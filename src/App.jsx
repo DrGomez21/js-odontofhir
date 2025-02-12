@@ -1,0 +1,26 @@
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom"
+import { PatientPage } from "./pages/PatientPage"
+import { PatientProfile } from "./pages/PatientProfile"
+import { NotFound } from "./pages/NotFound"
+import { Toaster } from "react-hot-toast"
+function App() {
+
+  const queryClient = new QueryClient()
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<PatientPage />} />
+          <Route path="/patient-profile/:id" element={<PatientProfile />} />
+          <Route path="/404" element={<NotFound />} />
+          <Route path="*" element={<Navigate to='/404' />} />
+        </Routes>
+        <Toaster />
+      </Router>
+    </QueryClientProvider>
+  )
+}
+
+export default App
