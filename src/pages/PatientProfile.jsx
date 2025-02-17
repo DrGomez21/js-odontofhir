@@ -23,10 +23,6 @@ export const PatientProfile = () => {
   if (isLoading) return <p>Cargando...</p>
   if (isError) return <p>Error {error.message}</p>
 
-  if (isSuccess) {
-    console.log(data)
-  }
-
   return (
     <div className='flex flex-col'>
       <h1>PatientProfile</h1>
