@@ -4,6 +4,7 @@ import { PatientPage } from "./pages/PatientPage"
 import { PatientProfile } from "./pages/PatientProfile"
 import { NotFound } from "./pages/NotFound"
 import { Toaster } from "react-hot-toast"
+import { PatientForm } from "./components/PatientForm"
 function App() {
 
   const queryClient = new QueryClient()
@@ -13,6 +14,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<PatientPage />} />
+          <Route path="/patient-form" element={<PatientForm />} />
           <Route path="/patient-profile/:id" element={<PatientProfile />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate to='/404' />} />
