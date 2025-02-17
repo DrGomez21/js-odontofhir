@@ -27,6 +27,7 @@ export const Odontograma = () => {
         };
       }
     })
+    console.log(`Click en diente ${numeroDiente} y en posición ${parte}`)
   }
 
   return (
