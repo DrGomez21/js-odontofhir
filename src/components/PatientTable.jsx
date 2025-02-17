@@ -48,8 +48,7 @@ export const PatientTable = () => {
   if (isError) return <p>Error {error.message}...</p>
 
   if (isSuccess) {
-    console.log(entries)
-    console.log(patients)
+
   }
 
   return (
