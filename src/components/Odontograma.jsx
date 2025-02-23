@@ -32,8 +32,7 @@ export const Odontograma = () => {
 
   return (
     <div className='p-4 bg-white rounded-lg shadow-lg'>
-      {/* <h2 className='text-xl font-bold mb-4 text-center'>Odontograma</h2> */}
-
+      
       {/* Dientes superiores */}
       <div className='flex flex-wrap justify-center mb-8'>
         {dientesSuperiores.map(numero => (
