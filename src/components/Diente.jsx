@@ -1,14 +1,22 @@
 import React from 'react'
+import { dentalConditions } from '../utils/procedimientosDentales'
 
 export const Diente = ({
   number,
   position,
   selected,
+  conditions,
+  currentCondition,
   onClick
 }) => {
 
   // Se definen las partes del diente
   const parts = ['arriba', 'derecha', 'abajo', 'izquierda', 'centro']
+
+  const getPartStyle = (part) => {
+    const condition = conditions[`${number}-${part}`] || 'healthy'
+    return `${dentalConditions[condition].color}`
+  }
 
   return (
     <div className='relative w-14 h-20 my-1 mx-2'>
