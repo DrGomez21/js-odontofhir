@@ -2,9 +2,9 @@
 CodeSystem: CSPY-PueblosIndigenas
 
 // Keywords  
-Id: CSPY-PuebloIndigenas
-Title: "Sistema de Códigos para Pueblos Indigenas del Paraguay"  
-Description: "Código de identificación oficial de OdontoFHIR en Paraguay, para los Pueblos Indigenas."  
+Id: CSPY-PueblosIndigenas
+Title: "Sistema de Códigos para Pueblos Indígenas de Paraguay"  
+Description: "Código de identificación oficial de OdontoFHIR en Paraguay para los Pueblos Indígenas."  
 * ^status = #active  
 * ^url = "https://odontofhir.py/fhir/CodeSystem/CSPY-PueblosIndigenas"
 * ^content = #complete  

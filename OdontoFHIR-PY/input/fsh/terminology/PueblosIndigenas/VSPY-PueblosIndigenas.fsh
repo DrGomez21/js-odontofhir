@@ -1,13 +1,14 @@
-Alias: $CSPY_Identidad = https://odontofhir.py/fhir/CodeSystem/CSPY-DocumentoIdentidad
+Alias: $CSPY-PueblosIndigenas = https://odontofhir.py/fhir/CodeSystem/CSPY-PueblosIndigenas
 
 // Declaración  
-ValueSet: VSPY-DocumentoIdentidad  
+ValueSet: VSPY-PueblosIndigenas  
 
 // Keywords  
-Id: PY-DocumentoIdentidad  
-Title: "Conjunto de Valores para identificador del paciente odontológico"  
-Description: "Lista de identificadores permitidos para pacientes odontológicos en Paraguay."  
+Id: VSPY-PueblosIndigenas  
+Title: "Conjunto de Valores para identificar el pueblo originario del paciente"  
+Description: "Lista de pueblos indígenas reconocidos en Paraguay según OdontoFHIR-PY."  
+* ^url = "https://odontofhir.py/fhir/ValueSet/VSPY-PueblosIndigenas"
 * ^status = #active  
 
 // Reglas  
-* include codes from system $CSPY_Identidad
+* include codes from system $CSPY-PueblosIndigenas
