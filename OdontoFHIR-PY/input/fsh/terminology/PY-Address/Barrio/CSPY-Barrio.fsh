@@ -1,12 +1,12 @@
 //Declaration
-CodeSystem: PY-Barrio
+CodeSystem: CSPY-Barrio
 
 //Keywords
-Id: PY-Barrio
+Id: CSPY-Barrio
 Title: "Código de Barrios en Paraguay"
 Description: "Sistema de códigos para los barrios en Paraguay."
 * ^status = #active
-* ^url = "https://odontofhir.py/fhir/CodeSystem/PY-Barrio"
+* ^url = "https://odontofhir.py/fhir/CodeSystem/CSPY-Barrio"
 
 //Codigos
 * #1 "SAJONIA"

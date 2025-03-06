@@ -11,12 +11,11 @@ Description: "Código de identificación oficial en Paraguay, incluyendo Cédula
 * ^caseSensitive = true  
 
 // Códigos  
-* #1 "Cédula de Identidad"  
+* #CI "Cédula de Identidad"  
   * ^definition = "Documento de identificación nacional obligatorio para ciudadanos paraguayos."  
-* #2 "Pasaporte"  
+* #PAS "Pasaporte"  
   * ^definition = "Documento de viaje internacional válido para identificación de ciudadanos."  
-* #3 "No tiene" 
+* #NO "No tiene" 
   * ^definition = "El paciente no posee actualmente un documento de identidad válido, ya sea porque no lo ha tramitado o por su situación legal."  
-* #4 "No se conoce"
+* #UNK "No se conoce"
   * ^definition = "No se dispone de información sobre si el paciente posee o no un documento de identidad"  
-

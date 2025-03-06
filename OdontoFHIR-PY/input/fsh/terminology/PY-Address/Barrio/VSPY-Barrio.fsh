@@ -5,6 +5,7 @@ ValueSet: VSPY-Barrio
 Id: VSPY-Barrio
 Title: "Barrios en Paraguay"
 Description: "Lista de barrios oficiales en Paraguay organizados por ciudad."
+* ^url = "https://odontofhir.py/fhir/ValueSet/VSPY-Barrio"
 * ^status = #active
 //Rules
 * include codes from system $CSPY-Barrio
