@@ -12,7 +12,9 @@ Description: "Código de identificación oficial en Paraguay, incluyendo Cédula
 
 // Códigos  
 * #CI "Cédula de Identidad"  
-  * ^definition = "Documento de identificación nacional obligatorio para ciudadanos paraguayos."  
+  * ^definition = "Documento de identificación nacional obligatorio para ciudadanos paraguayos."
+* #RPRO "Registro profesional"
+  * ^definition = "Registro Profesional que identifica a los profesionales de la salud."
 * #PAS "Pasaporte"  
   * ^definition = "Documento de viaje internacional válido para identificación de ciudadanos."  
 * #NO "No tiene" 

@@ -24,6 +24,6 @@ Description: "Extensión para direcciones en Paraguay, incluyendo Departamento, 
 * extension[barrio].value[x] only CodeableConcept
 * extension[barrio].valueCodeableConcept from $VSPY-Barrio (extensible)
 
-* extension[numeroCasa].value[x] only string
+* extension[numeroCasa].value[x] only number
 * extension[numeroCasa] ^short = "Número de Casa o Departamento"
 * extension[numeroCasa] ^definition = "Número de la casa o departamento del paciente."
