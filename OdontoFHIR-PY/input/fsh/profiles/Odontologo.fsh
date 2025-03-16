@@ -1,5 +1,6 @@
 Alias: $VSPY-DocumentoIdentidad = https://odontofhir.py/fhir/ValueSet/VSPY-DocumentoIdentidad
 Alias: $VSPY-OdontologiaEspecialidades = https://odontofhir.py/fhir/ValueSet/VSPY-OdontologiaEspecialidades
+Alias: $CSPY-DocumentoIdentidad = https://odontofhir.py/fhir/CodeSystem/CSPY-DocumentoIdentidad
 
 Profile: Odontologo
 Parent: Practitioner
@@ -10,19 +11,31 @@ Description: "Perfil de un profesional odontológico en Paraguay, incluyendo reg
 
 // Identificadores: Registro Profesional (obligatorio) y Documento de Identidad (opcional)
 * identifier ^slicing.discriminator.type = #pattern
-* identifier ^slicing.discriminator.path = "type"
+* identifier ^slicing.discriminator.path = "type.coding.code"
 * identifier ^slicing.rules = #open
 * identifier contains
     registroProfesional 1..1 MS and
     documentoIdentidad 0..1 MS
 
-* identifier[registroProfesional].type 1..1 MS
-* identifier[registroProfesional].type ^short = "Registro Profesional"
-* identifier[registroProfesional].value 1..1 MS
-* identifier[registroProfesional].system 1..1 MS
-* identifier[registroProfesional].system = "https://odontofhir.py/fhir/CodeSystem/RegistroProfesional"
+// * Registro Profesional (Obligatorio)
+* identifier[registroProfesional] ^short = "Identificador del Registro Profesional"
+* identifier[registroProfesional] ^definition = "Número de Registro Profesional del odontólogo, obligatorio para el ejercicio de la profesión en Paraguay."
+* identifier[registroProfesional].use MS
+* identifier[registroProfesional].type.coding.system = $CSPY-DocumentoIdentidad
+* identifier[registroProfesional].type.coding.code = #RPRO
+* identifier[registroProfesional].system MS
+* identifier[registroProfesional].system = "https://odontofhir.py/api/validar-registro-profesional"
+* identifier[registroProfesional].system ^short = "Endpoint para validar el Registro Profesional en Paraguay"
+* identifier[registroProfesional].system ^definition = "Define la URL del endpoint en Django para validar automáticamente el Registro Profesional del odontólogo."
+* identifier[registroProfesional].value MS
+* identifier[registroProfesional].value ^short = "Número de Registro Profesional"
+* identifier[registroProfesional].value ^definition = "Número de Registro Profesional asignado al odontólogo por la entidad reguladora en Paraguay."
 
-* identifier[documentoIdentidad].type 1..1 MS from $VSPY-DocumentoIdentidad
+// Documento de Identidad (Opcional)
+* identifier[documentoIdentidad] ^short = "Cédula de Identidad o Pasaporte"
+* identifier[documentoIdentidad] ^definition = "Documento de identidad del odontólogo."
+* identifier[documentoIdentidad].use MS
+* identifier[documentoIdentidad].type from $VSPY-DocumentoIdentidad (required)
 * identifier[documentoIdentidad].value 1..1 MS
 
 // Nombre
@@ -46,14 +59,11 @@ Description: "Perfil de un profesional odontológico en Paraguay, incluyendo reg
 * telecom.value 1..1 MS
 * telecom.system from http://hl7.org/fhir/ValueSet/contact-point-system (required)
 
-// Especialidades Odontológicas
-* qualification 1..* MS
-* qualification.code from $VSPY-OdontologiaEspecialidades (extensible)
-* qualification.identifier 1..1 MS
-* qualification.identifier.system 1..1 MS
-* qualification.identifier.value 1..1 MS
+// Especialidades Odontológicas. No es necesario, ya verificamos si es un odontologo con RPRO.
 
-// Estado del odontólogo en el sistema
+// **Estado del odontólogo en el sistema**
 * active 1..1 MS
 * active ^short = "Indica si el odontólogo está activo en el sistema"
 * active ^definition = "Si es `true`, el odontólogo está registrado como profesional activo en el sistema."
+
+//Colocar la categoria dental
