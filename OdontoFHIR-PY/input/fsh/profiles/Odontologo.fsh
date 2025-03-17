@@ -1,6 +1,7 @@
 Alias: $VSPY-DocumentoIdentidad = https://odontofhir.py/fhir/ValueSet/VSPY-DocumentoIdentidad
 Alias: $VSPY-OdontologiaEspecialidades = https://odontofhir.py/fhir/ValueSet/VSPY-OdontologiaEspecialidades
 Alias: $CSPY-DocumentoIdentidad = https://odontofhir.py/fhir/CodeSystem/CSPY-DocumentoIdentidad
+Alias: $dental-category = http://hl7.org/fhir/us/dental-data-exchange/CodeSystem/dental-category
 
 Profile: Odontologo
 Parent: Practitioner
@@ -67,3 +68,8 @@ Description: "Perfil de un profesional odontológico en Paraguay, incluyendo reg
 * active ^definition = "Si es `true`, el odontólogo está registrado como profesional activo en el sistema."
 
 //Colocar la categoria dental
+* category ^slicing.discriminator.type = #pattern
+* category ^slicing.discriminator.path = "$this"
+* category ^slicing.rules = #open
+* category contains dental 1..1 MS
+* category[dental] = $dental-category#dental "Dental" (exactly)
