@@ -7,13 +7,13 @@ Alias: $VSPY-TipoContactoConTutor = http://hl7.org/fhir/ValueSet/contact-point-s
 
 //Declaracion
 Profile: PacienteOdontologico
+Parent: Patient
 
 //Keywords
-Parent: Patient
+Id : PacienteOdontologico
+Title : "Perfil de Paciente Odontologico"
+Description : "Un perfil de paciente, adaptado a las necesidades odontológicas de Paraguay."
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/PacienteOdontologico"
-Id: paciente-odontologico
-Title: "Perfil de Paciente Odontologico"
-Description: "Un perfil de paciente, adaptado a las necesidades odontológicas de Paraguay."
 
 //Rules
 

@@ -5,10 +5,12 @@ Alias: $dental-category = http://hl7.org/fhir/us/dental-data-exchange/CodeSystem
 
 Profile: Odontologo
 Parent: Practitioner
+
+// Metadatos del perfil
+Id : Odontologo
+Title : "Perfil del Odontólogo"
+Description : "Perfil de un profesional odontológico en Paraguay, incluyendo registro profesional y especialidades."
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/Odontologo"
-Id: odontologo
-Title: "Perfil del Odontólogo"
-Description: "Perfil de un profesional odontológico en Paraguay, incluyendo registro profesional y especialidades."
 
 // Identificadores: Registro Profesional (obligatorio) y Documento de Identidad (opcional)
 * identifier ^slicing.discriminator.type = #pattern
