@@ -8,12 +8,6 @@ Title: "Alergias e Intolerancias Odontológicas"
 Description: "Perfil para registrar alergias e intolerancias en pacientes odontológicos en Paraguay."
 
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/AlergiasOdontologicas"
-* ^version = "1.0.0"
-* ^status = #draft
-* ^publisher = "OdontoFHIR-PY"
-* ^contact.name = "Equipo de OdontoFHIR Paraguay"
-* ^contact.telecom.system = #email
-* ^contact.telecom.value = "odontofhir@py.org"
 
 // **Paciente afectado**
 * patient 1..1 MS only Reference($paciente-odontologico)

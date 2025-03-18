@@ -3,6 +3,8 @@ Alias: $dental-anatomy = http://hl7.org/fhir/us/dental-data-exchange/ValueSet/de
 Alias: $odontologo = https://odontofhir.py/fhir/StructureDefinition/Odontologo
 Alias: $paciente-odontologico = https://odontofhir.py/fhir/StructureDefinition/PacienteOdontologico
 Alias: $encuentro-odontologico = https://odontofhir.py/fhir/StructureDefinition/EncuentroOdontologico
+Alias: $dental-category = http://hl7.org/fhir/us/dental-data-exchange/CodeSystem/dental-category
+
 
 Profile: HallazgosOdontologicos
 Parent: Observation
@@ -14,22 +16,25 @@ Cada hallazgo puede estar asociado a un diente específico, según la anatomía 
 """
 
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/HallazgosOdontologicos"
-* ^version = "1.0.0"
-* ^status = #draft
-* ^publisher = "OdontoFHIR-PY"
-* ^contact.name = "Equipo de OdontoFHIR Paraguay"
-* ^contact.telecom.system = #email
-* ^contact.telecom.value = "odontofhir@py.org"
 
-// Categoría de la Observación - Siempre será Dental
-* category 1..1 MS
-* category = $dental-observation-codes#dental "Dental" (exactly)
+// Categoría de la Observación 
+* category ^slicing.discriminator.type = #pattern
+* category ^slicing.discriminator.path = "$this"
+* category ^slicing.rules = #open
+* category contains dental 1..1 MS
+* category[dental] = $dental-category#dental "Dental" (exactly)
 
 // Código del hallazgo clínico
 * code 1..1 MS
 * code from $dental-observation-codes (required)
 * code ^short = "Código del hallazgo odontológico"
 * code ^definition = "Código estandarizado que representa el hallazgo clínico observado en el paciente."
+// Valor del hallazgo clínico
+* value[x] 1..1 MS
+* value[x] from $dental-observation-codes (extensible)
+* value[x] ^short = "Detalle del hallazgo"
+* value[x] ^definition = "Detalle clínico del hallazgo observado en el paciente."
+
 
 // Paciente al que pertenece el hallazgo
 * subject 1..1 MS only Reference($paciente-odontologico)
@@ -57,13 +62,3 @@ Cada hallazgo puede estar asociado a un diente específico, según la anatomía 
 * bodySite ^short = "Diente o área de la boca afectada"
 * bodySite ^definition = "Indica el diente o la estructura anatómica afectada por el hallazgo odontológico."
 
-// Valor del hallazgo clínico
-* value[x] 1..1 MS
-* value[x] from $dental-observation-codes (extensible)
-* value[x] ^short = "Detalle del hallazgo"
-* value[x] ^definition = "Detalle clínico del hallazgo observado en el paciente."
-
-// Posibilidad de componentes adicionales
-* component 0..* MS
-* component ^short = "Información adicional"
-* component ^definition = "Componentes opcionales para agregar información complementaria al hallazgo."

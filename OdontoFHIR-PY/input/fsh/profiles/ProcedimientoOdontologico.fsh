@@ -15,12 +15,6 @@ Incluye el diente tratado, la relación con hallazgos previos y el odontólogo r
 """
 
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/ProcedimientoOdontologico"
-* ^version = "1.0.0"
-* ^status = #draft
-* ^publisher = "OdontoFHIR-PY"
-* ^contact.name = "Equipo de OdontoFHIR Paraguay"
-* ^contact.telecom.system = #email
-* ^contact.telecom.value = "odontofhir@py.org"
 
 // Código del procedimiento realizado
 * code 1..1 MS

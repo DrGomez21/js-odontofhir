@@ -12,6 +12,13 @@ Title : "Perfil del Odontólogo"
 Description : "Perfil de un profesional odontológico en Paraguay, incluyendo registro profesional y especialidades."
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/Odontologo"
 
+//Colocar la categoria dental
+* category ^slicing.discriminator.type = #pattern
+* category ^slicing.discriminator.path = "$this"
+* category ^slicing.rules = #open
+* category contains dental 1..1 MS
+* category[dental] = $dental-category#dental "Dental" (exactly)
+
 // Identificadores: Registro Profesional (obligatorio) y Documento de Identidad (opcional)
 * identifier ^slicing.discriminator.type = #pattern
 * identifier ^slicing.discriminator.path = "type.coding.code"
@@ -69,9 +76,3 @@ Description : "Perfil de un profesional odontológico en Paraguay, incluyendo re
 * active ^short = "Indica si el odontólogo está activo en el sistema"
 * active ^definition = "Si es `true`, el odontólogo está registrado como profesional activo en el sistema."
 
-//Colocar la categoria dental
-* category ^slicing.discriminator.type = #pattern
-* category ^slicing.discriminator.path = "$this"
-* category ^slicing.rules = #open
-* category contains dental 1..1 MS
-* category[dental] = $dental-category#dental "Dental" (exactly)
