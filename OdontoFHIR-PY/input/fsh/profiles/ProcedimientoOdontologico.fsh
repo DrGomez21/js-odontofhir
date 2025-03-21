@@ -47,18 +47,14 @@ Incluye el diente tratado, la relación con hallazgos previos y el odontólogo r
 * reasonReference ^short = "Hallazgos clínicos relacionados"
 * reasonReference ^definition = "Referencia a los hallazgos clínicos observados que justificaron el procedimiento."
 
-// Diente o área tratada
+// Diente tratado
 * bodySite 1..1 MS
 * bodySite from $dental-anatomy (preferred)
-* bodySite ^short = "Diente o área de la boca tratada"
-* bodySite ^definition = "Indica el diente o la estructura anatómica donde se realizó el procedimiento odontológico."
+* bodySite ^short = "Diente tratado"
+* bodySite ^definition = "Indica el diente donde se realizó el procedimiento odontológico."
 
 // Estado del procedimiento (completado, planeado, en progreso)
 * status 1..1 MS
 * status ^short = "Estado del procedimiento"
 * status ^definition = "Estado del procedimiento realizado (completado, planeado, en progreso)."
 
-// Posibilidad de agregar notas o información adicional
-* note 0..* MS
-* note ^short = "Notas sobre el procedimiento"
-* note ^definition = "Comentarios adicionales sobre el procedimiento odontológico realizado."

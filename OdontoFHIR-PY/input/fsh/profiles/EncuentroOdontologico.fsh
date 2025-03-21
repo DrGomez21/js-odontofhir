@@ -1,9 +1,6 @@
 Alias: $paciente-odontologico = https://odontofhir.py/fhir/StructureDefinition/PacienteOdontologico
 Alias: $odontologo = https://odontofhir.py/fhir/StructureDefinition/Odontologo
-Alias: $encounter-type = http://hl7.org/fhir/ValueSet/encounter-type
 Alias: $encounter-status = http://hl7.org/fhir/ValueSet/encounter-status
-Alias: $dental-observation-codes = http://hl7.org/fhir/us/dental-data-exchange/ValueSet/dental-observation-codes
-Alias: $dental-anatomy = http://hl7.org/fhir/us/dental-data-exchange/ValueSet/dental-anatomy
 
 Profile: EncuentroOdontologico
 Parent: Encounter
@@ -13,23 +10,21 @@ Description: "Perfil que representa una consulta odontológica, incluyendo el od
 
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/EncuentroOdontologico"
 
-// **Paciente y Odontólogo**
+// Paciente que consulta
 * subject 1..1 MS only Reference($paciente-odontologico)
 * subject ^short = "Paciente atendido en la consulta"
 
+// Odontólogo que consulta
 * participant 1..1 MS
 * participant.individual only Reference($odontologo)
 * participant ^short = "Odontólogo que atendió al paciente"
 
-// **Estado y Tipo de Encuentro**
+// Estado y Tipo de Encuentro
 * status 1..1 MS from $encounter-status (required)
 * status ^short = "Estado del encuentro (en curso, finalizado, cancelado)"
 
 * class 1..1 MS
 * class ^short = "Tipo de consulta (ambulatoria, urgencia, control, etc.)"
-
-* type 1..1 MS from $encounter-type (extensible)
-* type ^short = "Tipo específico del encuentro odontológico"
 
 // **Fecha y Hora**
 * period 1..1 MS

@@ -56,9 +56,9 @@ Cada hallazgo puede estar asociado a un diente específico, según la anatomía 
 * performer ^short = "Odontólogo que registró el hallazgo"
 * performer ^definition = "Referencia al odontólogo que documentó la observación clínica."
 
-// Diente o área afectada
+// Diente afectado 
 * bodySite 1..1 MS
 * bodySite from $dental-anatomy (preferred)
-* bodySite ^short = "Diente o área de la boca afectada"
-* bodySite ^definition = "Indica el diente o la estructura anatómica afectada por el hallazgo odontológico."
+* bodySite ^short = "Diente afectado"
+* bodySite ^definition = "Indica el diente afectado en el hallazgo odontológico."
 

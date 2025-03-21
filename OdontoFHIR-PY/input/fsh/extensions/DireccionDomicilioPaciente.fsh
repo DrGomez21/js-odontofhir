@@ -3,9 +3,9 @@ Alias: $VSPY-Ciudad = https://odontofhir.py/fhir/ValueSet/VSPY-Ciudad
 Alias: $VSPY-Barrio = https://odontofhir.py/fhir/ValueSet/VSPY-Barrio
 
 
-// Declaración de la extensión PY-Address
-Extension: PY-Address
-Id: PY-Address
+// Declaración de la extensión DireccionDomicilioPaciente
+Extension: DireccionDomicilioPaciente
+Id: DireccionDomicilioPaciente
 Title: "Dirección en Paraguay"
 Description: "Extensión para direcciones en Paraguay, incluyendo Departamento, Ciudad, Barrio y Número de Casa."
 

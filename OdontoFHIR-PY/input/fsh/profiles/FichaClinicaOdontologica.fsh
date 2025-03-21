@@ -4,7 +4,6 @@ Alias: $encuentro-odontologico = https://odontofhir.py/fhir/StructureDefinition/
 Alias: $hallazgos-odontologicos = https://odontofhir.py/fhir/StructureDefinition/HallazgosOdontologicos
 Alias: $procedimiento-odontologico = https://odontofhir.py/fhir/StructureDefinition/ProcedimientoOdontologico
 Alias: $alergias-odontologicas = https://odontofhir.py/fhir/StructureDefinition/AlergiasOdontologicas
-Alias: $odontograma = https://odontofhir.py/fhir/StructureDefinition/Odontograma
 
 Profile: FichaClinica
 Parent: Composition
@@ -18,23 +17,14 @@ Description: "Contenedor de información clínica del paciente odontológico, in
 * subject 1..1 MS only Reference($paciente-odontologico)
 * subject ^short = "Paciente al que pertenece esta ficha clínica"
 
-// **Autor de la Ficha Clínica (Odontólogo)**
+// Autor de la Ficha Clínica (Odontólogo)
+//Es necesario?
 * author 1..1 MS only Reference($odontologo)
 * author ^short = "Odontólogo responsable de la ficha clínica"
-
-// **Estado de la Ficha Clínica**
-* status 1..1 MS
-* status = #final
-* status ^short = "Estado de la ficha clínica (final, en progreso, etc.)"
 
 // **Fecha de Creación**
 * date 1..1 MS
 * date ^short = "Fecha de creación de la ficha clínica"
-
-// **Tipo de Documento**
-* type 1..1 MS
-* type.text = "Ficha Clínica Odontológica"
-* type ^short = "Tipo de documento clínico"
 
 // **Secciones de la Ficha Clínica**
 * section 1..* MS
@@ -42,12 +32,10 @@ Description: "Contenedor de información clínica del paciente odontológico, in
 * section ^slicing.discriminator.path = "code"
 * section ^slicing.rules = #open
 * section contains 
-    antecedentes 0..1 MS and
     encuentros 1..* MS and
     procedimientos 0..* MS and
     hallazgos 0..* MS and
     alergias 0..1 MS and
-    odontograma 0..1 MS
 
 // **Sección de Encuentros Odontológicos**
 * section[encuentros].code = http://loinc.org#46242-1 "Encuentros Odontológicos"
@@ -68,11 +56,6 @@ Description: "Contenedor de información clínica del paciente odontológico, in
 * section[alergias].code = http://loinc.org#48765-2 "Alergias e Intolerancias"
 * section[alergias].entry 0..1 MS only Reference($alergias-odontologicas)
 * section[alergias] ^short = "Registro de alergias e intolerancias"
-
-// **Sección del Odontograma**
-* section[odontograma].code = http://loinc.org#86129-3 "Odontograma"
-* section[odontograma].entry 0..1 MS only Reference($odontograma)
-* section[odontograma] ^short = "Registro visual del estado dental del paciente"
 
 // **Notas Generales de la Ficha Clínica**
 * note 0..* MS
