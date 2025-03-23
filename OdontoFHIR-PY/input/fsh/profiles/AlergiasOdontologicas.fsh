@@ -10,7 +10,7 @@ Description: "Perfil para registrar alergias e intolerancias en pacientes odonto
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/AlergiasOdontologicas"
 
 // Paciente afectado
-* patient 1..1 MS only Reference($paciente-odontologico)
+* patient 1..1 MS only Reference($pacienteodontologico)
 * patient ^short = "Paciente afectado por la alergia o intolerancia"
 
 // Estado clínico de la alergia
