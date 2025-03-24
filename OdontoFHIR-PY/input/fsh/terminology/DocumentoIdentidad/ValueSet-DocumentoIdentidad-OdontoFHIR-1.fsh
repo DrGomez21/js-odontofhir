@@ -1,12 +1,12 @@
-Alias: $CSPY-DocumentoIdentidad = https://odontofhir.py/fhir/CodeSystem/CSPY-DocumentoIdentidad
+Alias: $CSPY-DocumentoIdentidad = https://odontofhir.py/fhir/CodeSystem/DocumentoIdentidad-OdontoFHIR-1
 // Declaración  
-ValueSet: VSPY-DocumentoIdentidad  
+ValueSet: DocumentoIdentidadOdontoFHIR1  
 
 // Keywords  
-Id: VSPY-DocumentoIdentidad  
+Id: DocumentoIdentidadOdontoFHIR1  
 Title: "Conjunto de Valores para identificador del paciente odontológico"  
 Description: "Lista de identificadores permitidos para pacientes odontológicos en Paraguay." 
-* ^url = "https://odontofhir.py/fhir/ValueSet/VSPY-DocumentoIdentidad" 
+* ^url = "https://odontofhir.py/fhir/ValueSet/DocumentoIdentidad-OdontoFHIR-1" 
 * ^status = #active  
 
 // Reglas  

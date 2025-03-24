@@ -1,12 +1,12 @@
 // Declaración  
-CodeSystem: CSPY-DocumentoIdentidad  
+CodeSystem: DocumentoIdentidadOdontoFHIR1  
 
 // Keywords  
-Id: CSPY-DocumentoIdentidad  
+Id: DocumentoIdentidadOdontoFHIR1  
 Title: "Sistema de Códigos de Identificación en Paraguay"  
 Description: "Código de identificación oficial en Paraguay, incluyendo Cédula de Identidad y Pasaporte."  
 * ^status = #active  
-* ^url = "https://odontofhir.py/fhir/CodeSystem/CSPY-DocumentoIdentidad"
+* ^url = "https://odontofhir.py/fhir/CodeSystem/DocumentoIdentidad-OdontoFHIR-1"
 * ^content = #complete  
 * ^caseSensitive = true  
 

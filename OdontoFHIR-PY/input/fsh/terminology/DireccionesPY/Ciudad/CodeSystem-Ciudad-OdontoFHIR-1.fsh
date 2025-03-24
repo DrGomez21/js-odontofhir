@@ -1,12 +1,11 @@
 //Declaration
-CodeSystem: CSPY-Ciudad
-
+CodeSystem: CiudadOdontoFHIR1
 //Keywords
-Id: CSPY-Ciudad
+Id: CiudadOdontoFHIR1
 Title: "Código de Ciudades en Paraguay"
 Description: "Sistema de códigos para las ciudades en Paraguay."
 * ^status = #active
-* ^url = "https://odontofhir.py/fhir/CodeSystem/CSPY-Ciudad"
+* ^url = "https://odontofhir.py/fhir/CodeSystem/Ciudad-OdontoFHIR-1"
 
 //Codigos
 * #101 "CONCEPCION"
