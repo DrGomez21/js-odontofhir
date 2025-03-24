@@ -3,7 +3,7 @@ canonical: https://odontofhir.py/fhir
 name: OdontoFHIR-PY
 title: OdontoFHIR-PY Implementation Guide
 description: Implementation Guide for OdontoFHIR-PY, a standardized approach to electronic dental records using FHIR.
-status: draft 
+status: draft
 version: 0.1.0
 fhirVersion: 4.0.1
 copyrightYear: 2025+
@@ -21,9 +21,6 @@ dependencies:
   hl7.fhir.cl.clcore: 1.9.2
 
 template: fhir.base.template
-style: styles.css
-
-useIntl: true
 
 menu:
   Home: index.html

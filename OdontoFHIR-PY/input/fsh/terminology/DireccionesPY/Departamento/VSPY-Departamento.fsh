@@ -1,6 +1,6 @@
 Alias: $CSPY-Departamento = https://odontofhir.py/fhir/CodeSystem/CSPY-Departamento
 // Declaración
-ValueSet: VSPY-Departamento
+ValueSet: VSPYDepartamento
 
 // Keywords  
 Id: VSPY-Departamento

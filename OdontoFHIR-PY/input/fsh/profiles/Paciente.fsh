@@ -2,7 +2,6 @@ Alias: $SegundoApellido = http://hl7.org/fhir/StructureDefinition/humanname-moth
 Alias: $VSPY-DocumentoIdentidad = https://odontofhir.py/fhir/ValueSet/VSPY-DocumentoIdentidad
 Alias: $VSPY-Nationality = https://odontofhir.py/fhir/ValueSet/VSPY-Nationality
 Alias: $VSPY-PueblosIndigenas = https://odontofhir.py/fhir/ValueSet/VSPY-PueblosIndigenas
-Alias: $VSPY-TipoTutor = https://odontofhir.py/fhir/ValueSet/VSPY-RelacionTutor
 Alias: $VSPY-TipoContactoConTutor = http://hl7.org/fhir/ValueSet/contact-point-system
 
 //Declaracion
@@ -32,7 +31,7 @@ Description : "Un perfil de paciente, adaptado a las necesidades odontológicas 
 //Identificador con CI o Pasaporte
 
 * identifier 1..1 MS
-* identifier.type 1..1 MS from $VSPY-DocumentoIdentidad (required)
+* identifier.type 1..1 MS $VSPY-DocumentoIdentidad (required)
 * identifier.system 1..1 MS
 * identifier.value 1..1 MS
 * identifier.type ^short = "Tipo de documento de identificación"
@@ -80,23 +79,3 @@ Description : "Un perfil de paciente, adaptado a las necesidades odontológicas 
 //Address
 
 * address.extension contains PY-Address named direccion 1..1
-
-//TutorLegal
-* contact 0..* MS
-* contact.relationship from $VSPY-TipoTutor (extensible)
-* contact.identifier 0..1 MS
-* contact.identifier.type from $VSPY-DocumentoIdentidad (required)
-* contact.identifier obeys tutor-debe-tener-identificacion
-Invariant: tutor-debe-tener-identificacion
-Description: "Si el paciente tiene un tutor legal, este debe tener un número de identificación."
-Expression: "contact.exists() implies contact.identifier.exists()"
-* contact.identifier.system 1..1 MS
-* contact.identifier.value 1..1 MS
-* contact.telecom 0..*
-* contact.telecom.system from $VSPY-TipoContactoConTutor (required)
-* contact.telecom.value 0..1 MS
-* contact obeys necesita-tutor
-Invariant: necesita-tutor
-Description: "Si el paciente es menor de 18 años, debe tener un tutor legal registrado."
-Expression: "(today() - birthDate).years < 18 implies contact.exists()"
-
