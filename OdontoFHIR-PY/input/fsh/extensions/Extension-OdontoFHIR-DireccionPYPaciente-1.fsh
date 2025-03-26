@@ -5,11 +5,11 @@ Alias: $VSBarrio = https://odontofhir.py/fhir/ValueSet/Barrio-OdontoFHIR-1
 // Declaración de la extensión DireccionDomicilioPaciente
 Extension: ExtensionOdontoFHIRDireccionPYPaciente1
 Id: Extension-OdontoFHIR-DireccionPYPaciente-1
+Title: "Dirección en Paraguay"
+Description: "Extensión para direcciones en Paraguay, incluyendo Departamento, Ciudad, Barrio y Número de Casa."
 
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-DireccionPYPaciente-1"
 
-Title: "Dirección en Paraguay"
-Description: "Extensión para direcciones en Paraguay, incluyendo Departamento, Ciudad, Barrio y Número de Casa."
 
 * extension contains
     Departamento named departamento 1..1 and
@@ -18,7 +18,7 @@ Description: "Extensión para direcciones en Paraguay, incluyendo Departamento, 
     DomicilioNumeroCasa named numeroCasa 0..1
 
 * extension[departamento].value[x] only CodeableConcept
-* extension[departamento].valueCodeableConcept from $VSDepartament (extensible)
+* extension[departamento].valueCodeableConcept from $VSDepartamento (extensible)
 
 * extension[ciudad].value[x] only CodeableConcept
 * extension[ciudad].valueCodeableConcept from $VSCiudad (extensible)
