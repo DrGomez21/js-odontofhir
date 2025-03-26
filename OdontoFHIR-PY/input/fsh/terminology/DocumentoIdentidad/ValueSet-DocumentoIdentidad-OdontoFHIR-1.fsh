@@ -1,6 +1,6 @@
 Alias: $DocumentoIdentidad = https://odontofhir.py/fhir/CodeSystem/DocumentoIdentidad-OdontoFHIR-1
 // Declaración  
-ValueSet: DocumentoIdentidadOdontoFHIR1  
+ValueSet: ValueSetDocumentoIdentidadOdontoFHIR1  
 
 // Keywords  
 Id: DocumentoIdentidad-OdontoFHIR-1  

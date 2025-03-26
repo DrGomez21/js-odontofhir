@@ -47,7 +47,7 @@ Description: "Perfil que representa una consulta odontológica, incluyendo el od
 
 // **Procedimientos Odontológicos**
 * procedure 0..*
-* procedure.procedure only Canonical(OdontoFHIRProcedimientoOdontologicoProcedure1)
+* procedure.procedure only Reference(OdontoFHIRProcedimientoOdontologicoProcedure1)
 * procedure ^short = "Procedimientos realizados en el encuentro"
 
 // **Notas y Observaciones**

@@ -1,5 +1,5 @@
 // Declaración  
-CodeSystem: DocumentoIdentidadOdontoFHIR1  
+CodeSystem: CodeSystemDocumentoIdentidadOdontoFHIR1  
 
 // Keywords  
 Id: DocumentoIdentidad-OdontoFHIR-1  

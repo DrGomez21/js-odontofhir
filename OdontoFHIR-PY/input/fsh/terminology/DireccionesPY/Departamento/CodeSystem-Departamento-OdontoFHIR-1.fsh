@@ -1,5 +1,5 @@
 // Declaración  
-CodeSystem: DepartamentoOdontoFHIRFHIR1
+CodeSystem: CodeSystemDepartamentoOdontoFHIR1
 // Keywords
 Id: Departamento-OdontoFHIR-1
 Title: "Código de Departamentos en Paraguay"

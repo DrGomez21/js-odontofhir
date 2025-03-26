@@ -1,7 +1,7 @@
 Alias: $CSPueblosIndigenas = https://odontofhir.py/fhir/CodeSystem/PueblosIndigenas-OdontoFHIR-1
 
 // Declaración  
-ValueSet: PueblosIndigenasOdontoFHIR1  
+ValueSet: ValueSetPueblosIndigenasOdontoFHIR1  
 
 // Keywords  
 Id: PueblosIndigenas-OdontoFHIR-1  

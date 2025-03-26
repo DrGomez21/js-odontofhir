@@ -1,5 +1,5 @@
 //Declaration
-CodeSystem: BarrioOdontoFHIR1
+CodeSystem: CodeSystemBarrioOdontoFHIR1
 
 //Keywords
 Id: Barrio-OdontoFHIR-1

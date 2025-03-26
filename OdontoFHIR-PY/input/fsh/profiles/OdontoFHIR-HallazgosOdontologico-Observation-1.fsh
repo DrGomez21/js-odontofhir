@@ -18,7 +18,7 @@ Cada hallazgo puede estar asociado a un diente específico, según la anatomía 
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologico-Observation-1"
 
 //MustSuppport
-* code and value and subject and encounter and effective and performer and bodySite MS
+* code and value[x] and subject and encounter and effective[x] and performer and bodySite MS
 
 // Categoría de la Observación 
 * category ^slicing.discriminator.type = #pattern

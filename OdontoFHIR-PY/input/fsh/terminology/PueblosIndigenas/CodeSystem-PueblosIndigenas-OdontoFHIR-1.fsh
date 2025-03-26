@@ -1,5 +1,5 @@
 // Declaración  
-CodeSystem: PueblosIndigenasOdontoFHIR1
+CodeSystem: CodeSystemPueblosIndigenasOdontoFHIR1
 
 // Keywords  
 Id: PueblosIndigenas-OdontoFHIR-1

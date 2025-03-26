@@ -66,12 +66,21 @@ Description : "Un perfil de paciente, adaptado a las necesidades odontológicas 
 * birthDate ^definition = "Fecha exacta en la que nació el paciente, utilizada para cálculos de edad y seguimiento clínico."
 
 // Telecom
-* telecom 1..*
-* telecom.system 1..1
-* telecom.value 1..1
-* telecom.system from http://hl7.org/fhir/ValueSet/contact-point-system (required)
-* telecom where (system = 'phone') 1..*
-* telecom where (system = 'email') 0..1
+* telecom ^slicing.discriminator.type = #value
+* telecom ^slicing.discriminator.path = "system"
+* telecom ^slicing.rules = #open
+
+* telecom contains phone 1..* and email 0..1
+
+* telecom[phone].system = #phone
+* telecom[phone].system MS
+* telecom[phone].value 1..1
+* telecom[phone].value MS
+
+* telecom[email].system = #email
+* telecom[email].system MS
+* telecom[email].value 1..1
+* telecom[email].value MS
 
 // Dirección
 * address.extension contains ExtensionOdontoFHIRDireccionPYPaciente1 named direccion 1..1
