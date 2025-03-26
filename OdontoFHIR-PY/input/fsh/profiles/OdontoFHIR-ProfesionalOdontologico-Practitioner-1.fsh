@@ -1,15 +1,14 @@
-Alias: $VSPY-DocumentoIdentidad = https://odontofhir.py/fhir/ValueSet/VSPY-DocumentoIdentidad
-Alias: $CSPY-DocumentoIdentidad = https://odontofhir.py/fhir/CodeSystem/CSPY-DocumentoIdentidad
-Alias: $dental-category = http://hl7.org/fhir/us/dental-data-exchange/CodeSystem/dental-category
+Alias: $CSDocumentoIdentidad = https://odontofhir.py/fhir/CodeSystem/CSPY-DocumentoIdentidad
+Alias: $DentalCategory = http://hl7.org/fhir/us/dental-data-exchange/CodeSystem/dental-category
 
-Profile: Odontologo
+Profile: OdontoFHIRProcedimientoOdontologicoProcedure1
 Parent: Practitioner
 
 // Metadatos del perfil
-Id : Odontologo
+Id : OdontoFHIR-ProfesionalOdontologico-Practitioner-1
 Title : "Perfil del Odontólogo"
 Description : "Perfil de un profesional odontológico en Paraguay, incluyendo registro profesional y especialidades."
-* ^url = "https://odontofhir.py/fhir/StructureDefinition/Odontologo"
+* ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ProfesionalOdontologico-Practitioner-1"
 
 //Colocar la categoria dental
 * category ^slicing.discriminator.type = #pattern

@@ -2,11 +2,11 @@
 CodeSystem: PueblosIndigenasOdontoFHIR1
 
 // Keywords  
-Id: PueblosIndigenasOdontoFHIR1
+Id: PueblosIndigenas-OdontoFHIR-1
 Title: "Sistema de Códigos para Pueblos Indígenas de Paraguay"  
 Description: "Código de identificación oficial de OdontoFHIR en Paraguay para los Pueblos Indígenas."  
 * ^status = #active  
-* ^url = "https://odontofhir.py/fhir/CodeSystem/PueblosIndigenas-Odonto-FHIR-1"
+* ^url = "https://odontofhir.py/fhir/CodeSystem/PueblosIndigenas-OdontoFHIR-1"
 * ^content = #complete  
 * ^caseSensitive = true  
 

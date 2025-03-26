@@ -2,7 +2,7 @@
 CodeSystem: BarrioOdontoFHIR1
 
 //Keywords
-Id: BarrioOdontoFHIR1
+Id: Barrio-OdontoFHIR-1
 Title: "Código de Barrios en Paraguay"
 Description: "Sistema de códigos para los barrios en Paraguay."
 * ^status = #active

@@ -1,6 +1,6 @@
 Alias: $CSPY-Ciudad = https://odontofhir.py/fhir/CodeSystem/Ciudad-OdontoFHIR-1
 //Declaration
-ValueSet: Ciudad-OdontoFHIR-1
+ValueSet: CiudadOdontoFHIR1
 //Keywords
 Id: Ciudad-OdontoFHIR-1
 Title: "Ciudades en Paraguay"

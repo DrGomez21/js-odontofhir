@@ -5,14 +5,14 @@ Alias: $VSPY-PueblosIndigenas = https://odontofhir.py/fhir/ValueSet/VSPY-Pueblos
 Alias: $VSPY-TipoContactoConTutor = http://hl7.org/fhir/ValueSet/contact-point-system
 
 //Declaracion
-Profile: PacienteOdontologico
+Profile: OdontoFHIRPacienteOdontologicoPatient1  
 Parent: Patient
 
 //Keywords
-Id : PacienteOdontologico
+Id : OdontoFHIR-PacienteOdontologico-Patient-1
 Title : "Perfil de Paciente Odontologico"
 Description : "Un perfil de paciente, adaptado a las necesidades odontológicas de Paraguay."
-* ^url = "https://odontofhir.py/fhir/StructureDefinition/PacienteOdontologico"
+* ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-PacienteOdontologico-Patient-1"
 
 //Rules
 

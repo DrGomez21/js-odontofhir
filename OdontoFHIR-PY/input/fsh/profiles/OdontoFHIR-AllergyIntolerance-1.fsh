@@ -1,9 +1,9 @@
-Alias: $paciente-odontologico = https://odontofhir.py/fhir/StructureDefinition/PacienteOdontologico
+Alias: $paciente-odontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-PacienteOdontologico-Patient-1
 Alias: $allergyintolerance-code = http://hl7.org/fhir/ValueSet/allergyintolerance-code
 
-Profile: AlergiasOdontologicas
+Profile: OdontoFHIRAllergyIntolerance1  
 Parent: AllergyIntolerance
-Id: alergias-odontologicas
+Id: OdontoFHIR-AllergyIntolerance-1
 Title: "Alergias e Intolerancias Odontológicas"
 Description: "Perfil para registrar alergias e intolerancias en pacientes odontológicos en Paraguay."
 

@@ -1,7 +1,7 @@
 //Declaration
 CodeSystem: CiudadOdontoFHIR1
 //Keywords
-Id: CiudadOdontoFHIR1
+Id: Ciudad-OdontoFHIR-1
 Title: "Código de Ciudades en Paraguay"
 Description: "Sistema de códigos para las ciudades en Paraguay."
 * ^status = #active

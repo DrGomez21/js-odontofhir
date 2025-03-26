@@ -5,9 +5,9 @@ Alias: $hallazgos-odontologicos = https://odontofhir.py/fhir/StructureDefinition
 Alias: $procedimiento-odontologico = https://odontofhir.py/fhir/StructureDefinition/ProcedimientoOdontologico
 Alias: $alergias-odontologicas = https://odontofhir.py/fhir/StructureDefinition/AlergiasOdontologicas
 
-Profile: FichaClinica
+Profile: OdontoFHIRFichaClinicaComposition1  
 Parent: Composition
-Id: ficha-clinica
+Id: OdontoFHIR-FichaClinica-Composition-1
 Title: "Ficha Clínica Odontológica"
 Description: "Contenedor de información clínica del paciente odontológico, incluyendo encuentros, hallazgos, procedimientos y alergias."
 

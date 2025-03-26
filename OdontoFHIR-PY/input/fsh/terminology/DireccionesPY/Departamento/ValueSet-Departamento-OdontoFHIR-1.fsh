@@ -1,14 +1,13 @@
-Alias: $CSPY-Departamento = https://odontofhir.py/fhir/CodeSystem/Departamento-Odonto-FHIR-1
+Alias: $CSPY-Departamento = https://odontofhir.py/fhir/CodeSystem/Departamento-OdontoFHIR-1
 // Declaración
 ValueSet: DepartamentoOdontoFHIR1
 
 // Keywords  
-Id: DepartamentoOdontoFHIR1
+Id: Departamento-OdontoFHIR-1
 Title: "Departamentos de Paraguay"
 Description: "Lista de departamentos oficiales de Paraguay."
-* ^url = "https://odontofhir.py/fhir/ValueSet/Departamento-Odonto-FHIR-1"
+* ^url = "https://odontofhir.py/fhir/ValueSet/Departamento-OdontoFHIR-1"
 * ^status = #active
 
 // Reglas
 * include codes from system $CSPY-Departamento
-CodeSystem-Ciudad-OdontoFHIR-1

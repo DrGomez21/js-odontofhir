@@ -6,16 +6,16 @@ Alias: $encuentro-odontologico = https://odontofhir.py/fhir/StructureDefinition/
 Alias: $dental-category = http://hl7.org/fhir/us/dental-data-exchange/CodeSystem/dental-category
 
 
-Profile: HallazgosOdontologicos
+Profile: OdontoFHIRHallazgosOdontologicoObservation1  
 Parent: Observation
-Id: hallazgos-odontologicos
+Id: OdontoFHIR-HallazgosOdontologico-Observation-1
 Title: "Hallazgos Odontológicos"
 Description: """
 Este perfil se utiliza para registrar los hallazgos clínicos observados durante un encuentro odontológico. 
 Cada hallazgo puede estar asociado a un diente específico, según la anatomía dental.
 """
 
-* ^url = "https://odontofhir.py/fhir/StructureDefinition/HallazgosOdontologicos"
+* ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologico-Observation-1"
 
 // Categoría de la Observación 
 * category ^slicing.discriminator.type = #pattern

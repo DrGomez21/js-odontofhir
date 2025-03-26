@@ -2,7 +2,7 @@
 CodeSystem: DocumentoIdentidadOdontoFHIR1  
 
 // Keywords  
-Id: DocumentoIdentidadOdontoFHIR1  
+Id: DocumentoIdentidad-OdontoFHIR-1  
 Title: "Sistema de Códigos de Identificación en Paraguay"  
 Description: "Código de identificación oficial en Paraguay, incluyendo Cédula de Identidad y Pasaporte."  
 * ^status = #active  

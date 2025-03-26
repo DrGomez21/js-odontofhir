@@ -1,11 +1,11 @@
 // Declaración  
 CodeSystem: DepartamentoOdontoFHIRFHIR1
 // Keywords
-Id: DepartamentoOdontoFHIR1
+Id: Departamento-OdontoFHIR-1
 Title: "Código de Departamentos en Paraguay"
 Description: "Sistema de códigos para los departamentos en Paraguay."
 * ^status = #active
-* ^url = "https://odontofhir.py/fhir/CodeSystem/Departamento-Odonto-FHIR-1"
+* ^url = "https://odontofhir.py/fhir/CodeSystem/Departamento-OdontoFHIR-1"
 
 // Codigos
 * #0 "CAPITAL"

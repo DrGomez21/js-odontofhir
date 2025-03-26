@@ -5,16 +5,17 @@ Alias: $encuentro-odontologico = https://odontofhir.py/fhir/StructureDefinition/
 Alias: $hallazgos-odontologicos = https://odontofhir.py/fhir/StructureDefinition/HallazgosOdontologicos
 Alias: $procedimiento-codes = http://hl7.org/fhir/us/dental-data-exchange/ValueSet/dental-procedures
 
-Profile: ProcedimientoOdontologico
+Profile: OdontoFHIRProcedimientoOdontologicoProcedure1  
 Parent: Procedure
-Id: procedimiento-odontologico
+
+Id: OdontoFHIR-ProcedimientoOdontologico-Procedure-1
 Title: "Procedimiento Odontológico"
 Description: """
 Este perfil se utiliza para documentar los procedimientos odontológicos realizados en un paciente durante un encuentro odontológico. 
 Incluye el diente tratado, la relación con hallazgos previos y el odontólogo responsable.
 """
 
-* ^url = "https://odontofhir.py/fhir/StructureDefinition/ProcedimientoOdontologico"
+* ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ProcedimientoOdontologico-Procedure-1"
 
 // Código del procedimiento realizado
 * code 1..1 MS

@@ -1,14 +1,14 @@
-Alias: $paciente-odontologico = https://odontofhir.py/fhir/StructureDefinition/PacienteOdontologico
-Alias: $odontologo = https://odontofhir.py/fhir/StructureDefinition/Odontologo
+Alias: $paciente-odontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-PacienteOdontologico-Patient-1
+Alias: $odontologo = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ProfesionalOdontologico-Practitioner-1
 Alias: $encounter-status = http://hl7.org/fhir/ValueSet/encounter-status
 
-Profile: EncuentroOdontologico
+Profile: OdontoFHIRConsultaOdontologicaEncounter1
 Parent: Encounter
-Id: encuentro-odontologico
+Id: OdontoFHIR-ConsultaOdontologica-Encounter-1
 Title: "Encuentro Odontológico"
 Description: "Perfil que representa una consulta odontológica, incluyendo el odontólogo, el paciente y los hallazgos clínicos registrados."
 
-* ^url = "https://odontofhir.py/fhir/StructureDefinition/EncuentroOdontologico"
+* ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ConsultaOdontologica-Encounter-1"
 
 // Paciente que consulta
 * subject 1..1 MS only Reference($paciente-odontologico)
@@ -35,12 +35,12 @@ Description: "Perfil que representa una consulta odontológica, incluyendo el od
 
 // **Hallazgos Odontológicos**
 * diagnosis 0..* MS
-* diagnosis.condition only Reference(HallazgosOdontologicos)
+* diagnosis.condition only Canonical(OdontoFHIRHallazgosOdontologicoObservation1)
 * diagnosis ^short = "Hallazgos clínicos registrados durante la consulta"
 
 // **Procedimientos Odontológicos**
 * procedure 0..* MS
-* procedure.procedure only Reference(ProcedimientoOdontologico)
+* procedure.procedure only Canonical(OdontoFHIRHallazgosOdontologicoObservation1)
 * procedure ^short = "Procedimientos realizados en el encuentro"
 
 // **Notas y Observaciones**
