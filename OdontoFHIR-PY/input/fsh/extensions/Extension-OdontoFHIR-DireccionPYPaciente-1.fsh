@@ -10,12 +10,12 @@ Description: "Extensión para direcciones en Paraguay, incluyendo Departamento, 
 
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-DireccionPYPaciente-1"
 
-
+// Subextensiones definidas
 * extension contains
-    Departamento named departamento 1..1 and
-    Ciudad named ciudad 1..1 and
-    Barrio named barrio 1..1 and
-    DomicilioNumeroCasa named numeroCasa 0..1
+    departamento 1..1 and
+    ciudad 1..1 and
+    barrio 1..1 and
+    numeroCasa 0..1
 
 * extension[departamento].value[x] only CodeableConcept
 * extension[departamento].valueCodeableConcept from $VSDepartamento (extensible)
@@ -26,6 +26,6 @@ Description: "Extensión para direcciones en Paraguay, incluyendo Departamento, 
 * extension[barrio].value[x] only CodeableConcept
 * extension[barrio].valueCodeableConcept from $VSBarrio (extensible)
 
-* extension[numeroCasa].value[x] only number
+* extension[numeroCasa].value[x] only integer
 * extension[numeroCasa] ^short = "Número de Casa o Departamento"
 * extension[numeroCasa] ^definition = "Número de la casa o departamento del paciente."

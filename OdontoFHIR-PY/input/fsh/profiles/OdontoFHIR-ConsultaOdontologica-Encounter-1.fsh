@@ -1,5 +1,7 @@
 Alias: $PacienteOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-PacienteOdontologico-Patient-1
 Alias: $ProfesionalOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ProfesionalOdontologico-Practitioner-1
+Alias: $ProcedimientoOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ProcedimientoOdontologico-Procedure-1
+Alias: $HallazgosOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologico-Condition-1
 Alias: $encounter-status = http://hl7.org/fhir/ValueSet/encounter-status
 
 Profile: OdontoFHIRConsultaOdontologicaEncounter1
@@ -12,7 +14,7 @@ Description: "Perfil que representa una consulta odontológica, incluyendo el od
 
 // Must Support
 * subject and participant and status and class MS
-* period and diagnosis.condition and procedure.procedure MS
+* period and diagnosis.condition and reasonReference MS
 
 // Paciente que consulta
 * subject 1..1
@@ -42,16 +44,15 @@ Description: "Perfil que representa una consulta odontológica, incluyendo el od
 
 // Hallazgos Odontológicos
 * diagnosis 0..*
-* diagnosis.condition only Reference(OdontoFHIRHallazgosOdontologicoObservation1)
+* diagnosis.condition only Reference($HallazgosOdontologico)
 * diagnosis ^short = "Hallazgos clínicos registrados durante la consulta"
 
 // **Procedimientos Odontológicos**
-* procedure 0..*
-* procedure.procedure only Reference(OdontoFHIRProcedimientoOdontologicoProcedure1)
-* procedure ^short = "Procedimientos realizados en el encuentro"
+* reasonReference 0..*
+* reasonReference ^slicing.discriminator.type = #type
+* reasonReference ^slicing.discriminator.path = "$this"
+* reasonReference ^slicing.rules = #open
 
-// **Notas y Observaciones**
-* note 0..*
-* note.text 1..1 
-* note.text MS
-* note ^short = "Notas generales del encuentro odontológico"
+* reasonReference contains procedimiento 0..*
+* reasonReference[procedimiento] only Reference($ProcedimientoOdontologico)
+* reasonReference[procedimiento] ^short = "Procedimientos que motivaron el encuentro"

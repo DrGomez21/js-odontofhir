@@ -1,7 +1,7 @@
 Alias: $PacienteOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-PacienteOdontologico-Patient-1
 Alias: $ProfesionalOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ProfesionalOdontologico-Practitioner-1
 Alias: $EncuentroOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ConsultaOdontologica-Encounter-1
-Alias: $HallazgosOdontologicos = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologico-Observation-1
+Alias: $HallazgosOdontologicos = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologico-Condition-1
 Alias: $ProcedimientoOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ProcedimientoOdontologico-Procedure-1
 Alias: $AllergyIntolerance = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-AllergyIntolerance-1
 
@@ -13,14 +13,13 @@ Description: "Contenedor de información clínica del paciente odontológico, in
 
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-FichaClinica-Composition-1"
 
-* subject and author and date and section and note MS
+* subject and author and date and section MS
 // **Paciente**
 * subject 1..1 
 * subject only Reference($PacienteOdontologico)
 * subject ^short = "Paciente al que pertenece esta ficha clínica"
 
 // Autor de la Ficha Clínica (Odontólogo)
-//Es necesario?
 * author 1..1
 * author only Reference($ProfesionalOdontologico)
 * author ^short = "Odontólogo responsable de la ficha clínica"
@@ -44,7 +43,7 @@ Description: "Contenedor de información clínica del paciente odontológico, in
 * section[encuentros].code = http://loinc.org#67781-5 "Resumen del encunetor lgmt es este codigo"
 * section[encuentros] MS
 * section[encuentros].entry 1..*
-* section[encuentros] only Reference($EncuentroOdontologico)
+* section[encuentros].entry only Reference($EncuentroOdontologico)
 * section[encuentros] ^short = "Lista de encuentros odontológicos"
 
 // **Sección de Procedimientos Odontológicos**
@@ -68,8 +67,7 @@ Description: "Contenedor de información clínica del paciente odontológico, in
 * section[alergias].entry only Reference($AllergyIntolerance)
 * section[alergias] ^short = "Registro de alergias e intolerancias"
 
-// **Notas Generales de la Ficha Clínica**
-* note 0..* 
-* note.text 1..1
-* note.text MS
-* note ^short = "Notas generales de la ficha clínica"
+* section contains notasGenerales 0..1
+* section[notasGenerales].code = http://loinc.org#86482-5 "Notas generales del documento"
+* section[notasGenerales].entry only Reference(Observation)
+* section[notasGenerales].entry ^short = "Notas generales registradas en el contexto clínico"

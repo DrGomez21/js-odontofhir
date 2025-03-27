@@ -1,7 +1,8 @@
 Alias: $SegundoApellido = http://hl7.org/fhir/StructureDefinition/humanname-mothers-family
 Alias: $VSDocumentoIdentidad = https://odontofhir.py/fhir/ValueSet/DocumentoIdentidad-OdontoFHIR-1
-Alias: $VSNationality = https://odontofhir.py/fhir/ValueSet/Nacionalidad-OdontoFHIR-1
-Alias: $VSPueblosIndigenas = https://odontofhir.py/fhir/ValueSet/PueblosIndigenas-OdontoFHIR-1
+Alias: $ExtNacionalidad = https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-Nacionalidad
+Alias: $ExtPuebloIndigena = https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-PuebloIndigena
+
 
 Profile: OdontoFHIRPacienteOdontologicoPatient1  
 Parent: Patient
@@ -13,20 +14,14 @@ Description : "Un perfil de paciente, adaptado a las necesidades odontológicas 
 
 // MustSupport
 * identifier and identifier.type and identifier.system and identifier.value MS
-* name and name[official] and name[official].given and name[official].family MS
+* name MS
 * gender and birthDate and telecom.system and telecom.value MS
-* extension[nacionalidad] and extension[puebloIndigena] MS
+
 
 // Nacionalidad y pueblo indígena
 * extension contains
-    VSNationality named nacionalidad 0..1 and
-    VSPueblosIndigenas named puebloIndigena 0..1
-
-* extension[nacionalidad].value[x] only CodeableConcept
-* extension[nacionalidad].valueCodeableConcept from $VSNationality (extensible)
-
-* extension[puebloIndigena].value[x] only CodeableConcept
-* extension[puebloIndigena].valueCodeableConcept from $VSPueblosIndigenas (extensible)
+    $ExtNacionalidad named nacionalidad 0..1 and
+    $ExtPuebloIndigena named puebloIndigena 0..1
 
 // Identificador con CI o Pasaporte
 * identifier 1..1
@@ -43,16 +38,12 @@ Description : "Un perfil de paciente, adaptado a las necesidades odontológicas 
 * name ^slicing.discriminator.type = #pattern
 * name ^slicing.discriminator.path = "use"
 * name ^slicing.rules = #open
-* name contains
-    official 1..1 and
-    givenName 1..1 and
-    familyName 1..1
+* name contains oficial 1..1
 
-* name[official].use = #official
-* name[official] ^short = "Nombre oficial del paciente"
-* name[official].given 1..1
-* name[official].family 1..1
-* name[official].family.extension contains $SegundoApellido named segundoApellido 0..1
+* name[oficial].use = #official
+* name[oficial].given 1..1
+* name[oficial].family 1..1
+* name[oficial].family.extension contains $SegundoApellido named segundoApellido 0..1
 
 // Género
 * gender 1..1

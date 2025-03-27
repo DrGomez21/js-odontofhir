@@ -1,27 +1,21 @@
 Alias: $SegundoApellido = http://hl7.org/fhir/StructureDefinition/humanname-mothers-family
 Alias: $VSPDocumentoIdentidad = https://odontofhir.py/fhir/ValueSet/DocumentoIdentidad-OdontoFHIR-1
 Alias: $CSDocumentoIdentidad = https://odontofhir.py/fhir/CodeSystem/DocumentoIdentidad-OdontoFHIR-1
-Alias: $DentalCategory = http://hl7.org/fhir/us/dental-data-exchange/CodeSystem/dental-category
 
 Profile: OdontoFHIRProfesionalOdontologicoPractitioner1
 Parent: Practitioner
 
-Id : OdontoFHIR-ProfesionalOdontologico-Practitioner-1
-Title : "Perfil del Odontólogo"
-Description : "Perfil de un profesional odontológico en Paraguay, incluyendo registro profesional y especialidades."
+Id: OdontoFHIR-ProfesionalOdontologico-Practitioner-1
+Title: "Perfil del Odontólogo"
+Description: "Perfil de un profesional odontológico en Paraguay, incluyendo registro profesional y especialidades."
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ProfesionalOdontologico-Practitioner-1"
 
 // Must Support
-* identifier and identifier[registroProfesional].use and identifier[registroProfesional].system MS
-* identifier[registroProfesional].value and name and name[official].given MS
-* name[official].family and telecom.system and telecom.value and active and category[dental] MS
+// Must Support
+* identifier and identifier.use and identifier.system and identifier.value MS
+* name and name.given and name.family and telecom.system and telecom.value MS
+* active MS
 
-// Categoría dental
-* category ^slicing.discriminator.type = #pattern
-* category ^slicing.discriminator.path = "$this"
-* category ^slicing.rules = #open
-* category contains dental 1..1
-* category[dental] = $DentalCategory#dental "Dental" (exactly)
 
 // Identificadores: Registro Profesional (obligatorio) y Documento de Identidad (opcional)
 * identifier ^slicing.discriminator.type = #pattern
@@ -49,17 +43,14 @@ Description : "Perfil de un profesional odontológico en Paraguay, incluyendo re
 * identifier[documentoIdentidad] ^short = "Cédula de Identidad o Pasaporte"
 * identifier[documentoIdentidad] ^definition = "Documento de identidad del odontólogo."
 * identifier[documentoIdentidad].use
-* identifier[documentoIdentidad].type from $VSDocumentoIdentidad (required)
+* identifier[documentoIdentidad].type from $VSPDocumentoIdentidad (required)
 * identifier[documentoIdentidad].value 1..1
 
 // Nombre
 * name ^slicing.discriminator.type = #pattern
 * name ^slicing.discriminator.path = "use"
 * name ^slicing.rules = #open
-* name contains
-    official 1..1 and
-    givenName 1..1 and
-    familyName 1..1
+* name contains official 1..1
 
 * name[official].use = #official
 * name[official] ^short = "Nombre oficial del odontólogo"

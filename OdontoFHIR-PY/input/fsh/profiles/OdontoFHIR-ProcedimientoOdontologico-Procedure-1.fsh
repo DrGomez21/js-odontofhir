@@ -1,7 +1,7 @@
 Alias: $PacienteOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-PacienteOdontologico-Patient-1
 Alias: $ProfesionalOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ProfesionalOdontologico-Practitioner-1
 Alias: $EncuentroOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ConsultaOdontologica-Encounter-1
-Alias: $HallazgosOdontologicos = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologico-Observation-1
+Alias: $HallazgosOdontologicos = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologico-Condition-1
 Alias: $dental-anatomy = http://hl7.org/fhir/us/dental-data-exchange/ValueSet/dental-anatomy
 Alias: $procedimiento-codes = http://hl7.org/fhir/us/dental-data-exchange/ValueSet/dental-procedures
 
@@ -17,7 +17,7 @@ Incluye el diente tratado, la relación con hallazgos previos y el odontólogo r
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ProcedimientoOdontologico-Procedure-1"
 
 // MustSupport
-* code and subject and encounter and performed and reasonReference MS
+* code and subject and encounter and performed[x] and reasonReference MS
 * bodySite and status and performer MS
 
 
@@ -47,7 +47,7 @@ Incluye el diente tratado, la relación con hallazgos previos y el odontólogo r
 
 // Odontólogo responsable del procedimiento
 * performer 1..1 
-* performer only Reference($ProfesionalOdontologico)
+* performer.actor only Reference($ProfesionalOdontologico)
 * performer ^short = "Odontólogo que realizó el procedimiento"
 * performer ^definition = "Referencia al odontólogo que realizó el procedimiento."
 
