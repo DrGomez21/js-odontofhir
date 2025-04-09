@@ -64,8 +64,6 @@ export const PatientForm = () => {
         if (oldData == null) return [newPatient]
         return [...oldData, newPatient]
       })
-
-      toast.success()
     }
   })
 
