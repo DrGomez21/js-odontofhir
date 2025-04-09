@@ -13,5 +13,6 @@ export const postPatient = async (newPatient) => {
 }
 
 export const deletePatientById = async (PatientId) => {
-  
+  const response = await axios.delete(`${PATIENT_BASE_URL}/${PatientId}/`)
+  return response.data
 }
