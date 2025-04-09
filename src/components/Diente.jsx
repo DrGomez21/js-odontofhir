@@ -20,12 +20,12 @@ export const Diente = ({
 
   return (
     <div className='relative w-14 h-20 my-1 mx-2'>
-      <div className='absolute w-full text-center text-sm font-medium'>{number}</div>
+      <div className='absolute w-full text-center text-sm font-medium top-0.5'>{number}</div>
       
       <div className='absolute top-5 w-full h-16 flex items-center justify-center'>
         {/* Parte superior del diente */}
         <div
-          className={`absolute top-0 w-8 h-2.5 border-1 border-black
+          className={`absolute top-0 w-8 h-2.5 border
             ${getPartStyle} cursor-pointer hover:scale-105 hover:border-2 hover:rounded-md transition-all duration-100
           `}
           onClick={() => onClick('arriba', number)}
