@@ -1,5 +1,3 @@
-Alias: $CSPueblosIndigenas = https://odontofhir.py/fhir/CodeSystem/PueblosIndigenas-OdontoFHIR-1
-
 // Declaración  
 ValueSet: ValueSetPueblosIndigenasOdontoFHIR1  
 

@@ -1,6 +1,3 @@
-Alias: $PacienteOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-PacienteOdontologico-Patient-1
-Alias: $allergyintolerance-code = http://hl7.org/fhir/ValueSet/allergyintolerance-code
-
 Profile: OdontoFHIRAllergyIntolerance1  
 Parent: AllergyIntolerance
 Id: OdontoFHIR-AllergyIntolerance-1

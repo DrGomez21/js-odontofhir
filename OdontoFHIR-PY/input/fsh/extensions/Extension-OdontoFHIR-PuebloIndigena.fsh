@@ -1,5 +1,3 @@
-Alias: $VSPueblosIndigenas = https://odontofhir.py/fhir/ValueSet/PueblosIndigenas-OdontoFHIR-1
-
 // Declaración de la extensión
 Extension: ExtensionOdontoFHIPuebloIndigena
 Id: Extension-OdontoFHIR-PuebloIndigena
@@ -10,3 +8,4 @@ Description: "Indica si el paciente pertenece a un pueblo indígena reconocido."
 
 * value[x] only CodeableConcept
 * valueCodeableConcept from $VSPueblosIndigenas (extensible)
+ 

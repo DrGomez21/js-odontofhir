@@ -1,5 +1,3 @@
-Alias: $VSNationality = https://odontofhir.py/fhir/ValueSet/Nacionalidad-OdontoFHIR-1
-
 Extension: ExtensionOdontoFHIRNacionalidad
 Id: Extension-OdontoFHIR-Nacionalidad
 Title: "Nacionalidad del paciente"

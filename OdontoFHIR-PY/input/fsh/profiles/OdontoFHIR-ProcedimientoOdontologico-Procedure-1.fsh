@@ -1,10 +1,3 @@
-Alias: $PacienteOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-PacienteOdontologico-Patient-1
-Alias: $ProfesionalOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ProfesionalOdontologico-Practitioner-1
-Alias: $EncuentroOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ConsultaOdontologica-Encounter-1
-Alias: $HallazgosOdontologicos = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologico-Condition-1
-Alias: $dental-anatomy = http://hl7.org/fhir/us/dental-data-exchange/ValueSet/dental-anatomy
-Alias: $procedimiento-codes = http://hl7.org/fhir/us/dental-data-exchange/ValueSet/dental-procedures
-
 Profile: OdontoFHIRProcedimientoOdontologicoProcedure1  
 Parent: Procedure
 

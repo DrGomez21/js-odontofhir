@@ -1,10 +1,3 @@
-Alias: $PacienteOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-PacienteOdontologico-Patient-1
-Alias: $ProfesionalOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ProfesionalOdontologico-Practitioner-1
-Alias: $EncuentroOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ConsultaOdontologica-Encounter-1
-Alias: $HallazgosOdontologicos = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologico-Condition-1
-Alias: $ProcedimientoOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ProcedimientoOdontologico-Procedure-1
-Alias: $AllergyIntolerance = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-AllergyIntolerance-1
-
 Profile: OdontoFHIRFichaClinicaComposition1  
 Parent: Composition
 Id: OdontoFHIR-FichaClinica-Composition-1

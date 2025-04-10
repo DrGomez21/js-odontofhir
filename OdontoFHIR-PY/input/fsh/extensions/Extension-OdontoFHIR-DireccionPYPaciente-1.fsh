@@ -1,7 +1,3 @@
-Alias: $VSDepartamento = https://odontofhir.py/fhir/ValueSet/Departamento-OdontoFHIR-1
-Alias: $VSCiudad = https://odontofhir.py/fhir/ValueSet/Ciudad-OdontoFHIR-1
-Alias: $VSBarrio = https://odontofhir.py/fhir/ValueSet/Barrio-OdontoFHIR-1
-
 // Declaración de la extensión DireccionDomicilioPaciente
 Extension: ExtensionOdontoFHIRDireccionPYPaciente1
 Id: Extension-OdontoFHIR-DireccionPYPaciente-1

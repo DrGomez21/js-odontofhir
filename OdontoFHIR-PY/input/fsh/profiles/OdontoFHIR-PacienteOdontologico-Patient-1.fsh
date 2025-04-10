@@ -1,9 +1,3 @@
-Alias: $SegundoApellido = http://hl7.org/fhir/StructureDefinition/humanname-mothers-family
-Alias: $VSDocumentoIdentidad = https://odontofhir.py/fhir/ValueSet/DocumentoIdentidad-OdontoFHIR-1
-Alias: $ExtNacionalidad = https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-Nacionalidad
-Alias: $ExtPuebloIndigena = https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-PuebloIndigena
-
-
 Profile: OdontoFHIRPacienteOdontologicoPatient1  
 Parent: Patient
 
@@ -19,6 +13,9 @@ Description : "Un perfil de paciente, adaptado a las necesidades odontológicas 
 
 
 // Nacionalidad y pueblo indígena
+* extension ^slicing.discriminator.type = #value
+* extension ^slicing.discriminator.path = "url"
+* extension ^slicing.rules = #open
 * extension contains
     $ExtNacionalidad named nacionalidad 0..1 and
     $ExtPuebloIndigena named puebloIndigena 0..1
@@ -74,4 +71,4 @@ Description : "Un perfil de paciente, adaptado a las necesidades odontológicas 
 * telecom[email].value MS
 
 // Dirección
-* address.extension contains ExtensionOdontoFHIRDireccionPYPaciente1 named direccion 1..1
+* address.extension contains $ExtDireccion named direccion 1..1

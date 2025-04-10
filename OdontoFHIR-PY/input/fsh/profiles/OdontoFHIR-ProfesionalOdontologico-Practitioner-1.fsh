@@ -1,7 +1,3 @@
-Alias: $SegundoApellido = http://hl7.org/fhir/StructureDefinition/humanname-mothers-family
-Alias: $VSPDocumentoIdentidad = https://odontofhir.py/fhir/ValueSet/DocumentoIdentidad-OdontoFHIR-1
-Alias: $CSDocumentoIdentidad = https://odontofhir.py/fhir/CodeSystem/DocumentoIdentidad-OdontoFHIR-1
-
 Profile: OdontoFHIRProfesionalOdontologicoPractitioner1
 Parent: Practitioner
 
@@ -18,7 +14,7 @@ Description: "Perfil de un profesional odontológico en Paraguay, incluyendo reg
 
 
 // Identificadores: Registro Profesional (obligatorio) y Documento de Identidad (opcional)
-* identifier ^slicing.discriminator.type = #pattern
+* identifier ^slicing.discriminator.type = #value
 * identifier ^slicing.discriminator.path = "type.coding.code"
 * identifier ^slicing.rules = #open
 * identifier contains
@@ -28,11 +24,12 @@ Description: "Perfil de un profesional odontológico en Paraguay, incluyendo reg
 // Registro Profesional
 * identifier[registroProfesional] ^short = "Identificador del Registro Profesional"
 * identifier[registroProfesional] ^definition = "Número de Registro Profesional del odontólogo, obligatorio para el ejercicio de la profesión en Paraguay."
-* identifier[registroProfesional].use
+* identifier[registroProfesional].use = #official
 * identifier[registroProfesional].type.coding.system = $CSDocumentoIdentidad
 * identifier[registroProfesional].type.coding.code = #RPRO
 * identifier[registroProfesional].system
 * identifier[registroProfesional].system = "https://odontofhir.py/api/validar-registro-profesional"
+* identifier[registroProfesional].system ^comment = "Endpoint en desarrollo para validar el número de registro profesional automáticamente."
 * identifier[registroProfesional].system ^short = "Endpoint para validar el Registro Profesional en Paraguay"
 * identifier[registroProfesional].system ^definition = "Define la URL del endpoint en Django para validar automáticamente el Registro Profesional del odontólogo."
 * identifier[registroProfesional].value
@@ -43,7 +40,7 @@ Description: "Perfil de un profesional odontológico en Paraguay, incluyendo reg
 * identifier[documentoIdentidad] ^short = "Cédula de Identidad o Pasaporte"
 * identifier[documentoIdentidad] ^definition = "Documento de identidad del odontólogo."
 * identifier[documentoIdentidad].use
-* identifier[documentoIdentidad].type from $VSPDocumentoIdentidad (required)
+* identifier[documentoIdentidad].type from $VSDocumentoIdentidad (required)
 * identifier[documentoIdentidad].value 1..1
 
 // Nombre

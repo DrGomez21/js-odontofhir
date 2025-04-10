@@ -1,4 +1,3 @@
-Alias: $DocumentoIdentidad = https://odontofhir.py/fhir/CodeSystem/DocumentoIdentidad-OdontoFHIR-1
 // Declaración  
 ValueSet: ValueSetDocumentoIdentidadOdontoFHIR1  
 
@@ -10,4 +9,4 @@ Description: "Lista de identificadores permitidos para pacientes odontológicos 
 * ^status = #active  
 
 // Reglas  
-* include codes from system $DocumentoIdentidad
+* include codes from system $CSDocumentoIdentidad

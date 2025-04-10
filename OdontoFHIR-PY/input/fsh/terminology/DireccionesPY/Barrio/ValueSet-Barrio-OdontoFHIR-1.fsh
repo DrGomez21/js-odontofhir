@@ -1,5 +1,3 @@
-Alias: $CodeSystem-Barrio-OdontoFHIR-1 = https://odontofhir.py/fhir/CodeSystem/Barrio-OdontoFHIR-1
-
 // Declaration
 ValueSet: ValueSetBarrioOdontoFHIR1
 
@@ -11,4 +9,4 @@ Description: "Lista de barrios oficiales en Paraguay organizados por ciudad."
 * ^status = #active
 
 // Rules
-* include codes from system $CodeSystem-Barrio-OdontoFHIR-1
+* include codes from system $CSPY-Barrio

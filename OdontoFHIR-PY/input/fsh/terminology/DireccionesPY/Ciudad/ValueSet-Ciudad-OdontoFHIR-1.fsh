@@ -1,4 +1,3 @@
-Alias: $CSPY-Ciudad = https://odontofhir.py/fhir/CodeSystem/Ciudad-OdontoFHIR-1
 //Declaration
 ValueSet: ValueSetCiudadOdontoFHIR1
 //Keywords

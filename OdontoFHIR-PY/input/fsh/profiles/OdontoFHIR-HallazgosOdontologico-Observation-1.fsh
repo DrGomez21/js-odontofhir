@@ -1,19 +1,13 @@
-Alias: $ProfesionalOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ProfesionalOdontologico-Practitioner-1
-Alias: $PacienteOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-PacienteOdontologico-Patient-1
-Alias: $EncuentroOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ConsultaOdontologica-Encounter-1
-Alias: $dental-observation-codes = http://hl7.org/fhir/us/dental-data-exchange/ValueSet/dental-observation-codes
-Alias: $dental-anatomy = http://hl7.org/fhir/us/dental-data-exchange/ValueSet/dental-anatomy
-
-Profile: OdontoFHIRHallazgosOdontologicoCondition1  
+Profile: OdontoFHIRHallazgosOdontologicosCondition1  
 Parent: Condition
-Id: OdontoFHIR-HallazgosOdontologico-Condition-1
+Id: OdontoFHIR-HallazgosOdontologicos-Condition-1
 Title: "Hallazgos Odontológicos"
 Description: """
 Perfil FHIR para representar hallazgos clínicos odontológicos como condiciones persistentes en pacientes.
 Cada hallazgo puede estar asociado a un diente específico utilizando bodySite.
 """
 
-* ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologico-Condition-1"
+* ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologicos-Condition-1"
 
 // MustSupport global
 * code and subject and encounter and recordedDate and asserter and bodySite MS
@@ -52,4 +46,3 @@ Cada hallazgo puede estar asociado a un diente específico utilizando bodySite.
 * bodySite from $dental-anatomy (preferred)
 * bodySite ^short = "Diente afectado"
 * bodySite ^definition = "Código anatómico del diente afectado por el hallazgo clínico."
-

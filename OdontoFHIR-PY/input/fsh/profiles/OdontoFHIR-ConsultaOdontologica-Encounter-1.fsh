@@ -1,9 +1,3 @@
-Alias: $PacienteOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-PacienteOdontologico-Patient-1
-Alias: $ProfesionalOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ProfesionalOdontologico-Practitioner-1
-Alias: $ProcedimientoOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ProcedimientoOdontologico-Procedure-1
-Alias: $HallazgosOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologico-Condition-1
-Alias: $encounter-status = http://hl7.org/fhir/ValueSet/encounter-status
-
 Profile: OdontoFHIRConsultaOdontologicaEncounter1
 Parent: Encounter
 Id: OdontoFHIR-ConsultaOdontologica-Encounter-1
@@ -44,7 +38,7 @@ Description: "Perfil que representa una consulta odontológica, incluyendo el od
 
 // Hallazgos Odontológicos
 * diagnosis 0..*
-* diagnosis.condition only Reference($HallazgosOdontologico)
+* diagnosis.condition only Reference($HallazgosOdontologicos)
 * diagnosis ^short = "Hallazgos clínicos registrados durante la consulta"
 
 // **Procedimientos Odontológicos**
