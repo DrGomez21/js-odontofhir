@@ -30,7 +30,10 @@ Description: "Paciente brasileño que usa pasaporte como documento."
 
 // Nacionalidad (extensión)
 * extension[+].url = "https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-Nacionalidad"
-* extension[=].valueCode = #BR
+* extension[=].valueCodeableConcept.coding[0].system = "https://odontofhir.py/fhir/CodeSystem/Nacionalidad-OdontoFHIR-1"
+* extension[=].valueCodeableConcept.coding[0].code = #BR
+* extension[=].valueCodeableConcept.coding[0].display = "Brasil"
+
 
 // Dirección (extensión con subextensiones)
 * address[0].extension[0].url = "https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-DireccionPYPaciente-1"
