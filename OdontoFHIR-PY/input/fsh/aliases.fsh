@@ -9,7 +9,7 @@ Alias: $CSPueblosIndigenas = https://odontofhir.py/fhir/CodeSystem/PueblosIndige
 Alias: $VSDepartamento = https://odontofhir.py/fhir/ValueSet/Departamento-OdontoFHIR-1
 Alias: $VSCiudad = https://odontofhir.py/fhir/ValueSet/Ciudad-OdontoFHIR-1
 Alias: $VSBarrio = https://odontofhir.py/fhir/ValueSet/Barrio-OdontoFHIR-1
-Alias: $VSNationality = https://odontofhir.py/fhir/ValueSet/Nacionalidad-OdontoFHIR-1
+Alias: $VSNacionalidad = https://odontofhir.py/fhir/ValueSet/Nacionalidad-OdontoFHIR-1
 Alias: $VSPueblosIndigenas = https://odontofhir.py/fhir/ValueSet/PueblosIndigenas-OdontoFHIR-1
 Alias: $VSDocumentoIdentidad = https://odontofhir.py/fhir/ValueSet/DocumentoIdentidad-OdontoFHIR-1
 Alias: $allergyintolerance-code = http://hl7.org/fhir/ValueSet/allergyintolerance-code
@@ -20,7 +20,7 @@ Alias: $procedimiento-codes = http://hl7.org/fhir/us/dental-data-exchange/ValueS
 
 // Extensions
 Alias: $ExtNacionalidad = https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-Nacionalidad
-Alias: $ExtPuebloIndigena = https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-PuebloIndigena
+Alias: $ExtPueblosIndigenas = https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-PueblosIndigenas
 Alias: $ExtDireccion = https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-DireccionPYPaciente-1
 Alias: $SegundoApellido = http://hl7.org/fhir/StructureDefinition/humanname-mothers-family
 

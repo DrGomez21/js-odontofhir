@@ -18,7 +18,7 @@ Description : "Un perfil de paciente, adaptado a las necesidades odontológicas 
 * extension ^slicing.rules = #open
 * extension contains
     $ExtNacionalidad named nacionalidad 0..1 and
-    $ExtPuebloIndigena named puebloIndigena 0..1
+    $ExtPueblosIndigenas named pueblosIndigenas 0..1
 
 // Identificador con CI o Pasaporte
 * identifier 1..1

@@ -6,9 +6,6 @@ Description: "Paciente joven con CI y pertenencia a un pueblo indígena."
 // Identificador: Cédula de Identidad
 * identifier.type.coding.system = "https://odontofhir.py/fhir/CodeSystem/DocumentoIdentidad-OdontoFHIR-1"
 * identifier.type.coding.code = #CI
-// Aún no se implementa un NamingSystem formal para este system. 
-// Se utiliza este URI experimentalmente como identificador del namespace 
-// para Cédulas de Identidad en Paraguay.
 * identifier.system = "https://odontofhir.py/id/ci"
 * identifier.value = "6000001"
 
@@ -23,17 +20,23 @@ Description: "Paciente joven con CI y pertenencia a un pueblo indígena."
 * gender = #male
 * birthDate = "2003-01-15"
 
-// Contacto (usando slices nombrados)
+// Contacto
 * telecom[phone].system = #phone
 * telecom[phone].value = "0981123456"
 * telecom[email].system = #email
 * telecom[email].value = "carlos@example.com"
 
-// Extensiones: Nacionalidad y Pueblo Indígena
+// Nacionalidad (valueCodeableConcept)
 * extension[+].url = "https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-Nacionalidad"
-* extension[=].valueCode = #PY
-* extension[+].url = "https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-PuebloIndigena"
-* extension[=].valueCode = #45
+* extension[=].valueCodeableConcept.coding[0].system = "https://odontofhir.py/fhir/CodeSystem/Nacionalidad-OdontoFHIR-1"
+* extension[=].valueCodeableConcept.coding[0].code = #600
+* extension[=].valueCodeableConcept.coding[0].display = "Paraguay"
+
+// Pueblo Indígena (valueCodeableConcept)
+* extension[+].url = "https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-PueblosIndigenas"
+* extension[=].valueCodeableConcept.coding[0].system = "https://odontofhir.py/fhir/CodeSystem/PueblosIndigenas-OdontoFHIR-1"
+* extension[=].valueCodeableConcept.coding[0].code = #45
+* extension[=].valueCodeableConcept.coding[0].display = "GUARANÍ OCCIDENTAL"
 
 // Dirección (extensión compuesta)
 * address[0].extension[0].url = "https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-DireccionPYPaciente-1"
@@ -51,4 +54,4 @@ Description: "Paciente joven con CI y pertenencia a un pueblo indígena."
 * address[0].extension[0].extension[2].valueCodeableConcept.coding[0].code = #1102037
 
 * address[0].extension[0].extension[3].url = "numeroCasa"
-* address[0].extension[0].extension[3].valueInteger = 444   
+* address[0].extension[0].extension[3].valueInteger = 444
