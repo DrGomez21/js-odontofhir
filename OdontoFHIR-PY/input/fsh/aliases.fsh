@@ -23,6 +23,7 @@ Alias: $ExtNacionalidad = https://odontofhir.py/fhir/StructureDefinition/Extensi
 Alias: $ExtPueblosIndigenas = https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-PueblosIndigenas
 Alias: $ExtDireccion = https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-DireccionPYPaciente-1
 Alias: $SegundoApellido = http://hl7.org/fhir/StructureDefinition/humanname-mothers-family
+Alias: $ExtRegistroProfesional = https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-RegistroProfesional
 
 
 // StructureDefinitions (Profiles)

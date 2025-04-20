@@ -5,25 +5,24 @@ Description: "Profesional odontológico registrado con documento de identidad."
 
 * active = true
 
-// Registro Profesional (obligatorio)
-* identifier[registroProfesional].use = #official
-* identifier[registroProfesional].type.coding.system = "https://odontofhir.py/fhir/CodeSystem/DocumentoIdentidad-OdontoFHIR-1"
-* identifier[registroProfesional].type.coding.code = #RPRO
-* identifier[registroProfesional].system = "https://odontofhir.py/api/validar-registro-profesional"
-* identifier[registroProfesional].value = "OD-2025-001"
+// Extensión RPRO
+* extension[registroProfesional].url = "https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-RegistroProfesional"
+* extension[registroProfesional].valueIdentifier.system = "https://odontofhir.py/fhir/CodeSystem/DocumentoIdentidad-OdontoFHIR-1"
+* extension[registroProfesional].valueIdentifier.type.coding[0].system = "https://odontofhir.py/fhir/CodeSystem/DocumentoIdentidad-OdontoFHIR-1"
+* extension[registroProfesional].valueIdentifier.type.coding[0].code = #RPRO
+* extension[registroProfesional].valueIdentifier.value = "12345"
 
-// Documento de Identidad (opcional)
-* identifier[documentoIdentidad].use = #official
-* identifier[documentoIdentidad].type.coding.system = "https://odontofhir.py/fhir/CodeSystem/DocumentoIdentidad-OdontoFHIR-1"
-* identifier[documentoIdentidad].type.coding.code = #CI
-* identifier[documentoIdentidad].value = "1234567"
+// Documento CI
+* identifier[0].use = #official
+* identifier[0].type.coding[0].system = "https://odontofhir.py/fhir/CodeSystem/DocumentoIdentidad-OdontoFHIR-1"
+* identifier[0].type.coding[0].code = #CI
+* identifier[0].type.coding[0].userSelected = true
+* identifier[0].value = "1234567"
 
-// Nombre (slice: oficial)
+// Nombre
 * name[official].use = #official
 * name[official].given = "María"
 * name[official].family = "Ortiz"
-
-// Segundo apellido como extensión
 * name[official].family.extension[0].url = "http://hl7.org/fhir/StructureDefinition/humanname-mothers-family"
 * name[official].family.extension[0].valueString = "Giménez"
 
