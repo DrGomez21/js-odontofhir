@@ -31,7 +31,7 @@ Incluye el diente tratado, la relación con hallazgos previos y el odontólogo r
 * encounter 1..1 
 * encounter only Reference($EncuentroOdontologico)
 * encounter ^short = "Encuentro odontológico asociado"
-* encounter ^definition = "Referencia al encuentro odontológico en el que se realizó el procedimiento."
+* encounter ^definition = "Referencia a la consulta en el que se realizó el procedimiento."
 
 // Fecha en la que se realizó el procedimiento
 * performed[x] 1..1

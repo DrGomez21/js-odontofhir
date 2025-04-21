@@ -21,7 +21,7 @@ Description: "Perfil para registrar alergias e intolerancias en pacientes odonto
 
 // Tipo de reacción
 * type 1..1 
-* type from http://hl7.org/fhir/ValueSet/allergyintolerance-type (required)
+* type from http://hl7.org/fhir/ValueSet/allergy-intolerance-type (required) //Porque esta en Trial Use. Se usara pero no esta dentro del servidor HAPI tdv
 * type ^short = "Alergia o Intolerancia"
 
 // Código de la alergia

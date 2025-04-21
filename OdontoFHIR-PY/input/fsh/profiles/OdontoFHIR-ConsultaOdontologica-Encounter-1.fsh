@@ -41,12 +41,11 @@ Description: "Perfil que representa una consulta odontológica, incluyendo el od
 * diagnosis.condition only Reference($HallazgosOdontologicos)
 * diagnosis ^short = "Hallazgos clínicos registrados durante la consulta"
 
-// **Procedimientos Odontológicos**
+// Procedimientos Odontológicos
 * reasonReference 0..*
 * reasonReference ^slicing.discriminator.type = #type
 * reasonReference ^slicing.discriminator.path = "$this"
 * reasonReference ^slicing.rules = #open
-
 * reasonReference contains procedimiento 0..*
 * reasonReference[procedimiento] only Reference($ProcedimientoOdontologico)
 * reasonReference[procedimiento] ^short = "Procedimientos que motivaron el encuentro"
