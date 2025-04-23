@@ -8,4 +8,4 @@ Description: "ValueSet de procedimientos clínicos comunes en la atención odont
 * ^status = #active
 
 
-* include codes from system https://odontofhir.py/fhir/CodeSystem/ProcedimientoOdontoFHIR-1
+* include codes from system https://odontofhir.py/fhir/CodeSystem/ProcedimientoOdontologico-OdontoFHIR-1

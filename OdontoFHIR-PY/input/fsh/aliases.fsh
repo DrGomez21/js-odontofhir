@@ -12,9 +12,10 @@ Alias: $VSBarrio = https://odontofhir.py/fhir/ValueSet/Barrio-OdontoFHIR-1
 Alias: $VSNacionalidad = https://odontofhir.py/fhir/ValueSet/Nacionalidad-OdontoFHIR-1
 Alias: $VSPueblosIndigenas = https://odontofhir.py/fhir/ValueSet/PueblosIndigenas-OdontoFHIR-1
 Alias: $VSDocumentoIdentidad = https://odontofhir.py/fhir/ValueSet/DocumentoIdentidad-OdontoFHIR-1
-Alias: $VSHallazgosOdontologico = https://odontofhir.py/fhir/ValueSet/HallazgosOdontologico-OdontoFHIR-1
+Alias: $VSHallazgosOdontologico = https://odontofhir.py/fhir/ValueSet/HallazgosOdontologicos-OdontoFHIR-1
 Alias: $VSAnatomiaDental = https://odontofhir.py/fhir/ValueSet/AnatomiaDental-OdontoFHIR-1
 Alias: $VSProcedimientoOdontologico = https://odontofhir.py/fhir/ValueSet/ProcedimientoOdontologico-OdontoFHIR-1
+Alias: $VSSeccionesFichaClinica = https://odontofhir.py/fhir/ValueSet/SeccionesFichaClinica-OdontoFHIR-1
 Alias: $allergyintolerance-code = http://hl7.org/fhir/ValueSet/allergyintolerance-code
 Alias: $encounter-status = http://hl7.org/fhir/ValueSet/encounter-status
 
