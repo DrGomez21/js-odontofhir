@@ -1,29 +1,4 @@
 // Declaración  
-CodeSystem: CodeSystemHallazgoOdontologicoOdontoFHIR1
-
-// Keywords  
-Id: HallazgoOdontologico-OdontoFHIR-1
-
-Title: "Hallazgos Clínicos Odontológicos"
-Description: "Listado de hallazgos odontológicos observados en consultas clínicas en Paraguay, mapeados con SNOMED y SNODENT cuando corresponde."
-* ^url = "https://odontofhir.py/fhir/CodeSystem/Hallazgos-OdontoFHIR-1"
-* ^status = #active
-* ^content = #complete
-* ^caseSensitive = true
-* ^version = "1.0.0"
-* ^copyright = "OdontoFHIR Paraguay. Basado en SNOMED CT y SNODENT. Uso local no comercial autorizado."
-
-// Ejemplo de código:
-* #12001OF "Absceso"
-  * ^definition = "Absceso dental u oral registrado en una consulta."
-  * ^designation[0].language = #es
-  * ^designation[0].value = "Absceso"
-  * ^property[0].code = #snomed
-  * ^property[0].valueCode = #128477000
-  * ^property[1].code = #snodent
-  * ^property[1].valueString = "123286D"
-
-// Declaración  
 CodeSystem: CodeSystemHallazgoOdontologicoFHIR1
 
 // Keywords  
