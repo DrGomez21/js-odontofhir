@@ -14,7 +14,7 @@ Cada hallazgo puede estar asociado a un diente específico utilizando bodySite.
 
 // Código del hallazgo clínico (Caries, enfermedad periodontal, etc.)
 * code 1..1
-* code from $dental-observation-codes (required)
+* code from $VSHallazgosOdontologico (required)
 * code ^short = "Código del hallazgo odontológico"
 * code ^definition = "Código estandarizado que representa el hallazgo clínico observado en el paciente."
 
@@ -43,6 +43,6 @@ Cada hallazgo puede estar asociado a un diente específico utilizando bodySite.
 
 // Diente afectado
 * bodySite 1..1
-* bodySite from $dental-anatomy (preferred)
+* bodySite from $VSAnatomiaDental (preferred)
 * bodySite ^short = "Diente afectado"
 * bodySite ^definition = "Código anatómico del diente afectado por el hallazgo clínico."

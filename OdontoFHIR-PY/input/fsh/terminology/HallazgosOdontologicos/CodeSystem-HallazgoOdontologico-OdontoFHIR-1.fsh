@@ -5,7 +5,7 @@ CodeSystem: CodeSystemHallazgoOdontologicoFHIR1
 Id: HallazgoOdontologico-OdontoFHIR-1
 Title: "Hallazgos Clínicos Odontológicos"
 Description: "Listado de hallazgos odontológicos observados en consultas clínicas en Paraguay, mapeados con SNOMED y SNODENT cuando corresponde."
-* ^url = "https://odontofhir.py/fhir/CodeSystem/Hallazgos-OdontoFHIR-1"
+* ^url = "https://odontofhir.py/fhir/CodeSystem/HallazgosOdontologicos-OdontoFHIR-1"
 * ^status = #active
 * ^content = #complete
 * ^caseSensitive = true

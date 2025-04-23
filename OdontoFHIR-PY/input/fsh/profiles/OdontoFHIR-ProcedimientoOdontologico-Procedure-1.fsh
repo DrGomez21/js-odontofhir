@@ -16,7 +16,7 @@ Incluye el diente tratado, la relación con hallazgos previos y el odontólogo r
 
 // Código del procedimiento realizado
 * code 1..1
-* code from $procedimiento-codes (required)
+* code from $VSProcedimientoOdontologico (required)
 * code ^short = "Procedimiento realizado"
 * code ^definition = "Código que representa el procedimiento odontológico realizado en el paciente."
 
@@ -52,7 +52,7 @@ Incluye el diente tratado, la relación con hallazgos previos y el odontólogo r
 
 // Diente tratado
 * bodySite 1..1
-* bodySite from $dental-anatomy (preferred)
+* bodySite from $VSAnatomiaDental (preferred)
 * bodySite ^short = "Diente tratado"
 * bodySite ^definition = "Indica el diente donde se realizó el procedimiento odontológico."
 
