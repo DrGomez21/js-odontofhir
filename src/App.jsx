@@ -5,9 +5,10 @@ import { PatientProfile } from "./pages/PatientProfile"
 import { NotFound } from "./pages/NotFound"
 import { Toaster } from "react-hot-toast"
 import { PatientFormCreate } from "./pages/PatientFormCreate"
-import './App.css'
 import { PatientNotes } from "./pages/PatientNotes"
 import { notes } from "./utils/procedimientosDentales"
+import { Test } from "./pages/test/Test"
+import './App.css'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/patient-profile/:id" element={<PatientProfile />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="/patient-notes" element={<PatientNotes notes={notes} />} />
+          <Route path="/test-api" element={<Test />} />
           <Route path="*" element={<Navigate to='/404' />} />
         </Routes>
         <Toaster />
