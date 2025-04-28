@@ -1,82 +1,52 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import React from 'react'
-import { postPatient } from '../api/fhir.api'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-import toast from 'react-hot-toast'
+import { usePatient } from '../hooks/usePatient'
+import { parseFHIRResource } from '../infraestructure/mappers/patient.mapper'
+import { useCodeSystem } from '../hooks/useCodeSystem'
 
 export const PatientForm = () => {
 
-  const { register, handleSubmit } = useForm()
-  const queryClient = useQueryClient()
-  const navigate = useNavigate()
+  const {
+    register,
+    handleSubmit,
+    watch
+  } = useForm()
+  const { mutate } = usePatient()
+  const {
+    ciudadesDelParaguay,
+    departamentosDelParaguay,
+    nacionalidades,
+    barriosDelParaguay
+  } = useCodeSystem()
 
+  // Nos suscribimos a los cambios en el input de la ciudad
+  const ciudadSeleccionada = watch('ciudad')
 
-  const parseFHIRResource = (patient) => {
-    const patientResource = {
-      resourceType: 'Patient',
-      name: [
-        {
-          use: 'official',
-          given: [
-            patient.given
-          ],
-          family: patient.family
-        }
-      ],
-      gender: patient.gender,
-      birthDate: patient.birthDate,
-      telecom: [
-        {
-          value: patient.phoneValue,
-          use: 'mobile',
-          system: 'phone',
-        },
-        {
-          system: 'email',
-          value: patient.emailValue
-        }
-      ],
-      addres: [
-        {
-          line: [
-            patient.addresLine
-          ],
-          city: patient.addresCity,
-          state: patient.addresState,
-          country: patient.addresCountry
-        }
-      ]
-    }
-
-    return patientResource
+  if (nacionalidades.isLoading || departamentosDelParaguay.isLoading || barriosDelParaguay.isLoading || ciudadesDelParaguay.isLoading) {
+    return <p>Cargando...</p> // Podemos cambiar a disabled o enabled dependiendo del estado de la consulta
+  }
+  if (nacionalidades.isError || departamentosDelParaguay.isError || barriosDelParaguay.isError || ciudadesDelParaguay.isError) {
+    return <p>Error al cargar los datos</p> // Podemos cambiar a disabled o enabled dependiendo del estado de la consulta
   }
 
-  const { mutate } = useMutation({
-    mutationFn: postPatient,
-    onSuccess: (newPatient) => {
+  const barriosFiltrados = ciudadSeleccionada && ciudadSeleccionada.toString() === '0'
+    ? barriosDelParaguay.data.slice(0, 68)
+    : barriosDelParaguay.data.filter(barrio =>
+      ciudadSeleccionada ? barrio.code.startsWith(ciudadSeleccionada.toString()) : false
+    )
 
-      // Invalidamos la caché
-      queryClient.invalidateQueries({ queryKey: ['patients'] })
+  console.log(ciudadSeleccionada)
 
-      // Actualizar caché de react-query
-      queryClient.setQueryData(['patients'], (oldData) => {
-        if (oldData == null) return [newPatient]
-        return [...oldData, newPatient]
-      })
-    }
-  })
-
-  const onSubmit = (data) => {
+  const onSubmit = (data) => {  
     const patient = parseFHIRResource(data)
     if (patient !== null) {
-      mutate(patient)
+      console.log(patient)
+      // mutate(patient)
     }
   }
 
   return (
-
-    <form className="flex flex-col justify-center w-fit bg-white p-6 rounded-xl shadow-2xl" onSubmit={handleSubmit(onSubmit)}>
+    <form className="flex flex-col justify-center w-3/4 bg-white p-6 rounded-xl shadow-2xl" onSubmit={handleSubmit(onSubmit)} onError={() => console.log("falta algo")}>
 
       <div className='grid grid-cols-2 grid-rows-3 gap-4'>
         <label className="flex flex-col gap-1 font-semibold text-[#4a4a4a] text-base col-span-1" htmlFor="given">
@@ -84,6 +54,7 @@ export const PatientForm = () => {
           <input
             className="px-4 py-2 text-base font-medium rounded-md border focus:outline-none bg-[#ffffff] text-[#092d26] border-black"
             type="text"
+            id='given'
             placeholder="Nombre"
             {...register('given', { required: true })}
           />
@@ -94,6 +65,7 @@ export const PatientForm = () => {
           <input
             className="px-4 py-2 text-base font-medium rounded-md border focus:outline-none bg-[#ffffff] text-[#092d26] border-black"
             type="text"
+            id='family'
             placeholder="Apellido"
             {...register('family', { required: true })}
           />
@@ -127,6 +99,7 @@ export const PatientForm = () => {
           <input
             className="px-4 py-2 text-base font-medium rounded-md border focus:outline-none bg-[#ffffff] text-[#092d26] border-[#262323]"
             type="tel"
+            id='telefono'
             placeholder="Número de teléfono"
             {...register('phoneValue', { required: true })}
           />
@@ -137,6 +110,7 @@ export const PatientForm = () => {
           <input
             className="px-4 py-2 text-base font-medium rounded-md border focus:outline-none bg-[#ffffff] text-[#092d26] border-black"
             type="email"
+            id='email'
             placeholder="Email"
             {...register('emailValue', { required: true })}
           />
@@ -147,6 +121,7 @@ export const PatientForm = () => {
           <textarea
             className="px-4 py-2 h-auto text-base font-medium rounded-md border focus:outline-none bg-[#ffffff] text-[#092d26] border-black"
             type="text"
+            id='direccion'
             placeholder="Dirección"
             {...register('addresLine', { required: true })}
           />
@@ -154,37 +129,80 @@ export const PatientForm = () => {
 
       </div>
 
-      <div className='grid grid-cols-3 grid-rows-1 mt-4 gap-2'>
-        <label className="flex flex-col gap-1 font-semibold text-[#4a4a4a] text-base col-span-1" htmlFor="ciudad">
-          Ciudad:
-          <input
-            className="px-4 py-2 text-base font-medium rounded-md border focus:outline-none bg-[#ffffff] text-[#092d26] border-black"
-            id="ciudad"
-            type="text"
-            placeholder="Ciudad"
-            {...register('addresCity')}
-          />
+      <div className='grid grid-cols-4 grid-rows-1 mt-4 gap-2'>
+
+        <label className="flex flex-col gap-1 font-semibold text-[#4a4a4a] text-base col-span-1" htmlFor="pais">
+          País:
+          {nacionalidades.isLoading ? (
+            <p id='pais'>Cargando nacionalidades</p> // Podemos cambiar a disabled o enabled dependiendo del estado de la consulta
+          ) : (
+            <select
+              className="px-4 py-2 text-base font-medium rounded-md border focus:outline-none bg-[#ffffff] text-[#092d26] border-[#262323]"
+              id="pais"
+              enabled={nacionalidades.isSuccess.toString()}
+              title='Nacionalidad del paciente'
+              defaultValue={600}
+              {...register('nacionalidad', { required: true })}
+            >
+              {nacionalidades.data.map((pais) => (
+                <option key={pais.code} value={pais.code}>
+                  {pais.display}
+                </option>
+              ))}
+            </select>
+          )}
         </label>
 
         <label className="flex flex-col gap-1 font-semibold text-[#4a4a4a] text-base col-span-1" htmlFor="departamento">
-          Departamento
-          <input
-            className="px-4 py-2 text-base font-medium rounded-md border focus:outline-none bg-[#ffffff] text-[#092d26] border-[#262323]"
-            id="departamento"
-            type="text"
-            placeholder="Departamento"
-            {...register('addresState', { required: true })}
-          />
+          Departamento:
+          {departamentosDelParaguay.isLoading ? (
+            <p>Cargando departamentos</p> // Podemos cambiar a disabled o enabled dependiendo del estado de la consulta
+          ) : (
+            <select
+              className="px-4 py-2 text-base font-medium rounded-md border focus:outline-none bg-[#ffffff] text-[#092d26] border-[#262323]"
+              id="departamento"
+              enabled={departamentosDelParaguay.isSuccess.toString()}
+              {...register('departamento', { required: true })}
+            >
+              {departamentosDelParaguay.data.map((departamento) => (
+                <option key={departamento.code} value={departamento.code}>
+                  {departamento.display}
+                </option>
+              ))}
+            </select>
+          )}
         </label>
 
-        <label className="flex flex-col gap-1 font-semibold text-[#4a4a4a] text-base col-span-1" htmlFor="pais">
-          País
-          <input
+        <label className="flex flex-col gap-1 font-semibold text-[#4a4a4a] text-base col-span-1" htmlFor="ciudad">
+          Ciudad:
+          <select
             className="px-4 py-2 text-base font-medium rounded-md border focus:outline-none bg-[#ffffff] text-[#092d26] border-[#262323]"
-            type="text"
-            placeholder="País"
-            {...register('addresCountry', { required: true })}
-          />
+            id="ciudad"
+            title='Ciudad del paciente'
+            {...register('ciudad', { required: true })}
+          >
+            <option value="">Seleccione una ciudad</option>
+            {ciudadesDelParaguay.data.map((ciudad) => (
+              <option key={ciudad.code} value={ciudad.code}>
+                {ciudad.display}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className="flex flex-col gap-1 font-semibold text-[#4a4a4a] text-base col-span-1" htmlFor="barrio">
+          Barrio:
+          <select
+            className="px-4 py-2 text-base font-medium rounded-md border focus:outline-none bg-[#ffffff] text-[#092d26] border-[#262323]"
+            id="barrio"
+            {...register('barrio', { required: true })}
+          >
+            {barriosFiltrados.map((barrio) => (
+              <option key={barrio.code} value={barrio.code}>
+                {barrio.display}
+              </option>
+            ))}
+          </select>
         </label>
       </div>
 
