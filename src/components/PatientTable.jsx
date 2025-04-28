@@ -3,9 +3,10 @@ import { usePatient } from '../hooks/usePatient'
 import DataTable from 'react-data-table-component'
 import { useNavigate } from 'react-router-dom'
 import Loader from './basics/Loader'
-import { Error } from './basics/Error'
 
 export const PatientTable = () => {
+
+  const { allPatients } = usePatient()
 
   const { patients, entries, isLoading, isError, error, isSuccess } = usePatient()
   const navigate = useNavigate()
@@ -80,20 +81,24 @@ export const PatientTable = () => {
     navigate(`/patient-profile/${patientId}`)
   }
 
-  if (isLoading) return <Loader />
-  if (isError) return <Error message={error.message | ''} />
+  if (allPatients.isLoading) return <Loader />
+  if (allPatients.isError) return <p>Ocurrió un error</p>
 
   return (
-    <div className='rounded-xl w-full'>
+    <div>
       <DataTable
+        className='rounded-xl w-full'
         columns={columns}
-        data={patients}
+        data={allPatients.data}
         customStyles={customStyles}
         pagination
         fixedHeader
         onRowClicked={patient => goToProfile(patient.id)}
         highlightOnHover
         pointerOnHover
+        noDataComponent={<div className='flex justify-center items-center h-full w-full'>No hay pacientes registrados</div>}
+        progressPending={allPatients.isLoading}
+        progressComponent={<Loader />}
       />
     </div>
   )
