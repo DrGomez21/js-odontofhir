@@ -4,17 +4,6 @@ import { meta } from "@eslint/js"
 
 // Se mapean los datos del formulario a los datos que necesita el backend para crear un paciente en FHIR.
 
-// {
-//   valueCodeableConcept: {
-//     coding: [
-//       {
-//         system: "https://odontofhir.py/fhir/CodeSystem/PueblosIndigenas-OdontoFHIR-1",
-//         code: patient.
-//       }
-//     ]
-//   }
-// }
-
 // Acá se considera el ingreso con cédula.
 export const parseFHIRResource = (patient) => {
   const patientResource = {
@@ -35,7 +24,7 @@ export const parseFHIRResource = (patient) => {
           ]
         },
         system: "https://odontofhir.py/id/ci",
-        value: patient.identificador
+        value: patient.identificacion
       }
     ],
     name: [
@@ -49,7 +38,7 @@ export const parseFHIRResource = (patient) => {
           extension: [
             {
               url: "http://hl7.org/fhir/StructureDefinition/humanname-mothers-family",
-              valueString: patient.segundoApellido
+              valueString: "Segundo Apellido"
             }
           ]
         }
@@ -60,7 +49,6 @@ export const parseFHIRResource = (patient) => {
     telecom: [
       {
         system: 'phone',
-        use: 'mobile',
         value: patient.phoneValue,
       },
       {
@@ -86,44 +74,44 @@ export const parseFHIRResource = (patient) => {
       {
         extension: [
           {
-            valueCodeableConcept: {
-              coding: [
-                {
-                  system: "https://odontofhir.py/fhir/CodeSystem/Departamento-OdontoFHIR-1",
-                  code: patient.departamento
-                }
-              ]
-            },
-            url: "departamento"
-          },
-          {
-            valueCodeableConcept: {
-              coding: [
-                {
-                  system: "https://odontofhir.py/fhir/CodeSystem/Ciudad-OdontoFHIR-1",
-                  code: patient.ciudad
-                }
-              ]
-            },
-            url: "ciudad"
-          },
-          {
-            valueCodeableConcept: {
-              coding: [
-                {
-                  system: "https://odontofhir.py/fhir/CodeSystem/Barrio-OdontoFHIR-1",
-                  code: patient.barrio
-                }
-              ]
-            },
-            url: "barrio"
-          },
-          {
-            url: "numeroDeCasa",
-            valueInteger: 444
+            extension: [
+              {
+                valueCodeableConcept: {
+                  coding: [
+                    {
+                      system: "https://odontofhir.py/fhir/CodeSystem/Departamento-OdontoFHIR-1",
+                      code: patient.departamento
+                    }
+                  ]
+                },
+                url: "departamento"
+              },
+              {
+                valueCodeableConcept: {
+                  coding: [
+                    {
+                      system: "https://odontofhir.py/fhir/CodeSystem/Ciudad-OdontoFHIR-1",
+                      code: patient.ciudad
+                    }
+                  ]
+                },
+                url: "ciudad"
+              },
+              {
+                valueCodeableConcept: {
+                  coding: [
+                    {
+                      system: "https://odontofhir.py/fhir/CodeSystem/Barrio-OdontoFHIR-1",
+                      code: patient.barrio
+                    }
+                  ]
+                },
+                url: "barrio"
+              }
+            ],
+            url: "https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-DireccionPYPaciente-1"
           }
-        ],
-        url: "https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-DireccionPYPaciente-1"
+        ]
       }
     ]
   }
