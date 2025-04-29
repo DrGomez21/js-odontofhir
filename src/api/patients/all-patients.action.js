@@ -17,7 +17,6 @@ export const allPatientsAction = async () => {
     // En caso de no haber datos se manda un arreglo vacío
     const patients = data?.entry ? data.entry.map((entry) => entry.resource) : []
 
-    console.log(patients)
     return patients
   } catch (error) {
     console.error(error)
