@@ -14,12 +14,20 @@ export const validateResource = async (resourceType, resource) => {
   if (!resourceType) return Error('Se requiere el endpoint del recurso a validar')
   if (!resource) return Error('Se requiere el recurso para validar')
 
-  const response = await odontoFhirApi.post(`/${resourceType}/$validate`, {
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    data: resource
-  })
+  try {
+    const response = await odontoFhirApi.post(`${resourceType}/$validate`,
+      resource,
+      {
+        headers: {
+          'Content-Type': 'application/json+fhir',
+          'Accept': 'application/json+fhir',
+        }
+      })
+    console.log(response)
+    return response.status === 200 ? true : false
+  } catch (error) {
+    console.error(error.response?.data || error.message)
+    throw new Error(`Error en la validación FHIR: ${error.response?.status || 'Desconocido'}`)
+  }
 
-  console.log(response)
 }
