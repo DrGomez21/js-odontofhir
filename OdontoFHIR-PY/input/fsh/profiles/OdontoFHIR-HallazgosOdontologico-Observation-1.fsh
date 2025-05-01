@@ -42,7 +42,7 @@ Cada hallazgo puede estar asociado a un diente específico utilizando bodySite.
 * asserter ^definition = "Profesional odontólogo que identificó y registró esta condición."
 
 // Diente afectado
-* bodySite 1..1
+* bodySite 1..*
 * bodySite from $VSAnatomiaDental (preferred)
 * bodySite ^short = "Diente afectado"
 * bodySite ^definition = "Código anatómico del diente afectado por el hallazgo clínico."
