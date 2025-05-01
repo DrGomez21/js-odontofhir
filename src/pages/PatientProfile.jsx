@@ -44,12 +44,13 @@ export const PatientProfile = () => {
     }
   };
 
+
   if (isLoading) return <Loader />
   if (isError) return <Error message={error.message} />
 
   return (
-    <div className='flex flex-col mx-8 py-6 gap-4'>
-      <h1 className='font-bold text-[#4A4A4A] text-4xl'>Perfil del paciente</h1>
+    <div className='flex flex-col mx-8 py-4 gap-4'>
+      <h1 className='font-bold text-[#4A4A4A] text-3xl'>Perfil del paciente</h1>
       <div className='flex w-full justify-between gap-12 items-center'>
         <PatientDetail patient={data} />
         <button
