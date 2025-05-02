@@ -1,6 +1,5 @@
 // Acá podremos mapear los datos de la base de datos a los datos que necesita el front.
 
-import { meta } from "@eslint/js"
 
 // Se mapean los datos del formulario a los datos que necesita el backend para crear un paciente en FHIR.
 
