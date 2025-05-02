@@ -1,55 +1,71 @@
 # OdontoFHIR-PY
 
 ## Aspectos Generales
-El proyecto plantea el desarrollo de un sistema de ficha odontológica interoperable basado en el estándar [HL7-FHIR1](https://hl7.org/fhir/), permitiendo la gestión de información clínica de pacientes de manera estructurada y compartible entre diferentes sistemas de salud.
 
-A fin de recolectar evidencias del uso de la ficha odontológica interoperable, este trabajo comprende la realización de un experimento de interoperabilidad. 
+**OdontoFHIR-PY** es una iniciativa que busca desarrollar un sistema interoperable de ficha clínica odontológica basado en el estándar [HL7-FHIR](https://hl7.org/fhir/), permitiendo la gestión estructurada y el intercambio seguro de información clínica entre distintos sistemas de salud.
 
-![Logo](../imagenes/odontofhir_esquema.png)
+Como parte de la validación de esta propuesta, el proyecto contempla la ejecución de un experimento de interoperabilidad entre OdontoFHIR y tres sistemas: uno creado para trabajar con FHIR, uno no compatible con FHIR (interoperabilidad mediada mediante middleware) y otro desarrollado en un pais diferente por la organización [HL7 Chile](https://hl7chile.cl), con el objetivo de demostrar la viabilidad del intercambio de información clínica odontológica a nivel internacional.
 
-El mismo se llevará a cabo entre OdontoFHIR y un sistema que no implementa el estándar HL7-FHIR, con el desarrollo de un middleware. También con un sistema basado en HL7-FHIR desarrollado por la organización [HL7 Chile](https://hl7chile.cl), para demostrar la viabilidad del intercambio de información clínica odontológica a nivel internacional. 
-Asimismo, incluye la construcción de perfiles personalizados de FHIR adaptados a las necesidades específicas de la atención odontológica de Paraguay.
+Esta guia fue desarrollada para demostrar los perfiles FHIR personalizados, adaptados a los requerimientos específicos del contexto de atención odontológica en Paraguay.
+
+![odontofhir_esquema](../imagenes/odontofhir_esquema.png)
 
 
 ### Autores
 
-| **Nombre**                     | **Contacto**                       |  **Afiliacion**             |
-| ---------------------------| -------------------------------| -------------------------|
-| Diego Rubén Gómez Morel    | diegoruben10.drgm@fpuna.edu.py | [Facultad Politecnica - UNA](https://www.pol.una.py/) |
-| José María Cabrera Peralta |  jaguarete2000@fpuna.edu.py    | [Facultad Politecnica - UNA](https://www.pol.una.py/) | 
+| **Nombre**                     | **Correo Electrónico**               | **Afiliación**                              |
+|-------------------------------|--------------------------------------|---------------------------------------------|
+| Diego Rubén Gómez Morel       | diegoruben10.drgm@fpuna.edu.py       | [Facultad Politécnica - UNA](https://www.pol.una.py/) |
+| José María Cabrera Peralta    | jaguarete2000@fpuna.edu.py           | [Facultad Politécnica - UNA](https://www.pol.una.py/) |
+
+### Alcance
+
+Esta Guía de Implementación define los siguientes **8 Perfiles FHIR**:
+
+- `Bundle`: Expediente Odontológico
+- `Composition`: Ficha Clínica
+- `Encounter`: Consulta Odontológica
+- `Observation`: Hallazgos Odontológicos
+- `Procedure`: Procedimientos Odontológicos
+- `Patient`: Paciente Odontológico
+- `Practitioner`: Profesional Odontológico
+- `AllergyIntolerance`: Registro de Alergias
+
+Asimismo, establece **7 categorías de terminologías** (CodeSystems y ValueSets):
+
+- Anatomía Dental
+- Hallazgos Odontológicos
+- Procedimientos Odontológicos
+- Secciones de la Ficha Clínica
+- Pueblos Indígenas
+- Direcciones geográficas de Paraguay
+- Documentos de Identidad
+
+Se incluye **1 escenario de uso** inicial:
+
+- [**Escenario 1:**](background.md#escenario-1) *Continuidad del Cuidado Odontológico*: Un paciente inicia su tratamiento en un consultorio odontológico pediátrico. Años más tarde, al cambiar de profesional durante la adolescencia, el nuevo odontólogo accede al historial clínico del paciente gracias al expediente clínico interoperable generado previamente. Ya como joven universitario, el paciente logra conseguir una beca para viajar a otro pais donde por dolor de muelas se ve obligado a visitar una odontologia, el profesional que antiende al joven accede, mediante el uso de estándares FHIR, al **Expediente Odontológico** almacenado en su país de origen, asegurando continuidad asistencial y evitando duplicidad de procedimientos.
+
+**OdontoFHIR** busca garantizar la portabilidad, accesibilidad y seguridad de la información clínica a lo largo del tiempo y del lugar fisico.
 
 
-#### Scope
 
-La guia de Implementacion de OdontFHIR define 8 [Perfiles]:
-- Expediente Odontologico `Bundle` 
-- Ficha Clinica `Composition`
-- Consulta Odontologica `Encounter`
-- Hallazgos Odontologicos `Observation`
-- Procedimiento Odontologico `Procedure`
-- Paciente Odontologico `Patient`
-- Profesional Odontologico `Practitioner`
-- AllergyIntolerance `AllergyIntolerance`
+### Audiencia
 
-La guia de Implementacion de OdontFHIR define 7 categorias para su terminologias:
+Esta guía fue escrita y dirigida a estudiantes de informática sin importar su area, carreras afines a la medicina que deseen iniciarse en el uso de estándares FHIR. Desarrolladores de sistemas clínicos odontológicos interesados en aplicar interoperabilidad en Paraguay. Profesionales de la salud y responsables de políticas públicas en salud digital.
 
-- Anatomia Dental
-- Hallazgos Odontologicos
-- Procedimientos Odontologicos 
-- Secciones Ficha Clinica
-- Pueblos Indigenas 
-- Direcciones de Paraguay
-- Documento de Identidad
+**¿A quién beneficia OdontoFHIR?**
 
-La guia de Implementacion de OdontFHIR contiene 1 caso de forma de uso para representar el intercambio de Fichas Odontologicas
-- [**Escenario 1:**](background.md#escenario-1) Todavia nose titulo, creame un titulo para el siguiente escenario. Un niño va a su odontologo
-y cuando es adolecente cambia a otro, ese recibe sus Expendiente Odontologico desde su antiguo consultorio quex 
+- A los pacientes, facilitando el acceso a su historial odontológico en cualquier centro habilitado.
+- A los profesionales odontológicos, permitiéndoles dar seguimiento clínico con datos completos, incluso en contextos de urgencia.
+- A la comunidad de desarrolladores, ofreciendo una guía reutilizable y abierta para construir soluciones interoperables.
 
-##### Audiencia
-La audiencia a quien va dirigida esta implementacion es a estudiantes que quieran aprender mas sobre el mundo de FHIR, a aquellos desarrolladores que realicen sistemas clinicos odontologicos dentro de la region de paraguay. Buscamos que este proyecto sea open source, por eso dejamos el link de nuestro github.
-A quien beneficia OdontoFHIR? Pacientes, tendran la disponibilidad de su informacion en todo centro odontologico. Odontologos seugimiento de lpaciente y datos actualziados y presentes en momentos de urgencia. Desarrolladores la guia de implmetnacion para futuros desarrollos basados en odontoFHIR, interoperables con el mismo
 
-###### Reconocimientos
-Esta guia fue desarrollada y producida en base al trabajo de fin de grado.
-Esta guia no podria ser posible sin el apoyo y confianza de PhD Sosa Cabrera como el que nos introdujo, animo y nos siguio paso a paso en este proyecto apoyando de forma academica como emocionalmente, nos entrego su confianza, Romina Rojas como nuestra tutora dentro de la carrera, aquella que nos corrigio y guio en nuestro documento, nos hizo esforzarnos a mejorar cada dia y pulio nuestra forma de expresarnos, Cesar Viaux Director de HL7 Chile que nostros siendo estudiantes desconocidos nos teniendo las manos para realizar este proyecto y nos guio en el recorrido. 
+### Reconocimientos
 
+Esta guía fue desarrollada como parte de un trabajo de fin de grado en la Facultad Politécnica de la Universidad Nacional de Asunción.
+
+Queremos agradecer profundamente a:
+
+- **Lic. Romina Rojas**, tutora del trabajo, quien con compromiso y rigor académico nos ayudó a pulir y mejorar cada entrega.
+- **Dr. Sosa Cabrera**, por su apoyo incondicional, guía académica y motivación constante desde el inicio del proyecto. Le agradecemos especialmente por habernos introducido a esta iniciativa, depositando en nosotros su confianza desde el primer momento.
+- **César Viaux**, Director de HL7 Chile, por su colaboración desinteresada, asesoramiento técnico y confianza hacia nuestro equipo.
