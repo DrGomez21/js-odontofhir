@@ -1,72 +1,26 @@
 import React, { useState } from 'react'
-import { dentalConditions } from '../utils/procedimientosDentales'
 
 export const Diente = ({
-  number,
-  position,
+  diente,
   selected,
-  conditions,
-  currentCondition,
   onClick
 }) => {
 
-  // Se definen las partes del diente
-  const parts = ['arriba', 'derecha', 'abajo', 'izquierda', 'centro']
-
-  const getPartStyle = (part) => {
-    const condition = conditions[`${number}-${part}`] || 'healthy'
-    return `${dentalConditions[condition].color} rounded-md`
-  }
-
   return (
-    <div className='relative w-14 h-20 my-1 mx-2'>
-      <div className='absolute w-full text-center text-sm font-medium top-0.5'>{number}</div>
-      
-      <div className='absolute top-5 w-full h-16 flex items-center justify-center'>
-        {/* Parte superior del diente */}
-        <div
-          className={`absolute top-0 w-8 h-2.5 border
-            ${getPartStyle} cursor-pointer hover:scale-105 hover:border-2 hover:rounded-md transition-all duration-100
-          `}
-          onClick={() => onClick('arriba', number)}
-        />
+    <div className='relative w-14 h-20 mx-2'>
+      <div className='absolute w-full text-center text-sm font-medium'>{diente.numberISO}</div>
 
-        {/* Parte derecha del diente */}
+      <div className='absolute top-2 w-full h-16 flex items-center justify-center'>
         <div
-          className={`absolute top-3 right-0 w-2.5 h-8 border
-            ${selected.includes('derecha') ? 'bg-blue-400 rounded-md' : 'bg-white'}
-            cursor-pointer hover:scale-105 hover:border-2 hover:rounded-md transition-all duration-100
+          id='diente'
+          className={`w-10 h-10 border-2 
+            ${selected.includes('centro') ? 'bg-blue-400 rounded-xl' : 'bg-white rounded-lg'}
+            cursor-pointer hover:scale-95 hover:border-4 hover:rounded-xl transition-all duration-100
           `}
-          onClick={() => onClick('derecha', number)}
-        />
-
-        {/* Parte inferior del diente */}
-        <div
-          className={`absolute bottom-2 w-8 h-2.5 border
-            ${selected.includes('abajo') ? 'bg-blue-400 rounded-md' : 'bg-white'}
-            cursor-pointer hover:scale-105 hover:border-2 hover:rounded-md transition-all duration-100
-          `}
-          onClick={() => onClick('abajo', number)}
-        />
-
-        {/* Parte izquierda del diente */}
-        <div
-          className={`absolute top-3 left-0 w-2.5 h-8 border
-            ${selected.includes('izquierda') ? 'bg-blue-400 rounded-md' : 'bg-white'}
-            cursor-pointer hover:scale-105 hover:border-2 hover:rounded-md transition-all duration-100
-          `}
-          onClick={() => onClick('izquierda', number)}
-        />
-
-        {/* Centro del diente */}
-        <div
-          className={`absolute top-3 w-8 h-8 border
-            ${selected.includes('centro') ? 'bg-blue-400 rounded-md' : 'bg-white'}
-            cursor-pointer hover:scale-95 hover:border-2 hover:rounded-md transition-all duration-100
-          `}
-          onClick={() => onClick('centro', number)}
+          onClick={() => onClick('centro', diente.numberISO, diente)}
         />
       </div>
+
     </div>
   )
 }
