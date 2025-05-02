@@ -27,7 +27,7 @@ export const PatientDetail = ({ patient }) => {
   }
 
   return (
-    <div className='flex justify-around border border-[#2B7A78] rounded-sm items-center p-4 text-[#4a4a4a] w-full'>
+    <div className='flex items-center justify-around w-full p-4 rounded-sm border-2 border-[#2B7A78] text-[#4a4a4a] bg-white'>
       <div>
         <p className='text-2xl font-bold'>{patient.name[0].given[0]} {patient.name[0].family}</p>
       </div>
