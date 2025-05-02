@@ -1,5 +1,11 @@
 import { odontoFhirApi } from "../fhir.api.js";
 
+export const getAnatomiaDental = async () => {
+  const response = await odontoFhirApi.get("/CodeSystem/1")
+  const codigoAnatomias = response.data.concept
+  return codigoAnatomias
+}
+
 export const getBarrios = async () => {
   const response = await odontoFhirApi.get("/CodeSystem/2")
   const barrios = response.data.concept
