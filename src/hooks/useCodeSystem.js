@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import {
+  getAnatomiaDental,
   getBarrios,
   getCiudades,
   getDepartamentos,
@@ -12,6 +13,12 @@ import {
 } from "../api/codesystem/codesystem.action.js"
 
 export const useCodeSystem = () => {
+
+  const anatomiaDental = useQuery({
+    queryKey: ['anatomiaDental'],
+    queryFn: getAnatomiaDental,
+    staleTime: 1000 * 60 * 60 * 72,
+  })
 
   const barriosDelParaguay = useQuery({
     queryKey: ['barrio'],
@@ -77,5 +84,6 @@ export const useCodeSystem = () => {
     pueblosIndigenas,
     seccionesFichaClinica,
     procedimientosOdontologicos,
+    anatomiaDental,
   }
 }
