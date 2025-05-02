@@ -20,11 +20,10 @@ dependencies:
   hl7.fhir.cl.clcore: 1.9.2
 
 menu:
-  Home: index.html
-  Artifacts: artifacts.html
-  Profiles: profiles.html
-  Terminology: terminology.html
-  Examples: examples.html
+  Inicio: index.html
+  Antecedentes: background.html
+  Generalidades: generalidades.html
+  Artefactos: artifacts.html
 
 instanceOptions:
   manualSliceOrdering: true

@@ -2,7 +2,7 @@ Profile: OdontoFHIRConsultaOdontologicaEncounter1
 Parent: Encounter
 Id: OdontoFHIR-ConsultaOdontologica-Encounter-1
 Title: "Encuentro Odontológico"
-Description: "Perfil que representa una consulta odontológica, incluyendo el odontólogo, el paciente y los hallazgos clínicos registrados."
+Description: "Perfil que representa una consulta odontológica, incluyendo el odontólogo, el paciente, los hallazgos y procedimientos clínicos registrados."
 
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ConsultaOdontologica-Encounter-1"
 
