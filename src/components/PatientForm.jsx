@@ -6,6 +6,8 @@ import { useCodeSystem } from '../hooks/useCodeSystem'
 import { validateResource } from '../api/fhir.validate'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import Loader from './basics/Loader'
+import { Error } from './basics/Error'
 
 export const PatientForm = () => {
 
@@ -28,13 +30,13 @@ export const PatientForm = () => {
 
   // Verificamos la carga de los datos.
   if (nacionalidades.isLoading || departamentosDelParaguay.isLoading || barriosDelParaguay.isLoading || ciudadesDelParaguay.isLoading) {
-    return <p>Cargando...</p> // Podemos cambiar a disabled o enabled dependiendo del estado de la consulta
+    return <Loader /> // Podemos cambiar a disabled o enabled dependiendo del estado de la consulta
   }
 
   // Nos aseguramos de que los datos se hayan cargado correctamente antes de renderizar el formulario.
   // Si hay un error en la carga de los datos, mostramos un mensaje de error.
   if (nacionalidades.isError || departamentosDelParaguay.isError || barriosDelParaguay.isError || ciudadesDelParaguay.isError) {
-    return <p>Error al cargar los datos</p> // Podemos cambiar a disabled o enabled dependiendo del estado de la consulta
+    return <Error /> 
   }
 
   // Filtramos los barrios según la ciudad seleccionada.
@@ -52,11 +54,31 @@ export const PatientForm = () => {
       const valido = validateResource('/Patient', patient)
 
       if (valido) {
-        toast.success('Paciente registrado correctamente')
+        toast.success('Paciente registrado correctamente', {
+          style: {
+            backgroundColor: '#B3E5FC',
+            color: '#4A4A4A',
+            fontSize: '14px',
+            fontWeight: 'medium',
+            borderRadius: '4px',
+            borderWidth: '2px',
+            borderColor: '#4A4A4A',
+          }
+        })
         mutate(patient)
         navigate('/')
       } 
-      else toast.error(`El paciente no es válido ${valido}`)
+      else toast.error(`El paciente no es válido ${valido}`, {
+        style: {
+          backgroundColor: '#fcb3b3',
+          color: '#4A4A4A',
+          fontSize: '14px',
+          fontWeight: 'medium',
+          borderRadius: '4px',
+          borderWidth: '2px',
+          borderColor: '#4A4A4A',
+        }
+      })
     }
   }
 
