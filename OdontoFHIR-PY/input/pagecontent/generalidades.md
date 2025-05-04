@@ -1,5 +1,5 @@
 # Generalidades del Proyecto OdontoFHIR-PY
-
+ASADS
 ## Estructura General del Modelo OdontoFHIR
 
 > El siguiente diagrama representa la estructura general de los perfiles definidos en el proyecto OdontoFHIR-PY, así como sus cardinalidades:
@@ -9,7 +9,17 @@
 - `{0..*}`: Elemento opcional, puede repetirse indefinidamente.
 - `{1..*}`: Elemento obligatorio, puede repetirse indefinidamente.
 
-![Diagrama de Perfiles](../imagenes/diagrama_perfiles.png)
+---
+
+<img src="diagrama_perfiles.png" alt="diagrama_perfiles" width="500px"/>
+
+---
+<img src="../images/diagrama_perfiles.png" alt="odontofhir_esquema" width="800px" />
+
+---
+
+![diagrama](diagrama_perfiles.png)
+---
 
 ## Paradigmas FHIR Soportados
 
@@ -109,23 +119,24 @@ A continuación, se presentan ejemplos de códigos definidos localmente y su cor
 | 22 | Trauma dental                                     | Trauma dental                                                        | 12022OF          | 397869004    | 128117D        |
 
 
-### Procedimientos Odontológicos
-| #  | Display                                      | Descripción                                                                                      | CodigoFHIR | CodigoSnomed     |
-|----|----------------------------------------------|--------------------------------------------------------------------------------------------------|------------|------------------|
-| 1  | Tratamiento de ortodoncia                    | Procedimiento para corregir la posición y alineación de los dientes y la mordida.               | 14001OF    | 71369009         |
-| 2  | Restauración estética dental                 | Tratamiento para mejorar el aspecto visual de restauraciones dentales insatisfactorias.         | 14002OF    | 109730006        |
-| 3  | Remoción de prótesis dental                  | Extracción o retiro de una prótesis dental removible o fija.                                    | 14003OF    | 448434009        |
-| 4  | Implante de prótesis dental                  | Inserción quirúrgica de una prótesis en el hueso maxilar o mandibular.                          | 14004OF    | 789147006        |
-| 5  | Restauración de diente mediante corona dental metálica | Colocación de una corona metálica sobre un diente dañado para restaurar su forma, función y protección. | 14005OF    | 1256041000        |
-| 6  | Blanqueamiento en dientes no vitales         | Aplicación tópica de peróxido de hidrógeno para blanqueo de dientes desvitalizados.             | 14006OF    | 104801000220102  |
-| 7  | Blanqueamiento en dientes vitales            | Aplicación tópica de peróxido de hidrógeno para blanqueo de dientes con pulpa viva.             | 14007OF    | 104791000220103  |
-| 8  | Limpieza de sarro                            | Procedimiento de remoción de depósitos como placa o cálculo en los dientes.                     | 14008OF    | 1260189003       |
-| 9  | Extracción de diente permanente              | Remoción de un diente permanente por razones clínicas u ortodónticas.                           | 14009OF    | 57703000         |
-| 10 | Extracción de diente supernumerario          | Remoción quirúrgica de un diente adicional fuera del número normal.                             | 14010OF    | 709108007        |
-| 11 | Extracción de diente temporal                | Remoción de un diente temporal (de leche) por indicación clínica.                               | 14011OF    | 26119007         |
-| 12 | Tratamiento de conducto                      | Procedimiento endodóntico para remover la pulpa infectada o dañada del diente.                  | 14012OF    | 1264277001       |
-| 13 | Asistencia en higiene oral                   | Actividades destinadas a mejorar o mantener la higiene bucal del paciente.                      | 14013OF    | 827136003        |
-| 14 | Aplicación de flúor                          | Aplicación de flúor en dientes para fortalecer el esmalte y prevenir caries.                    | 14014OF    | 68071007         |
-| 15 | Prevención de caries                         | Acciones clínicas orientadas a evitar la aparición de caries dental.                            | 14015OF    | 426482000        |
-| 16 | Profilaxis y flúor en niños                  | Limpieza dental profesional con aplicación de flúor en pacientes pediátricos.                   | 14016OF    | 70468009         |
-| 17 | Limpieza de caries                           | Procedimiento clínico para eliminar tejido cariado antes de la restauración                     | 14017OF    |                  |
+### Procedimientos Odontológicos 13:41 / 14:52
+
+| #  | Display                                     | Descripción                                                                                    | Código OdontoFHIR | Código SNOMED       |
+|----|---------------------------------------------|------------------------------------------------------------------------------------------------|-------------------|---------------------|
+| 1  | Tratamiento de ortodoncia                  | Procedimiento para corregir la posición y alineación de los dientes y la mordida.               | 14001OF           | 71369009             |
+| 2  | Restauración estética dental               | Mejora estética de restauraciones dentales insatisfactorias.                                    | 14002OF           | 109730006            |
+| 3  | Remoción de prótesis dental                | Extracción de una prótesis dental removible o fija.                                             | 14003OF           | 448434009            |
+| 4  | Implante de prótesis dental                | Inserción quirúrgica de prótesis en hueso maxilar o mandibular.                                 | 14004OF           | 789147006            |
+| 5  | Restauración con corona metálica           | Colocación de corona metálica sobre diente dañado.                                              | 14005OF           | 1256041000           |
+| 6  | Blanqueamiento en dientes no vitales       | Blanqueo con peróxido en dientes desvitalizados.                                                | 14006OF           | 104801000220102      |
+| 7  | Blanqueamiento en dientes vitales          | Blanqueo con peróxido en dientes con pulpa viva.                                                | 14007OF           | 104791000220103      |
+| 8  | Limpieza de sarro                          | Remoción de depósitos como placa o cálculo.                                                     | 14008OF           | 1260189003           |
+| 9  | Extracción de diente permanente            | Remoción por indicación clínica u ortodóntica.                                                  | 14009OF           | 57703000             |
+| 10 | Extracción de diente supernumerario        | Remoción quirúrgica de un diente adicional.                                                     | 14010OF           | 709108007            |
+| 11 | Extracción de diente temporal              | Remoción de un diente de leche.                                                                 | 14011OF           | 26119007             |
+| 12 | Tratamiento de conducto                    | Procedimiento endodóntico para remover la pulpa dañada.                                         | 14012OF           | 1264277001           |
+| 13 | Asistencia en higiene oral                 | Actividades para mantener o mejorar la higiene bucal.                                           | 14013OF           | 827136003            |
+| 14 | Aplicación de flúor                        | Aplicación de flúor para fortalecer el esmalte dental.                                          | 14014OF           | 68071007             |
+| 15 | Prevención de caries                       | Acciones clínicas para evitar la aparición de caries.                                           | 14015OF           | 426482000            |
+| 16 | Profilaxis y flúor en niños                | Limpieza profesional y aplicación de flúor en pacientes pediátricos.                            | 14016OF           | 70468009             |
+| 17 | Limpieza de caries                         | Eliminación de tejido cariado antes de restauración.                                            | 14017OF           | -                    |

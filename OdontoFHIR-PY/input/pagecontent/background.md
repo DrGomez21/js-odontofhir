@@ -1,112 +1,111 @@
-# Transfondo
+## Antecedentes y Justificación
 
-En Paraguay, la mayoría de los consultorios odontológicos aún no cuentan con sistemas electrónicos para gestionar las fichas clínicas de sus pacientes.
-Esta carencia afecta tanto la calidad como la precisión en el acceso a la información clínica, generando procesos fragmentados y poco eficientes. Además, los sistemas existentes carecen de estándares internacionales que permitan la interoperabilidad, entendida como la capacidad de que dos o más sistemas intercambien y utilicen la información compartida de manera efectiva.
+En Paraguay, la mayoría de los consultorios odontológicos aún no cuentan con sistemas electrónicos para gestionar las fichas clínicas de sus pacientes. Esta carencia compromete la calidad y precisión del acceso a la información clínica, generando procesos fragmentados y poco eficientes.
 
-En este contexto, el proyecto busca desarrollar un sistema de ficha clínica electrónica odontológica interoperable, basado en el estándar [HL7-FHIR](https://hl7.org/fhir/) (Fast Healthcare Interoperability Resources), para mejorar la gestión y el intercambio de información clínica en el ámbito odontológico. 
+Además, los sistemas existentes carecen de estándares de interoperabilidad, entendida como la capacidad de que dos o más sistemas intercambien y utilicen información compartida de manera efectiva. En este contexto, el proyecto **OdontoFHIR-PY** propone una solución interoperable basada en el estándar internacional [HL7 FHIR](https://hl7.org/fhir/), orientada a mejorar la gestión y el intercambio de datos clínicos en odontología.
 
-La falta de interoperabilidad representa un desafío y oportunidad en términos de la actualización tecnológica y la integración de los consultorios odontológicos en una infraestructura sanitaria digital más amplia y eficiente. 
-## Fichas Odontologicas utilizadas en Paraguay brindada por colaboradores
-Estas son las fichas las cuales nos guiaron a la creacion de las fichas interoperables odontolgicas y buscamos que sean regionalizadas para Paraguay. (mejorar descripcion con chatgpt)
-![formulario](../imagenes/formulario.png)
-![formulario2](../imagenes/formulario2.png)
+La falta de interoperabilidad representa un desafío, pero también una oportunidad para integrar a los consultorios odontológicos dentro de una infraestructura de salud digital nacional e incluso regional.
 
+---
 
+## Formularios Referenciales Utilizados
 
-## Atencedentes
-En el proceso de búsqueda de antecedentes sobre fichas clínicas electrónicas odontológicas interoperables, se identificó un proyecto de la [Asociación Americana Dental (ADA)](https://www.ada.org/), orientado a abordar la necesidad histórica de mejorar la comunicación entre los proveedores de atención primaria y los proveedores de salud dental. Tradicionalmente, esta comunicación se realizaba mediante papel o adjuntos por correo electrónico, implicando que los procesos de derivación de pacientes fueran fragmentados e ineficientes. Este problema fue identificado como una de las principales barreras a resolver. Para ello, se utilizaron los estándares interoperables HL7 CDA y FHIR como resultado, surgió la iniciativa [Dental Data Exchange](https://build.fhir.org/ig/HL7/dental-data-exchange/index.html), cuyo propósito es optimizar el intercambio de información entre dentistas y otros profesionales de la salud.
+Se recopilaron y analizaron formularios clínicos utilizados actualmente en clínicas odontológicas de Paraguay, los cuales sirvieron como base para diseñar los perfiles regionalizados de esta guía.
 
 
+<img src="formulario.png" alt="formulario1" width="800px" />
+<img src="formulario2.png" alt="formulario2" width="800px" />
 
-OdontoFHIR puede facilitar la continuidad de atención de un mismo paciente entre distintos centros, a pesar de que:
 
-- Se utilicen sistemas diferentes (con y sin FHIR),
-- El paciente se atienda en distintos momentos y lugares,
-- Existe una red nacional externa, como HL7 Chile, que pueda integrarse al flujo desde Paraguay.
-## Casos de uso
+## Antecedentes Internacionales
 
-Los casos de uso pueden servir como puente entre las interpretaciones conceptuales y la implementación técnica de esta guía. Para el proyecto de fin de grado se ha probado un escenario, mientras mas avance el proyecto se iran agregando diferentes escenarios.
+Uno de los referentes identificados es el proyecto de la [Asociación Dental Americana (ADA)](https://www.ada.org/), que buscó mejorar la comunicación entre odontólogos y médicos de atención primaria. El problema: procesos de derivación fragmentados realizados en papel o por correo electrónico.
 
-### **Escenario 1:** Continuidad del Cuidado Odontológico.
-Conoce a *Juan Prueba* tiene 20 años, es un estudiante universitario de intercambio.
+Como solución, se propuso el uso de estándares HL7 CDA y FHIR, derivando en la creación de la guía [Dental Data Exchange](https://build.fhir.org/ig/HL7/dental-data-exchange/index.html), que define perfiles específicos para optimizar el intercambio de información clínica odontológica en entornos heterogéneos.
 
-**Etapa Pediátrica**
 
-Juan Prueba, paciente masculino de 8 años, acude a *Clinica A* que tiene X sistema sin FHIR acompañado por su madre. Motivo de consulta: sangrado de encías y mal aliento persistente. Durante el interrogatorio dirigido, la madre indica que Juan no se cepilla correctamente y consume muchos alimentos azucarados.
-La odontopediatra Dra. Julia Odonto realiza un examen clínico y detecta acumulación de sarro en piezas posteriores, inflamación gingival y sangrado espontáneo al sondaje. Se realiza una orientación en higiene oral, se programa una limpieza y se documenta el hallazgo clínico en el sistema.
+# Escenarios de Implementación
 
-> Paciente presenta acumulación de sarro en dientes posteriores y encías inflamadas con sangrado espontáneo. Se orienta en técnicas de cepillado y se programa profilaxis.
+## Escenario 1: Continuidad del Cuidado Odontológico
 
-**Tabla de Hallazgos – Encuentro 1**
+Este escenario describe cómo el uso de OdontoFHIR permite mantener el historial clínico del paciente a través del tiempo y de diferentes instituciones, incluso entre países.
 
-| Descripción clínica             | Formato de Carga             | Código SNOMED / CIE         | Tipo de Recurso OdontoFHIR         |
-| ------------------------------- | ---------------------------- | --------------------------- | -----------------------------------|
-| Acumulación de sarro en dientes | `Notas en su sistema X`      | `Sin Sistema de Codigo`     | `HallazgoOdontologico-Observation` |
-| Encías inflamadas               | `Notas en su sistema X`      | `Sin Sistema de Codigo`     | `HallazgoOdontologico-Observation` |
-| Encías sangrantes               | `Notas en su sistema X`      | `Sin Sistema de Codigo`     | `HallazgoOdontologico-Observation` |
-| Higiene oral deficiente         | `Notas en su sistema X`      | `Sin Sistema de Codigo`     | `HallazgoOdontologico-Observation` |
+### Infancia – Atención Odontopediátrica
 
-**Procedimientos realizados – Encuentro 2**
+**Paciente:** Juan Prueba, 8 años.  
+**Institución:** Clínica A (sin sistema FHIR).  
+**Profesional:** Dra. Julia Odonto
 
-Una semana despues, se realiza una limpieza de sarro, aplicación de flúor y educación en técnica de cepillado. Juan y su madre comprenden la importancia de mantener un adecuado control de placa.
+> Consulta por sangrado de encías y mal aliento. Se detecta sarro, inflamación gingival y deficiente higiene oral. Se indica profilaxis y orientación.
 
-Se realiza profilaxis con ultrasonido, aplicación de flúor tópica y refuerzo de higiene oral. Buena tolerancia al procedimiento.
+#### Hallazgos - Encuentro 1
 
-**Tabla de Procedimientos – Encuentro 2**
+| Descripción clínica             | Recurso FHIR                       | Código SNOMED (si disponible) |
+| ------------------------------- | ---------------------------------- | ----------------------------- |
+| Acumulación de sarro            | `Observation` (`Hallazgo`)         | *Sin codificación*            |
+| Encías inflamadas               | `Observation` (`Hallazgo`)         | *Sin codificación*            |
+| Encías sangrantes               | `Observation` (`Hallazgo`)         | *Sin codificación*            |
+| Higiene oral deficiente         | `Observation` (`Hallazgo`)         | *Sin codificación*            |
 
-| Procedimiento realizado         | Formato de Carga             | Código SNOMED / CIE         | Tipo de Recurso OdontoFHIR         |
-| ------------------------------- | ---------------------------- | --------------------------- | -----------------------------------|
-| Limpieza de sarro (profilaxis)  | `Notas en su sistema X`      | `Sin Sistema de Codigo`     | `HallazgoOdontologico-Observation` |
-| Aplicación de flúor             | `Notas en su sistema X`      | `Sin Sistema de Codigo`     | `HallazgoOdontologico-Observation` |
-| Asistencia en higiene oral      | `Notas en su sistema X`      | `Sin Sistema de Codigo`     | `HallazgoOdontologico-Observation` |
+#### Procedimientos - Encuentro 2
 
-**Encuentro 3 – Control**
+Una semana después, se realiza:
 
-Tres semana despues se cita al paciente para control, donde se observa notable mejoría en las encías, sin sangrado a la exploración y buena técnica de cepillado. Se indica control semestral.
+- Profilaxis con ultrasonido
+- Aplicación de flúor
+- Reforzamiento de higiene oral
 
-    Control exitoso. Mejora en la higiene oral y encías saludables. Se sugiere seguimiento cada 6 meses.
-        
-**Etapa Adolecencia**
+| Procedimiento                  | Recurso FHIR         | Código SNOMED (si disponible) |
+| ----------------------------- | -------------------- | ----------------------------- |
+| Limpieza de sarro             | `Procedure`          | *Sin codificación*            |
+| Aplicación de flúor           | `Procedure`          | *Sin codificación*            |
+| Educación en higiene oral     | `Procedure`          | *Sin codificación*            |
 
-Juan Prueba, ahora de 14 años, acude a la clínica Sonrisa-Integral por recomendación escolar debido a molestias al morder y percepción de dientes mal alineados. Es evaluado por el ortodoncista Dr. Leandro P.
+#### Control - Encuentro 3
 
-Durante la evaluación clínica se detecta maloclusión de Clase II, con apiñamiento dental moderado y leve dolor en la articulación temporomandibular (ATM) al masticar.
+> Se observa mejoría significativa. Se indica control cada 6 meses.
 
-    Paciente refiere molestia al morder, dolor leve en región preauricular y estética comprometida. Se diagnostica maloclusión de Clase II con apiñamiento dental. Se indica tratamiento ortodóncico."
+---
 
-**Tabla de Hallazgos – Encuentro inicial adolescente**
+### Adolescencia – Atención Ortodóntica
 
-| Descripción clínica                     | Observación FHIR / Condición | Código SNOMED / CIE  | Tipo de Recurso FHIR |
-| --------------------------------------- | ---------------------------- | -------------------- | -------------------- |
-| Maloclusión dental                      | `Condition`                  | `367336001` (SNOMED) | `Condition`          |
-| Dolor de articulación temporomandibular | `Observation`                | `247373008` (SNOMED) | `Observation`        |
-| Anomalías dentales (apiñamiento)        | `Condition`                  | `125605004` (SNOMED) | `Condition`          |
+**Edad:** 14 años  
+**Clínica:** Sonrisa Integral  
+**Profesional:** Dr. Leandro P.
 
-Se inicia tratamiento ortodóncico con brackets convencionales. El plan incluye controles mensuales y seguimiento durante 18 meses. También se instruye al paciente en técnicas de higiene específicas para portadores de ortodoncia.
+> Consulta por molestias al morder. Se diagnostica maloclusión Clase II con apiñamiento dental. Dolor leve en la ATM.
 
-    Se coloca aparato ortodóncico fijo. Se brinda instrucción en higiene oral adaptada al aparato. Seguimiento mensual.
+#### Hallazgos
 
-**Tabla de Procedimientos – Ortodoncia**
+| Descripción clínica                     | Recurso FHIR   | Código SNOMED        |
+| --------------------------------------- | -------------- | -------------------- |
+| Maloclusión dental                      | `Condition`    | 367336001            |
+| Dolor en articulación temporomandibular | `Observation`  | 247373008            |
+| Apiñamiento dental                      | `Condition`    | 125605004            |
 
-| Procedimiento realizado               | Código SNOMED               | Tipo de recurso FHIR |
-| ------------------------------------- | --------------------------- | -------------------- |
-| Tratamiento de ortodoncia             | `428881005` (SNOMED)        | `Procedure`          |
-| Educación para higiene con ortodoncia | `71079003` (SNOMED)         | `Procedure`          |
-| Evaluación de dolor ATM               | `386053000` (SNOMED - Pain) | `Observation`        |
+#### Procedimientos
 
-**Etapa Joven Adulto**
+| Procedimiento                       | Recurso FHIR  | Código SNOMED   |
+| ---------------------------------- | ------------- | --------------- |
+| Colocación de brackets             | `Procedure`   | 428881005       |
+| Educación para higiene oral        | `Procedure`   | 71079003        |
 
-Juan, ahora estudiante universitario, obtiene una beca de intercambio y se traslada temporalmente a otro país. Durante su estancia, presenta dolor agudo en premolar superior derecho acompañado de inflamación local.
+### Joven Adulto – Atención en el Extranjero
 
-Acude al centro odontológico universitario Global Smile, donde lo atiende la odontóloga Dra. Erika FHIR. Al acceder a su Expediente Odontológico mediante estándares FHIR, la profesional verifica antecedentes de ortodoncia y antecedentes previos de higiene deficiente. Con esta información, evita duplicar estudios radiográficos y procede a tratamiento.
+**Edad:** 20 años  
+**Clínica:** Global Smile (extranjero)  
+**Profesional:** Dra. Erika FHIR
 
-    Paciente con dolor en premolar superior derecho. Antecedente de ortodoncia. Se accede a historial clínico FHIR que muestra higiene oral deficiente en la infancia y ortodoncia reciente. Se confirma absceso periapical. Se realiza tratamiento de conducto.
+> Consulta por dolor agudo en premolar superior derecho. Se accede al expediente odontológico interoperable y se evita duplicar estudios.
 
-| Descripción clínica            | Observación / Condición | Código SNOMED        | Tipo de Recurso FHIR |
-| ------------------------------ | ----------------------- | -------------------- | -------------------- |
-| Dolor de diente                | `Observation`           | `422587007` (SNOMED) | `Observation`        |
-| Infección periapical (absceso) | `Condition`             | `68566005` (SNOMED)  | `Condition`          |
+#### Diagnóstico y Procedimientos
 
-| Procedimiento realizado | Código SNOMED       | Tipo de Recurso FHIR |
-| ----------------------- | ------------------- | -------------------- |
-| Tratamiento de conducto | `23406003` (SNOMED) | `Procedure`          |
+| Descripción clínica                | Recurso FHIR   | Código SNOMED   |
+| ---------------------------------- | -------------- | --------------- |
+| Dolor de diente                    | `Observation`  | 422587007       |
+| Absceso periapical                 | `Condition`    | 68566005        |
+
+| Procedimiento realizado            | Recurso FHIR   | Código SNOMED   |
+| ---------------------------------- | -------------- | --------------- |
+| Tratamiento de conducto            | `Procedure`    | 23406003        |
+
