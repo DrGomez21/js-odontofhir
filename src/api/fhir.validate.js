@@ -5,7 +5,7 @@ import { odontoFhirApi } from "./fhir.api"
  *
  * @async
  * @function
- * @param {string} resourceType - The type of the FHIR resource (e.g., "Patient", "Observation").
+ * @param {string} resourceType - The type of the FHIR resource (e.g., "/Patient", "/Observation").
  * @param {Object} resource - The FHIR resource object to validate.
  * @returns {Promise<Error|void>} Resolves with no value if validation is successful, or an Error if validation fails.
  * @throws {Error} If `resourceType` or `resource` is not provided.
