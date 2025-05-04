@@ -8,6 +8,7 @@ import { PatientFormCreate } from "./pages/PatientFormCreate"
 import { PatientNotes } from "./pages/PatientNotes"
 import { notes } from "./utils/procedimientosDentales"
 import { Test } from "./pages/test/Test"
+import { RegistroAlergia } from "./pages/RegistroAlergia"
 import './App.css'
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/404" element={<NotFound />} />
           <Route path="/patient-notes" element={<PatientNotes notes={notes} />} />
           <Route path="/test-api" element={<Test />} />
+          <Route path="/patient/:id/allergies" element={<RegistroAlergia />} />
           <Route path="*" element={<Navigate to='/404' />} />
         </Routes>
         <Toaster />
