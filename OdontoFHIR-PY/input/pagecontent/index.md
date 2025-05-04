@@ -8,8 +8,9 @@ Como parte de la validación de esta propuesta, el proyecto contempla la ejecuci
 
 Esta guia fue desarrollada para demostrar los perfiles FHIR personalizados, adaptados a los requerimientos específicos del contexto de atención odontológica en Paraguay.
 
-<img src="odontofhir_esquema.png" alt="odontofhir_esquema" width="800px" />
-
+<br>
+<img src="odontofhir_esquema.png" alt="odontofhir_esquema" width="800px"/>
+<br>
 
 ## Autores
 

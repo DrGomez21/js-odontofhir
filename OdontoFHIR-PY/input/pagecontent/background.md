@@ -12,10 +12,10 @@ La falta de interoperabilidad representa un desafío, pero también una oportuni
 
 Se recopilaron y analizaron formularios clínicos utilizados actualmente en clínicas odontológicas de Paraguay, los cuales sirvieron como base para diseñar los perfiles regionalizados de esta guía.
 
-
-<img src="formulario.png" alt="formulario1" width="800px" />
-<img src="formulario2.png" alt="formulario2" width="800px" />
-
+<br>
+<img src="formulario.png" alt="formulario1" width="400px"/>
+<img src="formulario2.png" alt="formulario2" width="400px"/>
+<br>
 
 ## Antecedentes Internacionales
 

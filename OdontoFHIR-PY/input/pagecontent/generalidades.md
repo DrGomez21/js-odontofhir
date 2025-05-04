@@ -9,17 +9,9 @@ ASADS
 - `{0..*}`: Elemento opcional, puede repetirse indefinidamente.
 - `{1..*}`: Elemento obligatorio, puede repetirse indefinidamente.
 
----
-
-<img src="diagrama_perfiles.png" alt="diagrama_perfiles" width="500px"/>
-
----
-<img src="../images/diagrama_perfiles.png" alt="odontofhir_esquema" width="800px" />
-
----
-
-![diagrama](diagrama_perfiles.png)
----
+<br>
+<img src="diagrama_perfiles.png" alt="diagrama_perfiles" width="800px"/>
+<br>
 
 ## Paradigmas FHIR Soportados
 
