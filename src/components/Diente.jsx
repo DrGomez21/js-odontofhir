@@ -1,10 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 export const Diente = ({
   diente,
-  selected,
+  estado,
   onClick
 }) => {
+
+  const colorBg = estado === 'hallazgo'
+  ? 'bg-blue-400'
+  : estado === 'procedimiento'
+  ? 'bg-red-400'
+  : 'bg-white'
 
   return (
     <div className='relative w-14 h-20 mx-2'>
@@ -12,12 +18,12 @@ export const Diente = ({
 
       <div className='absolute top-2 w-full h-16 flex items-center justify-center'>
         <div
-          id='diente'
-          className={`w-10 h-10 border-2 
-            ${selected.includes('centro') ? 'bg-blue-400 rounded-xl' : 'bg-white rounded-lg'}
+          className={`
+            w-10 h-10 border-2 rounded-lg 
+            ${colorBg}
             cursor-pointer hover:scale-95 hover:border-4 hover:rounded-xl transition-all duration-100
           `}
-          onClick={() => onClick('centro', diente.numberISO, diente)}
+          onClick={() => onClick(diente)}
         />
       </div>
 
