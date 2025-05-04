@@ -292,3 +292,12 @@ const numeroDienteToCode = (numeroDiente) => {
   console.log(DIENTE_ODONTOFHIR_CODE[numeroDiente])
 }
 
+const NUMERO_POR_CODIGO = Object.fromEntries(
+  Object.entries(DIENTE_ODONTOFHIR_CODE)
+    .map(([numeroISO, codigo]) => [codigo, numeroISO])
+)
+
+// Y luego lo usas directamente
+export function obtenerNumeroPorCodigo(codigoBuscado) {
+  return NUMERO_POR_CODIGO[codigoBuscado] ?? null
+}

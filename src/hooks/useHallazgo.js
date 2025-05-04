@@ -1,33 +1,38 @@
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { addHallazgo } from "../api/hallazgos/add-hallazgo.action";
+import { getHallazgoByEncounterId, getHallazgoByPatientId, getHallazgoByPatientIdAndToothCode } from "../api/hallazgos/get-hallazgo.action";
 
-export const useHallazgo = () => {
-  const queryClient = useQueryClient();
+export const useHallazgo = (encounterId, paciente, diente) => {
+  
+  // const queryClient = useQueryClient();
 
   // Querys
-  const hallazgos = useQuery({
-    queryKey: ["hallazgos"],
-    queryFn: addHallazgo,
-    staleTime: 1000 * 60 * 60 * 72,
+  const hallazgosByEncounter = useQuery({
+    queryKey: ["hallazgos", encounterId],
+    queryFn: () => getHallazgoByEncounterId(encounterId),
+    staleTime: 1000 * 60 * 5,
+    enabled: !!encounterId,
   });
 
-  // Mutations
-  const {mutate: addHallazgoMutation } = useMutation({
-    mutationFn: addHallazgo,
-    onSuccess: (newHallazgo) => {
-      // Invalidamos la caché para que se vuelva a cargar la lista de hallazgos.
-      queryClient.invalidateQueries(["hallazgos"]);
-      // Actualizamos la caché con el nuevo hallazgo.
-      queryClient.setQueryData(["hallazgos"], (oldData) => {
-        // Si oldData es null, significa que no hay datos en caché, así que simplemente devolvemos el nuevo hallazgo.
-        if (oldData == null) return [newHallazgo];
-        return [...oldData, newHallazgo];
-      });
-    }
+  const hallazgosByPatient = useQuery({
+    queryKey: ["hallazgos", paciente],
+    queryFn: () => getHallazgoByPatientId(paciente),
+    staleTime: 1000 * 60 * 5,
+    enabled: !!paciente,
+  });
+
+  const hallazgoByPatientAndTooth = useQuery({
+    queryKey: ['hallazgo', paciente, diente],
+    queryFn: () => getHallazgoByPatientIdAndToothCode(paciente, diente),
+    staleTime: 1000 * 60 * 5,
+    enabled: !!diente
   })
 
+  // Mutations
+
   return {
-    hallazgos,
-    addHallazgoMutation,
+    hallazgosByEncounter,
+    hallazgosByPatient,
+    hallazgoByPatientAndTooth,
   }
 }

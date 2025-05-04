@@ -5,9 +5,11 @@ import { useForm } from 'react-hook-form'
 import { useEncounter } from '../hooks/useEncounter'
 import { LoaderCircle, PanelLeftClose, Save } from 'lucide-react'
 import { encounterMapper } from '../infraestructure/mappers/encounter.mapper'
-import toast from 'react-hot-toast'
 import { validateResource } from '../api/fhir.validate'
 import { ConsultaCard } from './consultas/ConsultaCard'
+import { HallazgoCard } from './cards/HallazgoCard'
+import { useHallazgo } from '../hooks/useHallazgo'
+import toast from 'react-hot-toast'
 
 const Encounter = ({ patientId }) => {
 
@@ -147,35 +149,25 @@ const Encounter = ({ patientId }) => {
   )
 }
 
-const Condition = () => {
-
-  // Aquí puedes usar el hook useForm de react-hook-form para manejar el formulario
-  const {
-    register,
-    handleSubmit,
-    watch
-  } = useForm()
+const Condition = ({ patientId, diente }) => {
 
   // Tendremos que registrar un hallazgo al servidor.
   // Para eso, usaremos el hook useCodeSystem para obtener los hallazgos disponibles.
   // Luego, al enviar el formulario, se registrará el hallazgo seleccionado.
-  const { hallazgos } = useCodeSystem()
+  const { hallazgos: opcionesHallazgo } = useCodeSystem()
+  const { hallazgosByPatient, hallazgoByPatientAndTooth } = useHallazgo(null, patientId, diente.code)
 
-  const [hallazgo, setHallazgo] = useState(null)
-
-  if (hallazgos.isLoading) return <Loader />
-  if (hallazgos.isError) return <Error />
+  if (hallazgosByPatient.isLoading || hallazgoByPatientAndTooth.isLoading) return <p>Cargando...</p>
+  if (hallazgosByPatient.isError || hallazgoByPatientAndTooth.isLoading) return <Error />
 
   return (
     <div className="mb-4">
-      <h3 className="text-lg font-semibold">Condición</h3>
+      <h3 className="text-lg font-semibold" title='Condiciones halladas en el paciente'>Hallazgos</h3>
       <p className="text-sm text-gray-600">Descripción de la condición.</p>
+      {!hallazgoByPatientAndTooth.data.entry && <p>No hay hallazgos en este diente.</p>}
       {
-        hallazgos.data.map((hallazgo) => (
-          <div key={hallazgo.code} className="mb-2">
-            <h4 className="text-md">{hallazgo.display}</h4>
-            <p className="text-sm text-gray-600">{hallazgo.definition}</p>
-          </div>
+        hallazgoByPatientAndTooth.data.entry && hallazgoByPatientAndTooth.data.entry.map(({resource}) => (
+          <HallazgoCard key={resource.id} condition={resource} />
         ))
       }
     </div>
@@ -212,6 +204,7 @@ export const Sidebar = ({ diente, patient, onClose }) => {
         {/* formularios FHIR */}
         <div>
           <Encounter patientId={patient.id} />
+          <Condition patientId={patient.id} diente={diente} />
         </div>
       </aside>
     </>
