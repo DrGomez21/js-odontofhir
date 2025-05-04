@@ -1,5 +1,5 @@
 # Generalidades del Proyecto OdontoFHIR-PY
-ASADS
+
 ## Estructura General del Modelo OdontoFHIR
 
 > El siguiente diagrama representa la estructura general de los perfiles definidos en el proyecto OdontoFHIR-PY, así como sus cardinalidades:
@@ -9,9 +9,10 @@ ASADS
 - `{0..*}`: Elemento opcional, puede repetirse indefinidamente.
 - `{1..*}`: Elemento obligatorio, puede repetirse indefinidamente.
 
-<br>
-<img src="diagrama_perfiles.png" alt="diagrama_perfiles" width="800px"/>
-<br>
+<div>
+<img src="diagrama_perfiles.png" alt="diagrama_perfiles" width="900px"/>
+</div>
+<p></p>
 
 ## Paradigmas FHIR Soportados
 

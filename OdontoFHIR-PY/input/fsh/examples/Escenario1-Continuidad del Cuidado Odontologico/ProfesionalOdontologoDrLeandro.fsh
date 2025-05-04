@@ -1,7 +1,7 @@
-Instance: ProfesionalOdontologoDraJuliaOdontoEjemploEscenario1
+Instance: ProfesionalOdontologoDrLeandroEjemploEscenario1
 InstanceOf: OdontoFHIR-ProfesionalOdontologico-Practitioner-1
-Title: "Odontólogo con Registro Profesional y Cédula"
-Description: "Profesional odontológico registrado con documento de identidad."
+Title: "Odontólogo Ortodoncista con Registro Profesional"
+Description: "Profesional odontológico que atiende a Juan en su adolescencia."
 
 * active = true
 
@@ -10,24 +10,24 @@ Description: "Profesional odontológico registrado con documento de identidad."
 * extension[registroProfesional].valueIdentifier.system = "https://odontofhir.py/fhir/CodeSystem/DocumentoIdentidad-OdontoFHIR-1"
 * extension[registroProfesional].valueIdentifier.type.coding[0].system = "https://odontofhir.py/fhir/CodeSystem/DocumentoIdentidad-OdontoFHIR-1"
 * extension[registroProfesional].valueIdentifier.type.coding[0].code = #RPRO
-* extension[registroProfesional].valueIdentifier.value = "126489"
+* extension[registroProfesional].valueIdentifier.value = "152301"
 
 // Documento CI
 * identifier[0].use = #official
 * identifier[0].type.coding[0].system = "https://odontofhir.py/fhir/CodeSystem/DocumentoIdentidad-OdontoFHIR-1"
 * identifier[0].type.coding[0].code = #CI
 * identifier[0].type.coding[0].userSelected = true
-* identifier[0].value = "4356447"
+* identifier[0].value = "3789902"
 
 // Nombre
 * name[official].use = #official
-* name[official].given = "Julia"
-* name[official].family = "Odonto"
+* name[official].given = "Leandro"
+* name[official].family = "Pérez"
 * name[official].family.extension[0].url = "http://hl7.org/fhir/StructureDefinition/humanname-mothers-family"
-* name[official].family.extension[0].valueString = "Prueba"
+* name[official].family.extension[0].valueString = "Ortiz"
 
 // Contacto
 * telecom[phone].system = #phone
-* telecom[phone].value = "0981223344"
+* telecom[phone].value = "0971445566"
 * telecom[email].system = #email
-* telecom[email].value = "odonto.julio@clinicaA.com"
+* telecom[email].value = "leandro.perez@sonrisaintegral.com"

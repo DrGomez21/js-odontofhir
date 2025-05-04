@@ -1,5 +1,4 @@
-# OdontoFHIR-PY
-
+# OdontoFHIR - Paraguay
 ## Aspectos Generales
 
 **OdontoFHIR-PY** es una iniciativa que busca desarrollar un sistema interoperable de ficha clínica odontológica basado en el estándar [HL7-FHIR](https://hl7.org/fhir/), permitiendo la gestión estructurada y el intercambio seguro de información clínica entre distintos sistemas de salud.
@@ -8,9 +7,10 @@ Como parte de la validación de esta propuesta, el proyecto contempla la ejecuci
 
 Esta guia fue desarrollada para demostrar los perfiles FHIR personalizados, adaptados a los requerimientos específicos del contexto de atención odontológica en Paraguay.
 
-<br>
+<div>
 <img src="odontofhir_esquema.png" alt="odontofhir_esquema" width="800px"/>
-<br>
+</div>
+<p></p>
 
 ## Autores
 
@@ -19,7 +19,7 @@ Esta guia fue desarrollada para demostrar los perfiles FHIR personalizados, adap
 | Diego Rubén Gómez Morel       | diegoruben10.drgm@fpuna.edu.py       | [Facultad Politécnica - UNA](https://www.pol.una.py/) |
 | José María Cabrera Peralta    | jaguarete2000@fpuna.edu.py           | [Facultad Politécnica - UNA](https://www.pol.una.py/) |
 
-### Alcance
+## Alcance
 
 Esta Guía de Implementación define los siguientes **8 Perfiles FHIR**:
 
@@ -44,13 +44,12 @@ Asimismo, establece **7 categorías de terminologías** (CodeSystems y ValueSets
 
 Se incluye **1 escenario de uso** inicial:
 
-- [**Escenario 1:**](background.md#escenario-1) *Continuidad del Cuidado Odontológico*: Un paciente inicia su tratamiento en un consultorio odontológico pediátrico. Años más tarde, al cambiar de profesional durante la adolescencia, el nuevo odontólogo accede al historial clínico del paciente gracias al expediente clínico interoperable generado previamente. Ya como joven universitario, el paciente logra conseguir una beca para viajar a otro pais donde por dolor de muelas se ve obligado a visitar una odontologia, el profesional que antiende al joven accede, mediante el uso de estándares FHIR, al **Expediente Odontológico** almacenado en su país de origen, asegurando continuidad asistencial y evitando duplicidad de procedimientos.
+- [**Escenario 1**](background.html#escenario-1-continuidad-del-cuidado-odontologico) *Continuidad del Cuidado Odontológico*: Un paciente inicia su tratamiento en un consultorio odontológico pediátrico. Años más tarde, al cambiar de profesional durante la adolescencia, el nuevo odontólogo accede al historial clínico del paciente gracias al expediente clínico interoperable generado previamente. Ya como joven universitario, el paciente logra conseguir una beca para viajar a otro pais donde por dolor de muelas se ve obligado a visitar una odontologia, el profesional que antiende al joven accede, mediante el uso de estándares FHIR, al **Expediente Odontológico** almacenado en su país de origen, asegurando continuidad asistencial y evitando duplicidad de procedimientos.
 
 **OdontoFHIR** busca garantizar la portabilidad, accesibilidad y seguridad de la información clínica a lo largo del tiempo y del lugar fisico.
 
 
-
-### Audiencia
+## Audiencia
 
 Esta guía fue escrita y dirigida a estudiantes de informática sin importar su area, carreras afines a la medicina que deseen iniciarse en el uso de estándares FHIR. Desarrolladores de sistemas clínicos odontológicos interesados en aplicar interoperabilidad en Paraguay. Profesionales de la salud y responsables de políticas públicas en salud digital.
 
@@ -61,7 +60,7 @@ Esta guía fue escrita y dirigida a estudiantes de informática sin importar su 
 - A la comunidad de desarrolladores, ofreciendo una guía reutilizable y abierta para construir soluciones interoperables.
 
 
-### Reconocimientos
+## Reconocimientos
 
 Esta guía fue desarrollada como parte de un trabajo de fin de grado en la Facultad Politécnica de la Universidad Nacional de Asunción.
 

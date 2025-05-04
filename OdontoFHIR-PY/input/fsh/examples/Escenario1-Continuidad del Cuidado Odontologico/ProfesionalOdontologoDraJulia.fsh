@@ -1,4 +1,4 @@
-Instance: ProfesionalOdontologoDraJuliaOdontoEjemploEscenario1ASDd
+Instance: ProfesionalOdontologoDraJuliaEjemploEscenario1
 InstanceOf: OdontoFHIR-ProfesionalOdontologico-Practitioner-1
 Title: "Odontólogo con Registro Profesional y Cédula"
 Description: "Profesional odontológico registrado con documento de identidad."
