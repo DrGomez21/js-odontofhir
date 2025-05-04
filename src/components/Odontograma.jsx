@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import { Diente } from './Diente';
+import { Sidebar } from './Sidebar';
 
-export const Odontograma = () => {
-
-  // Estado para almacenar todas las partes seleccionadas de cada diente
-  const [partesSeleccionadas, setPartesSeleccionadas] = useState({})
+export const Odontograma = ({ patient }) => {
 
   const dientesSuperiores = [
     {
@@ -104,7 +102,7 @@ export const Odontograma = () => {
       system: `https://odontofhir.py/fhir/CodeSystem/AnatomiaDental-OdontoFHIR-1`,
     }
   ]
-  
+
   const dientesInferiores = [
     {
       display: 'Incisivo central inferior derecho permanente completo',
@@ -204,54 +202,63 @@ export const Odontograma = () => {
     },
   ];
 
+  // estado global de colores: { '11': 'hallazgo'|'procedimiento', ... }
+  const [dientesEstado, setDientesEstado] = useState({})
+  // Diente clickeado para abrir el sidebar
+  const [selectedDiente, setSelectedDiente] = useState(null)
+
   // Tratar el click de un diente
-  const handleDienteClick = (parte, numeroDiente, diente) => {
-    setPartesSeleccionadas(prev => {
-      const partesDiente = prev[numeroDiente] || []
-      /* En caso de que el diente ya esté marcado, se debe desmarcar */
-      if (partesDiente.includes(parte)) {
-        return {
-          ...prev,
-          [numeroDiente]: partesDiente.filter(part => part !== parte)
-        };
-      } else { /* Si no está marcado, se agrega ese diente */
-        return {
-          ...prev,
-          [numeroDiente]: [...partesDiente, parte]
-        };
-      }
-    })
+  const handleDienteClick = (diente) => {
     console.log(diente)
+    setSelectedDiente(diente) // Abrir el sidebar con el diente clickeado.
+  }
+
+  const handleSaveEstado = (numberISO, tipo) => {
+    setDientesEstado(prevState => ({
+      ...prevState,
+      [numberISO]: tipo
+    }))
+    setSelectedDiente(null) // Cerrar el sidebar después de guardar.
   }
 
   return (
-    <div className='p-4 bg-white rounded-lg shadow-lg'>
+    <div className='flex-col p-4 bg-white rounded-lg shadow-lg'>
 
-      {/* Dientes superiores */}
-      <div className='flex flex-wrap justify-center mb-8'>
-        {dientesSuperiores.map(diente => (
-          <Diente
-            key={diente.numberISO}
-            diente={diente}
-            position='arriba'
-            selected={partesSeleccionadas[diente.numberISO] || []}
-            onClick={handleDienteClick}
-          />
-        ))}
+      <div className='flex-1'>
+        {/* Dientes superiores */}
+        <div className='flex flex-wrap justify-center mb-8'>
+          {dientesSuperiores.map(diente => (
+            <Diente
+              key={diente.numberISO}
+              diente={diente}
+              estado={dientesEstado[diente.numberISO]}
+              onClick={handleDienteClick}
+            />
+          ))}
+        </div>
+
+        {/* Dientes inferiores */}
+        <div className='flex flex-wrap justify-center'>
+          {dientesInferiores.map(diente => (
+            <Diente
+              key={diente.numberISO}
+              diente={diente}
+              estado={dientesEstado[diente.numberISO]}
+              onClick={handleDienteClick}
+            />
+          ))}
+        </div>
       </div>
 
-      {/* Dientes inferiores */}
-      <div className='flex flex-wrap justify-center'>
-        {dientesInferiores.map(diente => (
-          <Diente
-            key={diente.numberISO}
-            diente={diente}
-            position='abajo'
-            selected={partesSeleccionadas[diente.numberISO] || []}
-            onClick={handleDienteClick}
-          />
-        ))}
-      </div>
+
+      {selectedDiente && (
+        <Sidebar
+          diente={selectedDiente}
+          patient={patient}
+          onSave={handleSaveEstado}
+          onClose={() => setSelectedDiente(null)}
+        />
+      )}
 
     </div>
   )
