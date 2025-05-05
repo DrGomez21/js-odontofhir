@@ -4,13 +4,14 @@ Title: "Colocación de brackets"
 Description: "Inicio de tratamiento ortodóntico con colocación de brackets metálicos."
 
 * status = #completed
-* code = $VSProcedimientoOdontologico#428881005 "Colocación de brackets"
-* subject = Reference(PacienteJuanEjemploEscenario1)
-* encounter = Reference(Encuentro1OrtodonciaJuan)
-* performedDateTime = "2029-09-15T14:45:00-03:00"
-* performer.actor = Reference(ProfesionalOdontologoDrLeandroEjemploEscenario2)
-* reasonReference[0] = Reference(ConditionMaloclusionJuanEOrt)
-* reasonReference[1] = Reference(ConditionApinamientoJuanEOrt)
-* bodySite = $VSAnatomiaDental#13050OF "Diente canino inferior derecho temporal completo"
-
-
+* code = https://odontofhir.py/fhir/CodeSystem/ProcedimientoOdontologico-OdontoFHIR-1#14001OF "Tratamiento de ortodoncia"
+* subject = Reference(Patient/JuanSanchez)
+* subject.display = "Paciente Juan Sanchez"
+* encounter = Reference(Encounter/)
+* performedDateTime = "2023-04-15T09:00:00-03:00"
+* performer.actor = Reference(Practitioner/DraJulia)
+* performer[0].actor.display = "Doctora Julia"
+* reasonReference[0] = Reference(Condition/)
+* reasonReference[1] = Reference(Condition/)
+* bodySite[0] = https://odontofhir.py/fhir/CodeSystem/AnatomiaDental-OdontoFHIR-1#13025OF "Incisivo central inferior derecho permanente completo"
+* bodySite[1] = https://odontofhir.py/fhir/CodeSystem/AnatomiaDental-OdontoFHIR-1#13025OF "Incisivo central inferior derecho permanente completo"

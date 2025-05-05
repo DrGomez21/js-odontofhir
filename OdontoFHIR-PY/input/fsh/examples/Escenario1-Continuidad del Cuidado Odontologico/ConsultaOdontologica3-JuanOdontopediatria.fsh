@@ -12,7 +12,5 @@ Description: "Control posterior. Se observa mejoría significativa. Se indica se
 * participant[0].individual = Reference(Practitioner/DraJulia) 
 * participant[0].individual.display = "Doctora Julia"
 
-* period.start = "2011-06-15T09:00:00-03:00"
-* period.end = "2011-06-15T10:00:00-03:00"
-
-
+* period.start = "2011-10-15T09:00:00-03:00"
+* period.end = "2011-10-15T10:00:00-03:00"

@@ -1,13 +1,21 @@
-Instance: Encuentro3OrtodonciaRefaccionJuan
+Instance: Encuentro2OrtodonciaJuan
 InstanceOf: OdontoFHIR-ConsultaOdontologica-Encounter-1
-Title: "Encuentro Odontológico 3 – Ortodoncia (Reparación de brackets)"
-Description: "Consulta por desprendimiento de brackets. Se realiza reparación y control."
+Title: "Encuentro Odontológico 2 – Ortodoncia (Colocación)"
+Description: "Encuentro para inicio de tratamiento ortodóntico con colocación de brackets."
 
 * status = #finished
 * class = http://terminology.hl7.org/CodeSystem/v3-ActCode#AMB "ambulatory"
-* subject = Reference(PacienteJuanEjemploEscenario1)
-* participant.individual = Reference(ProfesionalOdontologoDrLeandroEjemploEscenario2)
-* period.start = "2029-10-10T11:00:00-03:00"
 
-// Procedimiento asociado
-* reasonReference[procedimiento][0] = Reference(ProcedureRefaccionBracketsJuanE3)
+* subject = Reference(Patient/JuanSanchez)
+* subject.display = "Paciente Juan Sanchez"
+
+* participant[0].individual = Reference(Practitioner/DraJulia) 
+* participant[0].individual.display = "Doctora Julia"
+
+* period.start = "2017-03-15T09:00:00-03:00"
+* period.end = "2017-03-15T10:00:00-03:00"
+
+
+// Procedimientos realizados
+* reasonReference[procedimiento][0] = Reference(Procedure/)
+

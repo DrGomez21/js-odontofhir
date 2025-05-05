@@ -3,10 +3,10 @@ InstanceOf: OdontoFHIR-HallazgosOdontologicos-Condition-1
 Title: "Hallazgo: Sarro en paciente pediátrico"
 Description: "Acumulación de sarro detectada durante el primer encuentro de Juan."
 
-* code = $CodigoHallazgosOdontoFHIR#13001OF "Acumulación de sarro"
-* subject = Reference(PacienteJuanEjemploEscenario1)
-* encounter = Reference(Encuentro1-JuanOdontopediatria)
-* recordedDate = "2025-04-22"
-* asserter = Reference(ProfesionalOdontologoDraJuliaOdontoEjemploEscenario1)
-* bodySite[0] = $VSAnatomiaDental#13046OF "Diente incisivo lateral inferior izquierdo temporal completo"
-* bodySite[1] = $VSAnatomiaDental#13047OF "Diente incisivo central inferior izquierdo temporal completo"
+* code = https://odontofhir.py/fhir/CodeSystem/Hallazgos-OdontoFHIR-1#12002OF "Acumulación de sarro en dientes"
+* subject = Reference(Patient/JuanSanchez)
+* encounter = Reference(Encounter/infancia1)
+* recordedDate = "2017-05-22"
+* asserter = Reference(Practitioner/DraJulia)
+* bodySite[0] = https://odontofhir.py/fhir/CodeSystem/AnatomiaDental-OdontoFHIR-1#13047OF "Diente incisivo central inferior izquierdo temporal completo"
+* bodySite[1] = https://odontofhir.py/fhir/CodeSystem/AnatomiaDental-OdontoFHIR-1#13048OF "Diente incisivo central inferior derecho temporal completo"

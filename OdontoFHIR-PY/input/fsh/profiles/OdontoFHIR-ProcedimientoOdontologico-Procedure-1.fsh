@@ -51,7 +51,7 @@ Incluye el diente tratado, la relación con hallazgos previos y el odontólogo r
 * reasonReference ^definition = "Referencia a los hallazgos clínicos observados que justificaron el procedimiento."
 
 // Diente tratado
-* bodySite 1..1
+* bodySite 1..*
 * bodySite from $VSAnatomiaDental (preferred)
 * bodySite ^short = "Diente tratado"
 * bodySite ^definition = "Indica el diente donde se realizó el procedimiento odontológico."

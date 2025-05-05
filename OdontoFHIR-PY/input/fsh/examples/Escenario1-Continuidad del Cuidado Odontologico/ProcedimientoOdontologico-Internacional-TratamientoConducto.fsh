@@ -4,10 +4,12 @@ Title: "Tratamiento de conducto"
 Description: "Procedimiento endodóntico para drenar absceso y preservar el diente."
 
 * status = #completed
-* code = $VSProcedimientoOdontologico#23406003 "Tratamiento de conducto"
-* subject = Reference(PacienteJuanEjemploEscenario1)
-* encounter = Reference(EncuentroGlobalSmileJuan)
-* performedDateTime = "2033-03-11T16:30:00-03:00"
-* performer.actor = Reference(ProfesionalOdontologoDraErikaEjemploEscenario3)
-* reasonReference[0] = Reference(ConditionAbscesoJuanEGlobal)
-* bodySite = $VSAnatomiaDental#13051OF "Primer diente molar inferior derecho temporal completo"
+* code = https://odontofhir.py/fhir/CodeSystem/ProcedimientoOdontologico-OdontoFHIR-1#14012OF "Tratamiento de conducto"
+* subject = Reference(Patient/JuanSanchez)
+* subject.display = "Paciente Juan Sanchez"
+* encounter = Reference(Encounter/)
+* performedDateTime = "2023-04-15T09:00:00-03:00"
+* performer.actor = Reference(Practitioner/DraJulia)
+* performer[0].actor.display = "Doctora Julia"
+* reasonReference[0] = Reference(Condition/)
+* bodySite[0] = https://odontofhir.py/fhir/CodeSystem/AnatomiaDental-OdontoFHIR-1#13003OF "Primer molar superior derecho permanente completo"

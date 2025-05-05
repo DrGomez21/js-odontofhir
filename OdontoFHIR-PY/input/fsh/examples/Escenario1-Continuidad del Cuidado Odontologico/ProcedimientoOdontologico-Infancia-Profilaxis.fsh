@@ -4,10 +4,13 @@ Title: "Profilaxis con ultrasonido"
 Description: "Limpieza de sarro realizada con ultrasonido como tratamiento inicial."
 
 * status = #completed
-* code = $VSProcedimientoOdontologico#14008OF "Limpieza de sarro"
-* subject = Reference(PacienteJuanEjemploEscenario1)
-* encounter = Reference(Encuentro2-JuanOdontopediatria)
-* performedDateTime = "2025-04-29T09:30:00-03:00"
-* performer.actor = Reference(ProfesionalOdontologoDraJuliaOdontoEjemploEscenario1)
-* reasonReference[0] = Reference(ConditionSarroJuanE1)
-* bodySite = $VSAnatomiaDental#13047OF "Diente incisivo central inferior izquierdo temporal completo"
+* code = https://odontofhir.py/fhir/CodeSystem/ProcedimientoOdontologico-OdontoFHIR-1#14008OF "Limpieza de sarro"
+* subject = Reference(Patient/JuanSanchez)
+* subject.display = "Paciente Juan Sanchez"
+* encounter = Reference(Encounter/)
+* performedDateTime = "2011-06-15T09:00:00-03:00"
+* performer.actor = Reference(Practitioner/DraJulia)
+* performer[0].actor.display = "Doctora Julia"
+* reasonReference[0] = Reference(Condition/)
+* bodySite[0] = https://odontofhir.py/fhir/CodeSystem/AnatomiaDental-OdontoFHIR-1#13047OF "Diente incisivo central inferior izquierdo temporal completo"
+* bodySite[1] = https://odontofhir.py/fhir/CodeSystem/AnatomiaDental-OdontoFHIR-1#13048OF "Diente incisivo central inferior derecho temporal completo"
