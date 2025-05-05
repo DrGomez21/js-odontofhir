@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Diente } from './Diente';
 import { Sidebar } from './Sidebar';
+import { useHallazgo } from '../hooks/useHallazgo';
+import { DienteConHallazgo } from './DienteConHallazgo';
 
 export const Odontograma = ({ patient }) => {
 
@@ -221,32 +223,94 @@ export const Odontograma = ({ patient }) => {
     setSelectedDiente(null) // Cerrar el sidebar después de guardar.
   }
 
+  const { hallazgosByPatient } = useHallazgo(null, patient.id)
+
+  if (hallazgosByPatient.isLoading) return <p>Cargando odontograma...</p>
+  if (hallazgosByPatient.isError) return <p>Error en el odontograma...</p>
+
+  /**{!hallazgoByPatientAndTooth.data.entry && <p>No hay hallazgos en este diente.</p>}
+        {
+          hallazgoByPatientAndTooth.data.entry && hallazgoByPatientAndTooth.data.entry.map(({resource}) => (
+            <HallazgoCard key={resource.id} condition={resource} />
+          ))
+        } */
+
+  // const renderDiente = (diente) => {
+  //   if (!hallazgosByPatient.data.entry) {
+  //     return (
+  //       <Diente
+  //         key={diente.numberISO}
+  //         diente={diente}
+  //         estado={dientesEstado[diente.numberISO]}
+  //         onClick={handleDienteClick}
+  //       />
+  //     )
+  //   }
+
+  //   const hayHallazgo = hallazgosByPatient.data.entry.find(
+  //     hallazgo => hallazgo.bodySite &&
+  //       hallazgo.bodySite[0]?.coding &&
+  //       hallazgo.bodySite[0].coding[0]?.code === diente.code
+  //   )
+
+  //   if (hayHallazgo) {
+  //     return (
+  //       <p>H</p>
+  //     )
+  //   }
+
+  //   return (
+  //     <Diente
+  //       key={diente.numberISO}
+  //       diente={diente}
+  //       estado={dientesEstado[diente.numberISO]}
+  //       onClick={handleDienteClick}
+  //     />
+  //   )
+  // }
+
+  const renderDiente = (diente) => {
+    const entries = hallazgosByPatient.data?.entry ?? []
+
+    // Buscamos si alguna entrada tiene este diente en su bodySite
+    const hayHallazgo = entries.some(({ resource }) =>
+      resource.bodySite?.some(site =>
+        site.coding?.some(coding => coding.code === diente.code)
+      )
+    )
+
+    console.log(`En diente ${diente.numberISO} ¿existe hallazgo? ${hayHallazgo}`)
+
+    // Renderizamos un componente u otro, pasando key al root
+    return hayHallazgo
+      ? (
+        <DienteConHallazgo
+          key={diente.numberISO}
+          diente={diente}
+          onClick={handleDienteClick}
+        />
+      )
+      : (
+        <Diente
+          key={diente.numberISO}
+          diente={diente}
+          onClick={handleDienteClick}
+        />
+      )
+  }
+
   return (
     <div className='flex-col p-4 bg-white rounded-lg shadow-lg'>
 
       <div className='flex-1'>
         {/* Dientes superiores */}
         <div className='flex flex-wrap justify-center mb-8'>
-          {dientesSuperiores.map(diente => (
-            <Diente
-              key={diente.numberISO}
-              diente={diente}
-              estado={dientesEstado[diente.numberISO]}
-              onClick={handleDienteClick}
-            />
-          ))}
+          {dientesSuperiores.map(diente => (renderDiente(diente)))}
         </div>
 
         {/* Dientes inferiores */}
         <div className='flex flex-wrap justify-center'>
-          {dientesInferiores.map(diente => (
-            <Diente
-              key={diente.numberISO}
-              diente={diente}
-              estado={dientesEstado[diente.numberISO]}
-              onClick={handleDienteClick}
-            />
-          ))}
+          {dientesInferiores.map(diente => (renderDiente(diente)))}
         </div>
       </div>
 
