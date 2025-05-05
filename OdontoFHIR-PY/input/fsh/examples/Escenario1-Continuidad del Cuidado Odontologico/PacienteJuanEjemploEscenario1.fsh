@@ -12,7 +12,7 @@ Description: "Paciente utilizando en el escenario del caso de uso numero 1."
 // Nombre (slice oficial)
 * name[oficial].use = #official
 * name[oficial].given = "Juan"
-* name[oficial].family = "Prueba"
+* name[oficial].family = "Sanchez"
 * name[oficial].family.extension[0].url = "http://hl7.org/fhir/StructureDefinition/humanname-mothers-family"
 * name[oficial].family.extension[0].valueString = "OdontoFHIR"
 
