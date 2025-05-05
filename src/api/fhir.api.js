@@ -5,7 +5,10 @@ export const odontoFhirApi = axios.create({
   params: {
     _format: 'json',
     _pretty: true
-  }
+  },
+  headers: {
+    'Content-Type': 'application/fhir+json'
+  } 
 })
 
 export const deletePatientById = async (PatientId) => {
