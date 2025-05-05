@@ -3,13 +3,14 @@ import { useCodeSystem } from '../hooks/useCodeSystem'
 import { Error } from './basics/Error'
 import { useForm } from 'react-hook-form'
 import { useEncounter } from '../hooks/useEncounter'
-import { LoaderCircle, PanelLeftClose, Save } from 'lucide-react'
+import { Loader2Icon, LoaderCircle, PanelLeftClose, Save, SquareCheckIcon } from 'lucide-react'
 import { encounterMapper } from '../infraestructure/mappers/encounter.mapper'
 import { validateResource } from '../api/fhir.validate'
 import { ConsultaCard } from './consultas/ConsultaCard'
 import { HallazgoCard } from './cards/HallazgoCard'
 import { useHallazgo } from '../hooks/useHallazgo'
 import toast from 'react-hot-toast'
+import { hallazgoMapper } from '../infraestructure/mappers/hallazgo.mapper'
 
 const Encounter = ({ patientId }) => {
 
@@ -151,22 +152,78 @@ const Encounter = ({ patientId }) => {
 
 const Condition = ({ patientId, diente }) => {
 
+  // Estado para mostrar o no el form de creación de encuentro.
+  const [mostrarCreacionHallazgo, setMostrarCreacionHallazgo] = useState(false)
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting }
+  } = useForm()
+
+
   // Tendremos que registrar un hallazgo al servidor.
   // Para eso, usaremos el hook useCodeSystem para obtener los hallazgos disponibles.
   // Luego, al enviar el formulario, se registrará el hallazgo seleccionado.
   const { hallazgos: opcionesHallazgo } = useCodeSystem()
-  const { hallazgosByPatient, hallazgoByPatientAndTooth } = useHallazgo(null, patientId, diente.code)
+  const { hallazgosByPatient, hallazgoByPatientAndTooth, hallazgoMutation } = useHallazgo(null, patientId, diente.code)
 
-  if (hallazgosByPatient.isLoading || hallazgoByPatientAndTooth.isLoading) return <p>Cargando...</p>
-  if (hallazgosByPatient.isError || hallazgoByPatientAndTooth.isLoading) return <Error />
+  const onSubmit = (data) => {
+    const hallazgoResource = hallazgoMapper(patientId, 203, 152, diente, data.hallazgo)
+    hallazgoMutation.mutate(hallazgoResource)
+    if (mutacionExitosa) {
+      toast.success('Exito')
+    }
+  }
+
+
+  if (opcionesHallazgo.isLoading || hallazgosByPatient.isLoading || hallazgoByPatientAndTooth.isLoading) return <p>Cargando...</p>
+  if (opcionesHallazgo.isError || hallazgosByPatient.isError || hallazgoByPatientAndTooth.isLoading) return <Error />
 
   return (
-    <div className="mb-4">
-      <h3 className="text-lg font-semibold" title='Condiciones halladas en el paciente'>Hallazgos</h3>
-      <p className="text-sm text-gray-600">Descripción de la condición.</p>
+    <div className="mt-4">
+      {/* Header */}
+      <div className='flex justify-between items-center'>
+        <h1 className='font-medium text-2xl'>Hallazgos</h1>
+        <button
+          className='flex items-center justify-center w-8 h-8 border-2 border-[#4a4a4a] rounded-md bg-cyan-200
+          hover:cursor-pointer hover:scale-95 transition-all duration-100'
+          onClick={() => setMostrarCreacionHallazgo(!mostrarCreacionHallazgo)}
+        >
+          {mostrarCreacionHallazgo ? 'X' : '+'}
+        </button>
+      </div>
+
+      {
+        mostrarCreacionHallazgo && (
+          <form onSubmit={handleSubmit(onSubmit)} className='mt-2 mb-2'>
+            <select
+              className='w-full py-2 px-1 border-2 border-[#4a4a4a] rounded-md'
+              {...register('hallazgo', { required: true })}
+            >
+              {opcionesHallazgo.data.map((h) => (
+                <option key={h.code} value={h.code}>{h.display}</option>
+              ))}
+            </select>
+            <button
+              type='submit'
+              className='px-4 py-2 border-2 mt-2 w-full border-[#4a4a4a] bg-cyan-200 text-[#4a4a4a] text-sm font-medium rounded hover:cursor-pointer hover:scale-95 transition-all duration-100 disabled:opacity-50'
+            >
+              {hallazgoMutation.isPending ? (
+                <p className='flex items-center justify-center gap-2'><Loader2Icon className='animate-spin' />Guardando...</p>
+              ) : (
+                <p className='flex items-center justify-center gap-2'><Save />Guardar hallazgo</p>
+              )}
+            </button>
+            {hallazgoMutation.isSuccess ? <div className='mt-1 w-full border-2 border-green-400 rounded-sm text-green-400 bg-green-200 px-2 py-2 text-center flex gap-2'>¡Hallazgo registrado!<SquareCheckIcon className='text-green-400' /></div> : null}
+            {hallazgoMutation.isError ? <div className='mt-1 w-full border-2 border-red-400 rounded-sm text-red-400 bg-red-200 px-2 py-2 text-center flex gap-2'>¡Hallazgo registrado!<SquareCheckIcon className='text-red-400' /></div> : null}
+          </form>
+        )
+      }
+
       {!hallazgoByPatientAndTooth.data.entry && <p>No hay hallazgos en este diente.</p>}
       {
-        hallazgoByPatientAndTooth.data.entry && hallazgoByPatientAndTooth.data.entry.map(({resource}) => (
+        hallazgoByPatientAndTooth.data.entry && hallazgoByPatientAndTooth.data.entry.map(({ resource }) => (
           <HallazgoCard key={resource.id} condition={resource} />
         ))
       }
@@ -184,7 +241,7 @@ export const Sidebar = ({ diente, patient, onClose }) => {
       />
 
       {/* Sidebar */}
-      <aside className="fixed top-0 left-0 h-screen w-120 bg-white z-50 p-6 overflow-auto">
+      <aside className="fixed top-0 left-0 h-screen w-120 bg-white z-50 p-6 overflow-y-auto">
         <div className='flex w-full justify-end'>
           <button
             onClick={onClose}
