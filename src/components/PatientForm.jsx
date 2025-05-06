@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { usePatient } from '../hooks/usePatient'
 import { parseFHIRResource } from '../infraestructure/mappers/patient.mapper'
-import { useCodeSystem } from '../hooks/useCodeSystem'
+import { useCiudadesDelParaguay, useDepartamentosDelParaguay, useNacionalidades, useBarriosDelParaguay } from '../hooks/useCodeSystem'
 import { validateResource } from '../api/fhir.validate'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
@@ -17,12 +17,11 @@ export const PatientForm = () => {
     watch
   } = useForm()
   const { mutate } = usePatient()
-  const {
-    ciudadesDelParaguay,
-    departamentosDelParaguay,
-    nacionalidades,
-    barriosDelParaguay
-  } = useCodeSystem()
+  const ciudadesDelParaguay = useCiudadesDelParaguay()
+  const departamentosDelParaguay = useDepartamentosDelParaguay()
+  const nacionalidades = useNacionalidades()
+  const barriosDelParaguay = useBarriosDelParaguay()
+  
   const navigate = useNavigate()
 
   // Nos suscribimos a los cambios en el input de la ciudad
@@ -36,7 +35,7 @@ export const PatientForm = () => {
   // Nos aseguramos de que los datos se hayan cargado correctamente antes de renderizar el formulario.
   // Si hay un error en la carga de los datos, mostramos un mensaje de error.
   if (nacionalidades.isError || departamentosDelParaguay.isError || barriosDelParaguay.isError || ciudadesDelParaguay.isError) {
-    return <Error /> 
+    return <Error />
   }
 
   // Filtramos los barrios según la ciudad seleccionada.
@@ -67,7 +66,7 @@ export const PatientForm = () => {
         })
         mutate(patient)
         navigate('/')
-      } 
+      }
       else toast.error(`El paciente no es válido ${valido}`, {
         style: {
           backgroundColor: '#fcb3b3',

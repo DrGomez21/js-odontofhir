@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useCodeSystem } from '../hooks/useCodeSystem'
+import { useHallazgos } from '../hooks/useCodeSystem'
 import { Error } from './basics/Error'
 import { useForm } from 'react-hook-form'
 import { useEncounter } from '../hooks/useEncounter'
@@ -19,7 +19,6 @@ const Encounter = ({ patientId }) => {
 
   // Hora actual.
   const now = new Date().toISOString().slice(0, 10)
-  const options = { timeZone: 'UTC', year: 'numeric', month: 'numeric', day: 'numeric' };
 
   const statusOptions = [
     { value: 'planned', label: 'Planned' },
@@ -163,17 +162,14 @@ const Condition = ({ patientId, diente }) => {
 
 
   // Tendremos que registrar un hallazgo al servidor.
-  // Para eso, usaremos el hook useCodeSystem para obtener los hallazgos disponibles.
+  // Para eso, usaremos el hook useHallazgos para obtener los hallazgos disponibles.
   // Luego, al enviar el formulario, se registrará el hallazgo seleccionado.
-  const { hallazgos: opcionesHallazgo } = useCodeSystem()
+  const opcionesHallazgo = useHallazgos()
   const { hallazgosByPatient, hallazgoByPatientAndTooth, hallazgoMutation } = useHallazgo(null, patientId, diente.code)
 
   const onSubmit = (data) => {
     const hallazgoResource = hallazgoMapper(patientId, 203, 152, diente, data.hallazgo)
     hallazgoMutation.mutate(hallazgoResource)
-    if (mutacionExitosa) {
-      toast.success('Exito')
-    }
   }
 
 
@@ -216,7 +212,7 @@ const Condition = ({ patientId, diente }) => {
               )}
             </button>
             {hallazgoMutation.isSuccess ? <div className='mt-1 w-full border-2 border-green-400 rounded-sm text-green-400 bg-green-200 px-2 py-2 text-center flex gap-2'>¡Hallazgo registrado!<SquareCheckIcon className='text-green-400' /></div> : null}
-            {hallazgoMutation.isError ? <div className='mt-1 w-full border-2 border-red-400 rounded-sm text-red-400 bg-red-200 px-2 py-2 text-center flex gap-2'>¡Hallazgo registrado!<SquareCheckIcon className='text-red-400' /></div> : null}
+            {hallazgoMutation.isError ? <div className='mt-1 w-full border-2 border-red-400 rounded-sm text-red-400 bg-red-200 px-2 py-2 text-center flex gap-2'>{hallazgoMutation.error.message}<SquareCheckIcon className='text-red-400' /></div> : null}
           </form>
         )
       }
