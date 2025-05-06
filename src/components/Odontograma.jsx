@@ -3,6 +3,7 @@ import { Diente } from './Diente';
 import { Sidebar } from './Sidebar';
 import { useHallazgo } from '../hooks/useHallazgo';
 import { DienteConHallazgo } from './DienteConHallazgo';
+import { Loader2Icon } from 'lucide-react';
 
 export const Odontograma = ({ patient }) => {
 
@@ -211,63 +212,13 @@ export const Odontograma = ({ patient }) => {
 
   // Tratar el click de un diente
   const handleDienteClick = (diente) => {
-    console.log(diente)
     setSelectedDiente(diente) // Abrir el sidebar con el diente clickeado.
-  }
-
-  const handleSaveEstado = (numberISO, tipo) => {
-    setDientesEstado(prevState => ({
-      ...prevState,
-      [numberISO]: tipo
-    }))
-    setSelectedDiente(null) // Cerrar el sidebar después de guardar.
   }
 
   const { hallazgosByPatient } = useHallazgo(null, patient.id)
 
   if (hallazgosByPatient.isLoading) return <p>Cargando odontograma...</p>
   if (hallazgosByPatient.isError) return <p>Error en el odontograma...</p>
-
-  /**{!hallazgoByPatientAndTooth.data.entry && <p>No hay hallazgos en este diente.</p>}
-        {
-          hallazgoByPatientAndTooth.data.entry && hallazgoByPatientAndTooth.data.entry.map(({resource}) => (
-            <HallazgoCard key={resource.id} condition={resource} />
-          ))
-        } */
-
-  // const renderDiente = (diente) => {
-  //   if (!hallazgosByPatient.data.entry) {
-  //     return (
-  //       <Diente
-  //         key={diente.numberISO}
-  //         diente={diente}
-  //         estado={dientesEstado[diente.numberISO]}
-  //         onClick={handleDienteClick}
-  //       />
-  //     )
-  //   }
-
-  //   const hayHallazgo = hallazgosByPatient.data.entry.find(
-  //     hallazgo => hallazgo.bodySite &&
-  //       hallazgo.bodySite[0]?.coding &&
-  //       hallazgo.bodySite[0].coding[0]?.code === diente.code
-  //   )
-
-  //   if (hayHallazgo) {
-  //     return (
-  //       <p>H</p>
-  //     )
-  //   }
-
-  //   return (
-  //     <Diente
-  //       key={diente.numberISO}
-  //       diente={diente}
-  //       estado={dientesEstado[diente.numberISO]}
-  //       onClick={handleDienteClick}
-  //     />
-  //   )
-  // }
 
   const renderDiente = (diente) => {
     const entries = hallazgosByPatient.data?.entry ?? []
@@ -278,8 +229,6 @@ export const Odontograma = ({ patient }) => {
         site.coding?.some(coding => coding.code === diente.code)
       )
     )
-
-    console.log(`En diente ${diente.numberISO} ¿existe hallazgo? ${hayHallazgo}`)
 
     // Renderizamos un componente u otro, pasando key al root
     return hayHallazgo
@@ -299,8 +248,14 @@ export const Odontograma = ({ patient }) => {
       )
   }
 
+  const sidebarClose = () => {
+    setSelectedDiente(null)
+  }
+
   return (
-    <div className='flex-col p-4 bg-white rounded-lg shadow-lg'>
+    <div className='flex-col relative p-4 bg-white rounded-lg shadow-lg'>
+
+      {hallazgosByPatient.isFetching && <div><Loader2Icon className='absolute right-2 animate-spin' /></div>}
 
       <div className='flex-1'>
         {/* Dientes superiores */}
@@ -319,8 +274,7 @@ export const Odontograma = ({ patient }) => {
         <Sidebar
           diente={selectedDiente}
           patient={patient}
-          onSave={handleSaveEstado}
-          onClose={() => setSelectedDiente(null)}
+          onClose={sidebarClose}
         />
       )}
 
