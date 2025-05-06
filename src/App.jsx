@@ -11,6 +11,7 @@ import { Test } from "./pages/test/Test"
 import { RegistroAlergia } from "./pages/RegistroAlergia"
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import './App.css'
+import { EncuentroDetail } from "./pages/EncuentroDetail"
 
 function App() {
 
@@ -22,11 +23,12 @@ function App() {
         <Routes>
           <Route path="/" element={<PatientPage />} />
           <Route path="/patient-form" element={<PatientFormCreate />} />
-          <Route path="/patient-profile/:id" element={<PatientProfile />} />
+          <Route path="/patient/:id" element={<PatientProfile />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="/patient-notes" element={<PatientNotes notes={notes} />} />
           <Route path="/test-api" element={<Test />} />
           <Route path="/patient/:id/allergies" element={<RegistroAlergia />} />
+          <Route path="/patient/:id/consulta/:idconsulta" element={<EncuentroDetail />} />
           <Route path="*" element={<Navigate to='/404' />} />
         </Routes>
         <Toaster />

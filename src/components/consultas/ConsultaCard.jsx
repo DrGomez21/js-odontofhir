@@ -14,7 +14,8 @@ export const ConsultaCard = ({ encounter }) => {
   return (
     <div
       className='bg-white p-2 border rounded-md m-1 hover:bg-gray-100 cursor-pointer transition-all duration-100'
-      onClick={handleClick}
+      onMouseEnter={handleClick}
+      onMouseLeave={handleClick}
     >
       <span className="font-medium text-[#4a4a4a]">Consulta del: {new Date(encounter.period.start).toLocaleDateString(undefined, options)}</span>
       <Indicator estado={encounter.status} />

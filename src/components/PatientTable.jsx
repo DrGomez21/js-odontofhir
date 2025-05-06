@@ -83,7 +83,7 @@ export const PatientTable = () => {
   }
 
   const goToProfile = (patientId) => {
-    navigate(`/patient-profile/${patientId}`)
+    navigate(`/patient/${patientId}`)
   }
 
   if (allPatients.isLoading) return <Loader />
