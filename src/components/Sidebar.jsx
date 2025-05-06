@@ -9,10 +9,10 @@ import { validateResource } from '../api/fhir.validate'
 import { ConsultaCard } from './consultas/ConsultaCard'
 import { HallazgoCard } from './cards/HallazgoCard'
 import { useHallazgoByPatientAndTooth, useHallazgoMutation } from '../hooks/useHallazgo'
-import toast from 'react-hot-toast'
 import { hallazgoMapper } from '../infraestructure/mappers/hallazgo.mapper'
+import toast from 'react-hot-toast'
 
-const Encounter = ({ patientId }) => {
+export const Encounter = ({ patientId }) => {
 
   // Necesitamos traer las consultas de este paciente.
   const { patientEncounter, mutate } = useEncounter(patientId)
@@ -65,9 +65,9 @@ const Encounter = ({ patientId }) => {
   if (!patientEncounter.data.entry || patientEncounter.data.entry.length === 0) return <p>No hay consultas previas.</p>
 
   return (
-    <div>
+    <div className='p-4'>
       {/* Header */}
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center mb-2'>
         <h1 className='font-medium text-2xl'>Consultas</h1>
         <button
           className='flex items-center justify-center w-8 h-8 border-2 border-[#4a4a4a] rounded-md bg-cyan-200
@@ -79,7 +79,7 @@ const Encounter = ({ patientId }) => {
       </div>
 
       {/* En este div está la lista de consultas. */}
-      <div className='max-h-52 min-h-0 overflow-y-auto py-2'>
+      <div className='max-h-64 min-h-0 overflow-y-auto py-2'>
         {/* Me gustaría poner acá el formulario para agregar consulta nueva.
         Que esté oculto y, al apretar el botón, se muestre */}
         {
@@ -149,7 +149,7 @@ const Encounter = ({ patientId }) => {
   )
 }
 
-const Condition = ({ patientId, diente }) => {
+const Condition = ({ patientId, diente, onNewHallazgo }) => {
 
   // Estado para mostrar o no el form de creación de encuentro.
   const [mostrarCreacionHallazgo, setMostrarCreacionHallazgo] = useState(false)
@@ -171,7 +171,13 @@ const Condition = ({ patientId, diente }) => {
 
   const onSubmit = (data) => {
     const hallazgoResource = hallazgoMapper(patientId, 203, 152, diente, data.hallazgo)
-    hallazgoMutation.mutate(hallazgoResource)
+    hallazgoMutation.mutate(hallazgoResource, {
+      onSuccess: nuevoHallazgo => {
+        toast.success('Hallazgo registrado', { position: 'bottom-left' })
+        onNewHallazgo(diente.numberISO)
+      },
+      onError: () => toast.error('Error al registrar el hhalazgo')
+    })
   }
 
 
@@ -221,7 +227,7 @@ const Condition = ({ patientId, diente }) => {
 
       {!hallazgoByPatientAndTooth.data.entry && <p>No hay hallazgos en este diente.</p>}
       {
-        hallazgoByPatientAndTooth.data.entry && hallazgoByPatientAndTooth.data.entry.map(({ resource }) => (
+        hallazgoByPatientAndTooth.data?.entry?.map(({ resource }) => (
           <HallazgoCard key={resource.id} condition={resource} />
         ))
       }
@@ -229,7 +235,7 @@ const Condition = ({ patientId, diente }) => {
   )
 }
 
-export const Sidebar = ({ diente, patient, onClose }) => {
+export const Sidebar = ({ diente, patient, onClose, onNewHallazgo }) => {
   return (
     <>
       {/* Overlay oscuro */}
@@ -259,7 +265,7 @@ export const Sidebar = ({ diente, patient, onClose }) => {
         {/* formularios FHIR */}
         <div>
           <Encounter patientId={patient.id} />
-          <Condition patientId={patient.id} diente={diente} />
+          <Condition patientId={patient.id} diente={diente} onNewHallazgo={onNewHallazgo} />
         </div>
       </aside>
     </>
