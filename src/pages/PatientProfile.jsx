@@ -18,10 +18,9 @@ export const PatientProfile = () => {
   const { id } = useParams()
   const navigate = useNavigate()
 
-  const { data, isLoading, isError, error, isSuccess } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ['profile', id],
-    queryFn: () => getPatientById(id),
-    staleTime: 1000 * 60 * 5,
+    queryFn: () => getPatientById(id)
   })
 
   if (isLoading) return <Loader />
