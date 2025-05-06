@@ -9,6 +9,7 @@ import { PatientNotes } from "./pages/PatientNotes"
 import { notes } from "./utils/procedimientosDentales"
 import { Test } from "./pages/test/Test"
 import { RegistroAlergia } from "./pages/RegistroAlergia"
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import './App.css'
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         </Routes>
         <Toaster />
       </Router>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
 }
