@@ -205,52 +205,57 @@ export const Odontograma = ({ patient }) => {
     },
   ];
 
-  // Estado para manejar todos los dientes.
-  const [dientes, setDientes] = useState([])
-  // Diente clickeado para abrir el sidebar
-  const [selectedDiente, setSelectedDiente] = useState(null)
+  // Combina y marca posición para poder renderizar superiores/inferiores
+  const initialDientes = [
+    ...dientesSuperiores.map(d => ({ ...d, position: 'arriba', estado: null })),
+    ...dientesInferiores.map(d => ({ ...d, position: 'abajo', estado: null })),
+  ]
 
-  // Tratar el click de un diente
-  const handleDienteClick = (diente) => {
-    setSelectedDiente(diente) // Abrir el sidebar con el diente clickeado.
+  const [dientes, setDientes] = useState(initialDientes) // Estado para manejar todos los dientes.
+  const [selectedDiente, setSelectedDiente] = useState(null) // Diente clickeado para abrir el sidebar
+
+  // Hallazgos clínicos de un paciente.
+  const hallazgosByPatient = useHallazgosByPatient(patient.id)
+
+  // Cuando llegan los hallazgos del servidor, inicializa el estado de 'estado'
+  useEffect(() => {
+    if (!hallazgosByPatient.data?.entry) return
+    setDientes(dientes =>
+      dientes.map(d => {
+        const encontrado = hallazgosByPatient.data.entry.some(
+          ({ resource }) =>
+            resource.bodySite?.[0]?.coding?.some(c => c.code === d.code)
+        )
+        return { ...d, estado: encontrado ? 'hallazgo' : null }
+      })
+    )
+  }, [hallazgosByPatient.data])
+
+  // Callback para actualizar un diente tras un nuevo hallazgo
+  const handleNewHallazgo = numberISO => {
+    setDientes(dientes =>
+      dientes.map(d =>
+        d.numberISO === numberISO ? { ...d, estado: 'hallazgo' } : d
+      )
+    )
   }
 
-  const hallazgosByPatient = useHallazgosByPatient(patient.id)
+  // Renderizado de cada diente según su estado
+  const renderDiente = d => {
+    const props = {
+      key: d.numberISO,
+      diente: d,
+      onClick: () => setSelectedDiente(d) // Tratar el click de un diente.
+    }
+    return d.estado === 'hallazgo'
+      ? <DienteConHallazgo {...props} />
+      : <Diente {...props} />
+  }
+
+  const sidebarClose = () => setSelectedDiente(null)
 
   if (hallazgosByPatient.isLoading) return <p>Cargando odontograma...</p>
   if (hallazgosByPatient.isError) return <p>Error en el odontograma...</p>
-
-  const renderDiente = (diente) => {
-    const entries = hallazgosByPatient.data?.entry ?? []
-
-    // Buscamos si alguna entrada tiene este diente en su bodySite
-    const hayHallazgo = entries.some(({ resource }) =>
-      resource.bodySite?.some(site =>
-        site.coding?.some(coding => coding.code === diente.code)
-      )
-    )
-
-    // Renderizamos un componente u otro, pasando key al root
-    return hayHallazgo
-      ? (
-        <DienteConHallazgo
-          key={diente.numberISO}
-          diente={diente}
-          onClick={handleDienteClick}
-        />
-      )
-      : (
-        <Diente
-          key={diente.numberISO}
-          diente={diente}
-          onClick={handleDienteClick}
-        />
-      )
-  }
-
-  const sidebarClose = () => {
-    setSelectedDiente(null)
-  }
 
   return (
     <div className='flex-col relative p-4 bg-white rounded-lg shadow-lg'>
@@ -260,24 +265,23 @@ export const Odontograma = ({ patient }) => {
       <div className='flex-1'>
         {/* Dientes superiores */}
         <div className='flex flex-wrap justify-center mb-8'>
-          {dientesSuperiores.map(diente => (renderDiente(diente)))}
+          {dientes.filter(d => d.position === 'arriba').map(renderDiente)}
         </div>
 
         {/* Dientes inferiores */}
         <div className='flex flex-wrap justify-center'>
-          {dientesInferiores.map(diente => (renderDiente(diente)))}
+          {dientes.filter(d => d.position === 'abajo').map(renderDiente)}
         </div>
       </div>
-
 
       {selectedDiente && (
         <Sidebar
           diente={selectedDiente}
           patient={patient}
           onClose={sidebarClose}
+          onNewHallazgo={handleNewHallazgo}
         />
       )}
-
     </div>
   )
 }
