@@ -8,7 +8,7 @@ import { encounterMapper } from '../infraestructure/mappers/encounter.mapper'
 import { validateResource } from '../api/fhir.validate'
 import { ConsultaCard } from './consultas/ConsultaCard'
 import { HallazgoCard } from './cards/HallazgoCard'
-import { useHallazgo } from '../hooks/useHallazgo'
+import { useHallazgoByPatientAndTooth, useHallazgoMutation } from '../hooks/useHallazgo'
 import toast from 'react-hot-toast'
 import { hallazgoMapper } from '../infraestructure/mappers/hallazgo.mapper'
 
@@ -165,7 +165,9 @@ const Condition = ({ patientId, diente }) => {
   // Para eso, usaremos el hook useHallazgos para obtener los hallazgos disponibles.
   // Luego, al enviar el formulario, se registrará el hallazgo seleccionado.
   const opcionesHallazgo = useHallazgos()
-  const { hallazgosByPatient, hallazgoByPatientAndTooth, hallazgoMutation } = useHallazgo(null, patientId, diente.code)
+
+  const hallazgoByPatientAndTooth = useHallazgoByPatientAndTooth(patientId, diente.code)
+  const hallazgoMutation = useHallazgoMutation(patientId)
 
   const onSubmit = (data) => {
     const hallazgoResource = hallazgoMapper(patientId, 203, 152, diente, data.hallazgo)
@@ -173,8 +175,8 @@ const Condition = ({ patientId, diente }) => {
   }
 
 
-  if (opcionesHallazgo.isLoading || hallazgosByPatient.isLoading || hallazgoByPatientAndTooth.isLoading) return <p>Cargando...</p>
-  if (opcionesHallazgo.isError || hallazgosByPatient.isError || hallazgoByPatientAndTooth.isLoading) return <Error />
+  if (opcionesHallazgo.isLoading || hallazgoByPatientAndTooth.isLoading) return <p>Cargando...</p>
+  if (opcionesHallazgo.isError || hallazgoByPatientAndTooth.isLoading) return <Error />
 
   return (
     <div className="mt-4">

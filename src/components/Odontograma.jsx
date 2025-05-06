@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Diente } from './Diente';
 import { Sidebar } from './Sidebar';
-import { useHallazgo } from '../hooks/useHallazgo';
+import { useHallazgosByPatient } from '../hooks/useHallazgo';
 import { DienteConHallazgo } from './DienteConHallazgo';
 import { Loader2Icon } from 'lucide-react';
 
@@ -205,8 +205,8 @@ export const Odontograma = ({ patient }) => {
     },
   ];
 
-  // estado global de colores: { '11': 'hallazgo'|'procedimiento', ... }
-  const [dientesEstado, setDientesEstado] = useState({})
+  // Estado para manejar todos los dientes.
+  const [dientes, setDientes] = useState([])
   // Diente clickeado para abrir el sidebar
   const [selectedDiente, setSelectedDiente] = useState(null)
 
@@ -215,7 +215,7 @@ export const Odontograma = ({ patient }) => {
     setSelectedDiente(diente) // Abrir el sidebar con el diente clickeado.
   }
 
-  const { hallazgosByPatient } = useHallazgo(null, patient.id)
+  const hallazgosByPatient = useHallazgosByPatient(patient.id)
 
   if (hallazgosByPatient.isLoading) return <p>Cargando odontograma...</p>
   if (hallazgosByPatient.isError) return <p>Error en el odontograma...</p>
