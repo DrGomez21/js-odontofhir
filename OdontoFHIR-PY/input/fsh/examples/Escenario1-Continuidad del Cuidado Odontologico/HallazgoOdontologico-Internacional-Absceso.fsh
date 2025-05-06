@@ -7,6 +7,6 @@ Description: "Se diagnostica absceso periapical en premolar afectado."
 * subject = Reference(Patient/JuanSanchez)
 * encounter = Reference(Encounter/infancia1)
 * recordedDate = "2023-04-15"
-* asserter = Reference(Practitioner/DraJulia)
+* asserter = Reference(Practitioner/DraErika)
 * bodySite[0] = https://odontofhir.py/fhir/CodeSystem/AnatomiaDental-OdontoFHIR-1#13003OF "Primer molar superior derecho permanente completo"
 

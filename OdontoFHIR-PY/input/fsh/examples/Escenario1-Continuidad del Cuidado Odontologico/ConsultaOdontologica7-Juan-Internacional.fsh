@@ -8,8 +8,8 @@ Description: "Consulta por dolor agudo en premolar superior derecho. Se diagnost
 * subject = Reference(Patient/JuanSanchez)
 * subject.display = "Paciente Juan Sanchez"
 
-* participant[0].individual = Reference(Practitioner/DraJulia) 
-* participant[0].individual.display = "Doctora Julia"
+* participant[0].individual = Reference(Practitioner/DraErika) 
+* participant[0].individual.display = "Doctora Erika"
 
 * period.start = "2023-04-15T09:00:00-03:00"
 * period.end = "2023-04-15T10:00:00-03:00"

@@ -3,6 +3,10 @@ InstanceOf: OdontoFHIR-ProfesionalOdontologico-Practitioner-1
 Title: "Odontóloga Extranjera con Registro Profesional"
 Description: "Profesional odontológica que atiende a Juan durante su estadía en el extranjero."
 
+
+* text.status = #generated
+* text.div = """<div xmlns="http://www.w3.org/1999/xhtml"><p>Doctora: Erika Schmidt</p></div>"""
+
 * active = true
 
 // Extensión RPRO
@@ -22,9 +26,9 @@ Description: "Profesional odontológica que atiende a Juan durante su estadía e
 // Nombre
 * name[official].use = #official
 * name[official].given = "Erika"
-* name[official].family = "López"
+* name[official].family = "Schmidt"
 * name[official].family.extension[0].url = "http://hl7.org/fhir/StructureDefinition/humanname-mothers-family"
-* name[official].family.extension[0].valueString = "Schmidt"
+* name[official].family.extension[0].valueString = "Pereira"
 
 // Contacto
 * telecom[phone].system = #phone

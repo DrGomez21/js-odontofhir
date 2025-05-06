@@ -3,6 +3,11 @@ InstanceOf: OdontoFHIR-ProfesionalOdontologico-Practitioner-1
 Title: "Odontólogo con Registro Profesional y Cédula"
 Description: "Profesional odontológico registrado con documento de identidad."
 
+
+* text.status = #generated
+* text.div = """<div xmlns="http://www.w3.org/1999/xhtml"><p>Doctora: Julia Ochoa</p></div>"""
+
+
 * active = true
 
 // Extensión RPRO
@@ -22,7 +27,7 @@ Description: "Profesional odontológico registrado con documento de identidad."
 // Nombre
 * name[official].use = #official
 * name[official].given = "Julia"
-* name[official].family = "Odonto"
+* name[official].family = "Ochoa"
 * name[official].family.extension[0].url = "http://hl7.org/fhir/StructureDefinition/humanname-mothers-family"
 * name[official].family.extension[0].valueString = "Prueba"
 

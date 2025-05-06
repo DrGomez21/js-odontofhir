@@ -5,6 +5,10 @@ Description: "Profesional odontológico que atiende a Juan en su adolescencia."
 
 * active = true
 
+* text.status = #generated
+* text.div = """<div xmlns="http://www.w3.org/1999/xhtml"><p>Doctor: Leandro Pérez</p></div>"""
+
+
 // Extensión RPRO
 * extension[registroProfesional].url = "https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-RegistroProfesional"
 * extension[registroProfesional].valueIdentifier.system = "https://odontofhir.py/fhir/CodeSystem/DocumentoIdentidad-OdontoFHIR-1"

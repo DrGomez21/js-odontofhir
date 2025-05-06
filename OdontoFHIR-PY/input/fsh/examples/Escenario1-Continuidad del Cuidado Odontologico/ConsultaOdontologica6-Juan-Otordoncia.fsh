@@ -8,8 +8,8 @@ Description: "Consulta por desprendimiento de brackets. Se realiza reparación y
 * subject = Reference(Patient/JuanSanchez)
 * subject.display = "Paciente Juan Sanchez"
 
-* participant[0].individual = Reference(Practitioner/DraJulia) 
-* participant[0].individual.display = "Doctora Julia"
+* participant[0].individual = Reference(Practitioner/DrLeandro) 
+* participant[0].individual.display = "Doctora Leandro"
 
 * period.start = "2017-06-15T09:00:00-03:00"
 * period.end = "2017-06-15T10:00:00-03:00"

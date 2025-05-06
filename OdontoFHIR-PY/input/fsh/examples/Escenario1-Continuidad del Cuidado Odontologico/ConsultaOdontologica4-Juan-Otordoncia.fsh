@@ -9,8 +9,8 @@ Description: "Consulta por molestias al morder. Se diagnostica maloclusión Clas
 * subject = Reference(Patient/JuanSanchez)
 * subject.display = "Paciente Juan Sanchez"
 
-* participant[0].individual = Reference(Practitioner/DraJulia) 
-* participant[0].individual.display = "Doctora Julia"
+* participant[0].individual = Reference(Practitioner/DrLeandro) 
+* participant[0].individual.display = "Doctora Leandro"
 
 * period.start = "2017-02-22T09:00:00-03:00"
 * period.end = "2017-02-22T10:00:00-03:00"

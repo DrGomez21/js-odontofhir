@@ -9,8 +9,8 @@ Description: "Encuentro para inicio de tratamiento ortodóntico con colocación 
 * subject = Reference(Patient/JuanSanchez)
 * subject.display = "Paciente Juan Sanchez"
 
-* participant[0].individual = Reference(Practitioner/DraJulia) 
-* participant[0].individual.display = "Doctora Julia"
+* participant[0].individual = Reference(Practitioner/DrLeandro) 
+* participant[0].individual.display = "Doctora Leandro"
 
 * period.start = "2017-03-15T09:00:00-03:00"
 * period.end = "2017-03-15T10:00:00-03:00"

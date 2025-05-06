@@ -3,6 +3,9 @@ InstanceOf: OdontoFHIR-PacienteOdontologico-Patient-1
 Title: "Paciente paraguayo de prueba"
 Description: "Paciente utilizando en el escenario del caso de uso numero 1."
 
+* text.status = #generated
+* text.div = """<div xmlns="http://www.w3.org/1999/xhtml"><p>Paciente: Juan Sanchez - Nacimiento 2003-06-14</p></div>"""
+
 // Identificador: Cédula de Identidad
 * identifier.type.coding.system = "https://odontofhir.py/fhir/CodeSystem/DocumentoIdentidad-OdontoFHIR-1"
 * identifier.type.coding.code = #CI

@@ -7,5 +7,5 @@ Description: "Se diagnostica maloclusión Clase II como parte del examen ortodó
 * subject = Reference(Patient/JuanSanchez)
 * encounter = Reference(Encounter/infancia1)
 * recordedDate = "2017-02-22"
-* asserter = Reference(Practitioner/DraJulia)
+* asserter = Reference(Practitioner/DrLeandro)
 * bodySite[0] = https://odontofhir.py/fhir/CodeSystem/AnatomiaDental-OdontoFHIR-1#13025OF "Incisivo central inferior derecho permanente completo"
