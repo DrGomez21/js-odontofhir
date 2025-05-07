@@ -30,12 +30,13 @@ export const encounterMapper = (
         code: encounter.classCode,
         system: 'http://terminology.hl7.org/CodeSystem/v3-ActCode',
         display: encounter.classDisplay
-      }
+      },
+      diagnosis: [],
+      reasonReference: [],
     }
 
     return encounterResource
   }
-
 
   const encounterResource = {
     resourceType: 'Encounter',
@@ -63,7 +64,9 @@ export const encounterMapper = (
       code: encounter.classCode,
       system: 'http://terminology.hl7.org/CodeSystem/v3-ActCode',
       display: encounter.classDisplay
-    }
+    },
+    diagnosis: [],
+    reasonReference: [],
   }
 
   return encounterResource
