@@ -5,7 +5,7 @@ import { useHallazgosByPatient } from '../hooks/useHallazgo';
 import { DienteConHallazgo } from './DienteConHallazgo';
 import { Loader2Icon } from 'lucide-react';
 
-export const Odontograma = ({ patient }) => {
+export const Odontograma = ({ patient, consulta }) => {
 
   const dientesSuperiores = [
     {
@@ -277,7 +277,8 @@ export const Odontograma = ({ patient }) => {
       {selectedDiente && (
         <Sidebar
           diente={selectedDiente}
-          patient={patient}
+          patient={patient.id}
+          consulta={consulta}
           onClose={sidebarClose}
           onNewHallazgo={handleNewHallazgo}
         />
