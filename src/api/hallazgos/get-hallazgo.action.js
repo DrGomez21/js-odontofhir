@@ -30,3 +30,8 @@ export const getHallazgoByPatientIdAndToothCode = async (patientId, toothCode) =
     throw 'Error al obtener los hallazgos del paciente.'
   }
 }
+
+export const getHallazgoByReference = async (conditionReference) => {
+  const { data } = await odontoFhirApi.get(`/${conditionReference}`)
+  return data
+}
