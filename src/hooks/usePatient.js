@@ -1,6 +1,7 @@
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query"
 import { allPatientsAction } from "../api/patients/all-patients.action"
 import { addPatientAction } from "../api/patients/add-patient.action"
+import { getPatientByIdAction } from "../api/patients/get-patient.action"
 
 export const usePatient = () => {
 
@@ -32,5 +33,11 @@ export const usePatient = () => {
     allPatients,
     mutate,
   }
+}
 
+export const useGetPatient = (id) => {
+  return useQuery({
+    queryKey: ['patient', id],
+    queryFn: () => getPatientByIdAction(id)
+  })
 }
