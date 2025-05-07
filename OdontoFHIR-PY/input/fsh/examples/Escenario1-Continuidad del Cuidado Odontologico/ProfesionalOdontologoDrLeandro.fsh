@@ -1,6 +1,6 @@
-Instance: ProfesionalOdontologoDrLeandroEjemploEscenario1
+Instance: ProfesionalOdontologoDrLeandroEscenario1
 InstanceOf: OdontoFHIR-ProfesionalOdontologico-Practitioner-1
-Title: "Odontólogo Ortodoncista con Registro Profesional"
+Title: "Escenario 1: Doctor Leandro"
 Description: "Profesional odontológico que atiende a Juan en su adolescencia."
 
 * active = true

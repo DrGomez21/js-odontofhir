@@ -1,6 +1,6 @@
-Instance: ProfesionalOdontologoDraErikaEjemploEscenario1
+Instance: ProfesionalOdontologoDraErikaEscenario1
 InstanceOf: OdontoFHIR-ProfesionalOdontologico-Practitioner-1
-Title: "Odontóloga Extranjera con Registro Profesional"
+Title: "Escenario 1: Doctora Erika"
 Description: "Profesional odontológica que atiende a Juan durante su estadía en el extranjero."
 
 

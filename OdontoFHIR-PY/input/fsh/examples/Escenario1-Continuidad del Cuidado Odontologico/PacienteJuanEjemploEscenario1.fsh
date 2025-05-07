@@ -1,6 +1,6 @@
-Instance: PacienteJuanEjemploEscenario1
+Instance: PacienteJuanSanchezEscenario1
 InstanceOf: OdontoFHIR-PacienteOdontologico-Patient-1
-Title: "Paciente paraguayo de prueba"
+Title: "Escenario 1: Juan Paciente Paraguayo"
 Description: "Paciente utilizando en el escenario del caso de uso numero 1."
 
 * text.status = #generated

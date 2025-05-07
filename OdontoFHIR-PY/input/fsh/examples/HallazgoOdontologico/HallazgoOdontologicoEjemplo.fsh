@@ -1,10 +1,10 @@
 Instance: HallazgoSarroPaciente53
 
 InstanceOf: OdontoFHIR-HallazgosOdontologicos-Condition-1
-Title: "Hallazgo: Sarro en canino superior derecho"
+Title: "Hallazgo Odontologico: Sarro en canino superior derecho"
 Description: "Paciente con acumulación de sarro en el canino superior derecho, registrado durante consulta odontológica."
 
-* code = https://odontofhir.py/fhir/CodeSystem/Hallazgos-OdontoFHIR-1#12002OF "Acumulación de sarro en dientes"
+* code = https://odontofhir.py/fhir/CodeSystem/HallazgosOdontologicos-OdontoFHIR-1#12002OF "Acumulación de sarro en dientes"
 * subject = Reference(Patient/24)
 * encounter = Reference(Encounter/54)
 * recordedDate = "2025-04-21"

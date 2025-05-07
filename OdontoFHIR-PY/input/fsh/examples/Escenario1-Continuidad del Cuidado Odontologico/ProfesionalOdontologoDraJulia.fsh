@@ -1,6 +1,6 @@
-Instance: ProfesionalOdontologoDraJuliaEjemploEscenario1
+Instance: ProfesionalOdontologoDraJuliaEscenario1
 InstanceOf: OdontoFHIR-ProfesionalOdontologico-Practitioner-1
-Title: "Odontólogo con Registro Profesional y Cédula"
+Title: "Escenario 1: Doctora Julia"
 Description: "Profesional odontológico registrado con documento de identidad."
 
 

@@ -9,7 +9,7 @@ Description: "Consulta odontológica sin hallazgos ni procedimientos registrados
 * subject.reference = "Patient/53"
 * subject.display = "Paciente ejemplo"
 
-* participant.individual.reference = "Practitioner/52"
+* participant.individual.reference = "Practitioner/patient-pacientejuansanchezescenario1"
 * participant.individual.display = "Odontólogo ejemplo"
 
 * period.start = "2025-04-20T09:00:00-03:00"
