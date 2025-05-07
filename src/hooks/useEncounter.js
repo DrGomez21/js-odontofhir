@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { getEncounterByPatientId } from "../api/encounter/get-encounter.action"
+import { getEncounterById, getEncounterByPatientId } from "../api/encounter/get-encounter.action"
 import { addEncounter } from "../api/encounter/add-encounter.action"
+import { updateEncounterWithNewCondition } from "../api/encounter/update-encounter.action"
 
 export const useEncounter = (patientId) => {
 
@@ -8,11 +9,10 @@ export const useEncounter = (patientId) => {
 
   const patientEncounter = useQuery({
     queryKey: ['encounter', patientId],
-    queryFn: () => getEncounterByPatientId(patientId),
-    staleTime: 1000 * 60 * 5
+    queryFn: () => getEncounterByPatientId(patientId)
   })
 
-  const {mutate} = useMutation({
+  const { mutate } = useMutation({
     mutationFn: addEncounter,
     onSuccess: () => {
       // Invalidamos la caché.
@@ -24,4 +24,22 @@ export const useEncounter = (patientId) => {
     patientEncounter,
     mutate,
   }
+}
+
+export const useGetEncounterById = (id) => {
+  return useQuery({
+    queryKey: ['encounter', id],
+    queryFn: () => getEncounterById(id)
+  })
+}
+
+export const useMutateEncounterWithCondition = () => {
+  const queryClient = useQueryClient()
+  
+  return useMutation({
+    mutationFn: updateEncounterWithNewCondition,
+    onSuccess: (encounter) => {
+      queryClient.invalidateQueries(['encounter', encounter.id])
+    }
+  })
 }
