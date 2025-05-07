@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { addHallazgo } from "../api/hallazgos/add-hallazgo.action";
-import { getHallazgoByEncounterId, getHallazgoByPatientId, getHallazgoByPatientIdAndToothCode } from "../api/hallazgos/get-hallazgo.action";
+import { getHallazgoByEncounterId, getHallazgoByPatientId, getHallazgoByPatientIdAndToothCode, getHallazgoByReference } from "../api/hallazgos/get-hallazgo.action";
 
 // Querys
 export const useHallazgosByEncounter = (encounterId) => {
@@ -25,7 +25,13 @@ export const useHallazgoByPatientAndTooth = (paciente, diente) => {
     queryFn: () => getHallazgoByPatientIdAndToothCode(paciente, diente),
     enabled: !!diente
   })
+}
 
+export const useGetHallazgoByReference = (conditionReference) => {
+  return useQuery({
+    queryKey: ["hallazgo", conditionReference],
+    queryFn: () => getHallazgoByReference(conditionReference)
+  })
 }
 
 // Mutations
