@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useHallazgos } from '../hooks/useCodeSystem'
 import { Error } from './basics/Error'
 import { useForm } from 'react-hook-form'
-import { useEncounter } from '../hooks/useEncounter'
+import { useEncounter, useMutateEncounterWithCondition } from '../hooks/useEncounter'
 import { Loader2Icon, LoaderCircle, PanelLeftClose, Save, SquareCheckIcon } from 'lucide-react'
 import { encounterMapper } from '../infraestructure/mappers/encounter.mapper'
 import { validateResource } from '../api/fhir.validate'
@@ -11,6 +11,7 @@ import { HallazgoCard } from './cards/HallazgoCard'
 import { useHallazgoByPatientAndTooth, useHallazgoMutation } from '../hooks/useHallazgo'
 import { hallazgoMapper } from '../infraestructure/mappers/hallazgo.mapper'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 export const Encounter = ({ patientId }) => {
 
@@ -19,6 +20,7 @@ export const Encounter = ({ patientId }) => {
 
   // Hora actual.
   const now = new Date().toISOString().slice(0, 10)
+  const navigate = useNavigate()
 
   const statusOptions = [
     { value: 'planned', label: 'Planned' },
@@ -56,7 +58,15 @@ export const Encounter = ({ patientId }) => {
       toast.error('No válido unu')
       return
     } else {
-      mutate(encounter)
+      mutate(encounter, {
+        onSuccess: (newEncounter) => {
+          toast.success('Correcto')
+          navigate(`/patient/${patientId}/consulta/${newEncounter.id}`)
+        },
+        onError: () => {
+          toast.error('Ocurrió un error')
+        }
+      })
     }
   }
 
@@ -67,8 +77,8 @@ export const Encounter = ({ patientId }) => {
   return (
     <div className='p-4'>
       {/* Header */}
-      <div className='flex justify-between items-center mb-2'>
-        <h1 className='font-medium text-2xl'>Consultas</h1>
+      <div className='flex relative justify-between items-center mb-2'>
+        <h1 className='flex font-medium text-2xl'>Consultas {patientEncounter.isFetching && <Loader2Icon className='animate-spin ml-2' />} </h1>
         <button
           className='flex items-center justify-center w-8 h-8 border-2 border-[#4a4a4a] rounded-md bg-cyan-200
           hover:cursor-pointer hover:scale-95 transition-all duration-100'
@@ -140,16 +150,17 @@ export const Encounter = ({ patientId }) => {
             </form>
           )
         }
-        {patientEncounter.data.entry.map(({ resource }) => (
-          <ConsultaCard key={resource.id} encounter={resource} />
-        ))}
+        {patientEncounter.data.entry
+          .sort((a, b) => new Date(b.resource.period.start) - new Date(a.resource.period.start))
+          .map(({ resource }) => (
+            <ConsultaCard key={resource.id} encounter={resource} paciente={patientId} />
+          ))}
       </div>
-
     </div>
   )
 }
 
-const Condition = ({ patientId, diente, onNewHallazgo }) => {
+export const Condition = ({ patientId, diente, consultaId, onNewHallazgo }) => {
 
   // Estado para mostrar o no el form de creación de encuentro.
   const [mostrarCreacionHallazgo, setMostrarCreacionHallazgo] = useState(false)
@@ -168,15 +179,26 @@ const Condition = ({ patientId, diente, onNewHallazgo }) => {
 
   const hallazgoByPatientAndTooth = useHallazgoByPatientAndTooth(patientId, diente.code)
   const hallazgoMutation = useHallazgoMutation(patientId)
+  const patchEncounter = useMutateEncounterWithCondition()
+
+  console.log('CONSULTA NUMERO: ', consultaId)
 
   const onSubmit = (data) => {
-    const hallazgoResource = hallazgoMapper(patientId, 203, 152, diente, data.hallazgo)
+    const hallazgoResource = hallazgoMapper(patientId, consultaId, 152, diente, data.hallazgo)
     hallazgoMutation.mutate(hallazgoResource, {
-      onSuccess: nuevoHallazgo => {
-        toast.success('Hallazgo registrado', { position: 'bottom-left' })
+      onSuccess: (nuevoHallazgo) => {
         onNewHallazgo(diente.numberISO)
+        // Encadenamos la segunda mutación.
+        patchEncounter.mutate({
+          encounterId: consultaId,
+          conditionRef: `Condition/${nuevoHallazgo.id}`
+        }, {
+          onSuccess: () => toast.success('Actualizado el encuentro'),
+          onError: () => toast.error('Falló la UPDATE')
+        })
+        toast.success('Hallazgo registrado', { position: 'bottom-left' })
       },
-      onError: () => toast.error('Error al registrar el hhalazgo')
+      onError: () => toast.error('Error al registrar el hallazgo')
     })
   }
 
@@ -189,13 +211,15 @@ const Condition = ({ patientId, diente, onNewHallazgo }) => {
       {/* Header */}
       <div className='flex justify-between items-center'>
         <h1 className='font-medium text-2xl'>Hallazgos</h1>
-        <button
-          className='flex items-center justify-center w-8 h-8 border-2 border-[#4a4a4a] rounded-md bg-cyan-200
+        {consultaId && (
+          <button
+            className='flex items-center justify-center w-8 h-8 border-2 border-[#4a4a4a] rounded-md bg-cyan-200
           hover:cursor-pointer hover:scale-95 transition-all duration-100'
-          onClick={() => setMostrarCreacionHallazgo(!mostrarCreacionHallazgo)}
-        >
-          {mostrarCreacionHallazgo ? 'X' : '+'}
-        </button>
+            onClick={() => setMostrarCreacionHallazgo(!mostrarCreacionHallazgo)}
+          >
+            {mostrarCreacionHallazgo ? 'X' : '+'}
+          </button>
+        )}
       </div>
 
       {
@@ -235,7 +259,7 @@ const Condition = ({ patientId, diente, onNewHallazgo }) => {
   )
 }
 
-export const Sidebar = ({ diente, patient, onClose, onNewHallazgo }) => {
+export const Sidebar = ({ diente, patient, consulta, onClose, onNewHallazgo }) => {
   return (
     <>
       {/* Overlay oscuro */}
@@ -264,8 +288,13 @@ export const Sidebar = ({ diente, patient, onClose, onNewHallazgo }) => {
 
         {/* formularios FHIR */}
         <div>
-          <Encounter patientId={patient.id} />
-          <Condition patientId={patient.id} diente={diente} onNewHallazgo={onNewHallazgo} />
+          {/* <Encounter patientId={patient.id} /> */}
+          <Condition patientId={patient} diente={diente} consultaId={consulta} onNewHallazgo={onNewHallazgo} />
+          {/* {
+            consulta && (
+              <Condition patientId={patient.id} diente={diente} consultaId={consulta} onNewHallazgo={onNewHallazgo} />
+            )
+          } */}
         </div>
       </aside>
     </>
