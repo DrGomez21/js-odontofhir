@@ -112,7 +112,7 @@ A continuación, se presentan ejemplos de códigos definidos localmente y su cor
 | 22 | Trauma dental                                     | Trauma dental                                                        | 12022OF          | 397869004    | 128117D        |
 
 
-### Procedimientos Odontológicos 13:41 / 14:52
+### Procedimientos Odontológicos
 
 | #  | Display                                     | Descripción                                                                                    | Código OdontoFHIR | Código SNOMED       |
 |----|---------------------------------------------|------------------------------------------------------------------------------------------------|-------------------|---------------------|

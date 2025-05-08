@@ -1,10 +1,11 @@
-## Antecedentes y Justificación
+## Antecedentes
 
 En Paraguay, la mayoría de los consultorios odontológicos aún no cuentan con sistemas electrónicos para gestionar las fichas clínicas de sus pacientes. Esta carencia compromete la calidad y precisión del acceso a la información clínica, generando procesos fragmentados y poco eficientes.
 
 Además, los sistemas existentes carecen de estándares de interoperabilidad, entendida como la capacidad de que dos o más sistemas intercambien y utilicen información compartida de manera efectiva. En este contexto, el proyecto **OdontoFHIR-PY** propone una solución interoperable basada en el estándar internacional [HL7 FHIR](https://hl7.org/fhir/), orientada a mejorar la gestión y el intercambio de datos clínicos en odontología.
 
 La falta de interoperabilidad representa un desafío, pero también una oportunidad para integrar a los consultorios odontológicos dentro de una infraestructura de salud digital nacional e incluso regional.
+
 
 ---
 
@@ -37,86 +38,81 @@ Este escenario ilustra cómo el uso de OdontoFHIR permite mantener la continuida
 
 ### Infancia – Atención Odontopediátrica
 
-**Paciente:** Juan Prueba, 8 años  
-**Institución:** Clínica Odontopediátrica (sin sistema FHIR)  
-**Profesional tratante:** Dra. Julia O.
+**Paciente:** [`Juan Sánchez`](pacientejuansanchezescenario1.html), 8 años  
+**Institución:** Clínica Odontopediátrica Juan Agusto Salivar (sin sistema FHIR)  
+**Profesional tratante:** [`Dra. Julia O.`](profesionalodontologodrajuliaescenario1.html)
 
 La clínica odontopediátrica utiliza un sistema de registro clínico no interoperable, pero permite exportar datos en formato plano, sin codificación estandarizada.
 
 > Consulta por sangrado de encías y mal aliento. Se observa acumulación de sarro, inflamación gingival y deficiente higiene oral. Se indica profilaxis y orientación.
 
-#### Hallazgos – Encuentro 1
+#### Hallazgos – [`Encuentro 1`](consultaodontologica-juanodontopediatria-1.html)
 
-| Descripción clínica         | Recurso FHIR           | Código SNOMED         |
-|----------------------------|------------------------|------------------------|
-| Acumulación de sarro       | `Observation` (Hallazgo) | *Sin codificación*     |
-| Encías inflamadas          | `Observation` (Hallazgo) | *Sin codificación*     |
-| Encías sangrantes          | `Observation` (Hallazgo) | *Sin codificación*     |
-| Higiene oral deficiente    | `Observation` (Hallazgo) | *Sin codificación*     |
+- [`Acumulación de sarro`](hallazgoodontologico-juanodontopediatria-sarro.html)
+- [`Encías inflamadas`](hallazgoodontologico-juanodontopediatria-inflamaciongingival.html)
+- [`Encías sangrantes`](hallazgoodontologico-juanodontopediatria-enciassangrantes.html)
+- [`Higiene oral deficiente`](hallazgoodontologico-juanodontopediatria-higieneoraldeficiente.html)
 
-#### Procedimientos – Encuentro 2 (1 semana después)
+#### Procedimientos – [`Encuentro 2`](consultaodontologica-juanodontopediatria-2.html)
 
-- Profilaxis con ultrasonido  
-- Aplicación de flúor  
-- Reforzamiento de técnicas de higiene oral
+- [`Profilaxis`](procedimientoodontologico-juanodontopediatria-profilaxis.html), en respuesta a [`Higiene oral deficiente`](hallazgoodontologico-juanodontopediatria-higieneoraldeficiente.html)
+- [`Aplicación de flúor`](procedimientoodontologico-juanodontopediatria-fluor.html), en respuesta a [`Encías inflamadas`](hallazgoodontologico-juanodontopediatria-inflamaciongingival.html)
+- [`Educación en higiene oral`](procedimientoodontologico-juanodontopediatria-educacionhigiene.html)
 
-| Procedimiento                  | Recurso FHIR | Código SNOMED         |
-|-------------------------------|--------------|------------------------|
-| Limpieza de sarro             | `Procedure`  | *Sin codificación*     |
-| Aplicación de flúor           | `Procedure`  | *Sin codificación*     |
-| Educación en higiene oral     | `Procedure`  | *Sin codificación*     |
-
-#### Control – Encuentro 3
+#### Control – [`Encuentro 3`](consultaodontologica-juanodontopediatria-3.html)
 
 > Se evidencia una mejoría significativa. Se indica control cada 6 meses.
 
----
+
+Toda la información clínica de esta etapa se consolida en un documento estructurado FHIR de tipo `Composition`, el cual organiza los encuentros, hallazgos y procedimientos realizados. Este documento constituye la **Ficha Clínica Odontopediátrica** de Juan y puede consultarse en el siguiente recurso:
+- [`Ficha Clínica Pediatrica`](fichaclinica-juanodontopediatria-1.html)
+
 
 ### Adolescencia – Atención Ortodóntica
 
 **Edad:** 14 años  
-**Clínica:** Sonrisa Integral (compatible con FHIR)  
-**Profesional tratante:** Dr. Leandro P.
+**Clínica:** Odontologia Ada Lovelace (compatible con FHIR)  
+**Profesional tratante:** [`Dr. Leandro P.`](profesionalodontologodrleandroescenario1.html)
 
-El paciente cambia de consultorio odontologico por motivos personales. La nueva clínica utiliza OdontoFHIR, permitiendo acceder y cargar el historial clínico previo exportado por la clínica anterior. Se realiza una consulta por molestias al morder.
+El paciente cambia de consultorio odontológico por motivos personales. La nueva clínica utiliza OdontoFHIR, permitiendo acceder y cargar el historial clínico previo exportado por la clínica anterior. Se introduce en un Bundle con los Expendientes Odontologicos de la anterior clinica, en este caso Juan llega a esta odontologia para realizar una consulta por molestias al morder.
 
 > Se diagnostica maloclusión Clase II con apiñamiento dental y dolor leve en la articulación temporomandibular (ATM).
 
-#### Hallazgos
+#### Hallazgos – [`Encuentro 1`](consultaodontologica-juanortodoncia-1.html)
 
-| Descripción clínica                     | Recurso FHIR | Código SNOMED |
-|----------------------------------------|--------------|----------------|
-| Maloclusión dental                     | `Condition`  | 367336001      |
-| Dolor en articulación temporomandibular | `Observation`| 247373008      |
-| Apiñamiento dental                     | `Condition`  | 125605004      |
+- [`Maloclusión dental`](hallazgoodontologico-juanortodoncia-maloclusion.html)
+- [`Dolor en articulación temporomandibular`](hallazgoodontologico-juanortodoncia-doloratm.html)
 
-#### Procedimientos
+#### Procedimientos – [`Encuentro 2`](consultaodontologica-juanortodoncia-2.html)
 
-| Procedimiento                | Recurso FHIR | Código SNOMED |
-|-----------------------------|--------------|----------------|
-| Colocación de brackets      | `Procedure`  | 428881005      |
-| Educación para higiene oral | `Procedure`  | 71079003       |
+- [`Colocación de brackets`](procedimientoodontologico-juanortodoncia-colocacionbrackets.html)
+- [`Tratamiento ortodóntico`](procedimientoodontologico-juanortodoncia-tratamientortodoncia.html)
+- [`Educación para higiene oral`](procedimientoodontologico-juanodontopediatria-educacionhigiene.html)
 
----
+#### Control – [`Encuentro 3`](consultaodontologica-juanortodoncia-3.html)
+
+> Se realiza seguimiento a la evolución del tratamiento de ortodoncia.
+
+Toda la información clínica de esta etapa se consolida en un documento estructurado FHIR de tipo `Composition`, el cual organiza los encuentros, hallazgos y procedimientos realizados. Este documento constituye la **Ficha Clínica de Ortodoncia** para Juan y puede consultarse en el siguiente recurso:
+- [`Ficha Clínica Ortodoncia`](fichaclinica-juanortodoncia-1.html)
+
 
 ### Adultez Joven – Atención en el Extranjero
 
 **Edad:** 20 años  
-**Clínica:** Global Smile (extranjero, compatible con FHIR)  
-**Profesional tratante:** Dra. Erika
+**Clínica:** Odontologia El Extranjero (extranjero, compatible con FHIR)  
+**Profesional tratante:** [`Dra. Erika`](profesionalodontologodraerikaescenario1.html)
 
 Durante una estancia universitaria en el exterior, el paciente presenta un dolor agudo y acude a consulta odontológica. El sistema clínico del país extranjero, basado en FHIR, permite acceder al expediente interoperable de Juan.
 
 > Gracias al acceso al historial clínico completo, se evita la duplicación de estudios y se toma una decisión clínica precisa.
 
-#### Diagnóstico y Procedimientos
+#### Diagnóstico y Procedimientos – [`Encuentro 1`](consultaodontologica-juaninternacional-1.html)
 
-| Descripción clínica        | Recurso FHIR | Código SNOMED |
-|---------------------------|--------------|----------------|
-| Dolor de diente           | `Observation`| 422587007      |
-| Absceso periapical        | `Condition`  | 68566005       |
+- [`Dolor de diente`](hallazgoodontologico-juaninternacional-dolordiente.html)
+- [`Absceso periapical`](hallazgoodontologico-juaninternacional-absceso.html)
+- [`Tratamiento de conducto`](procedimientoodontologico-juaninternacional-tratamientoconducto.html)
 
-| Procedimiento realizado    | Recurso FHIR | Código SNOMED |
-|---------------------------|--------------|----------------|
-| Tratamiento de conducto   | `Procedure`  | 23406003       |
-
+---
+Toda la información clínica de esta etapa se consolida en un documento estructurado FHIR de tipo `Composition`, el cual organiza los encuentros, hallazgos y procedimientos realizados. Este documento constituye la **Ficha Clínica Extranjera** de Juan y puede consultarse en el siguiente recurso:
+- [`Ficha Clínica Extranjero`](fichaclinica-juaninternacional-1.html)
