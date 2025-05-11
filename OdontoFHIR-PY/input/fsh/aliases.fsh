@@ -34,5 +34,5 @@ Alias: $ProfesionalOdontologico = https://odontofhir.py/fhir/StructureDefinition
 Alias: $ProcedimientoOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ProcedimientoOdontologico-Procedure-1
 Alias: $EncuentroOdontologico = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ConsultaOdontologica-Encounter-1
 Alias: $HallazgosOdontologicos = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologicos-Condition-1
-Alias: $AllergyIntolerance = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-AllergyIntolerance-1
+Alias: $AlergiasIntolerancias = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-AlergiasIntolerancias-1
 Alias: $FichaClinica = https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-FichaClinica-Composition-1

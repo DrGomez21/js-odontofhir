@@ -1,10 +1,10 @@
-Profile: OdontoFHIRAllergyIntolerance1  
+Profile: OdontoFHIRAlergiasIntolerancias1  
 Parent: AllergyIntolerance
-Id: OdontoFHIR-AllergyIntolerance-1
+Id: OdontoFHIR-AlergiasIntolerancias-1
 Title: "Alergias e Intolerancias Odontológicas"
 Description: "Perfil para registrar alergias e intolerancias en pacientes odontológicos en Paraguay."
 
-* ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-AllergyIntolerance-1"
+* ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-AlergiasIntolerancias-1"
 
 //Must Support
 * patient and clinicalStatus and type and code MS
@@ -21,7 +21,7 @@ Description: "Perfil para registrar alergias e intolerancias en pacientes odonto
 
 // Tipo de reacción
 * type 1..1 
-* type from http://hl7.org/fhir/ValueSet/allergy-intolerance-type (required) //Porque esta en Trial Use. Se usara pero no esta dentro del servidor HAPI tdv
+* type from https://odontofhir.py/fhir/ValueSet/AlergiasIntolerancias-OdontoFHIR-1 (required) 
 * type ^short = "Alergia o Intolerancia"
 
 // Código de la alergia

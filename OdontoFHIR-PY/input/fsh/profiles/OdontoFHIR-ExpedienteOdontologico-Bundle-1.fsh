@@ -64,6 +64,6 @@ Description: "Este perfil define cómo debe estructurarse un Bundle de tipo docu
 * entry[hallazgos] ^short = "Hallazgos clínicos"
 * entry[hallazgos] ^definition = "Hallazgos observados durante la atención clínica odontológica."
 
-* entry[alergias].resource only $AllergyIntolerance
+* entry[alergias].resource only $AlergiasIntolerancias
 * entry[alergias] ^short = "Alergias/intolerancias"
 * entry[alergias] ^definition = "Registro de alergias relevantes del paciente, si existen."
