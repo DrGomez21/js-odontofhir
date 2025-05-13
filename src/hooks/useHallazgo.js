@@ -49,37 +49,3 @@ export const useHallazgoMutation = (paciente) => {
   })
 }
 
-// const hallazgoMutation = useMutation({
-//   mutationFn: addHallazgo,
-//   onSuccess: async newHallazgo => {
-//     // Insert optimista en caché.
-//     queryClient.setQueryData(
-//       ['hallazgos', paciente],
-//       prev => ({
-//         ...prev,
-//         entry: [
-//           ...prev.entry,
-//           { resource: newHallazgo }
-//         ]
-//       })
-//     )
-
-//     // refetch oficial
-//     await queryClient.invalidateQueries(['hallazgos', paciente])
-
-//     // recuperar el recurso nuevo por su _id
-//     const { data: bundleById } = await odontoFhirApi.get(`/Condition?subject=Patient/${paciente}&_id=${newHallazgo.id}`)
-//     // bundleById.entry[0].resource será tu recurso exacto
-//     // Volver a mergearlo:
-//     queryClient.setQueryData(
-//       ['hallazgos', paciente],
-//       prev => ({
-//         ...prev,
-//         entry: [
-//           ...prev.entry.filter(e => e.resource.id != newHallazgo.id),
-//           bundleById.entry[0]
-//         ]
-//       })
-//     )
-//   }
-// })
