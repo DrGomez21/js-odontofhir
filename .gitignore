@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 .env
+/OdontoFHIR-PY/fsh-generated
+/OdontoFHIR-PY/output
