@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { getEncounterById, getEncounterByPatientId } from "../api/encounter/get-encounter.action"
 import { addEncounter } from "../api/encounter/add-encounter.action"
-import { updateEncounterWithNewCondition } from "../api/encounter/update-encounter.action"
+import { updateEncounterWithNewCondition, updateEncounterWithNewProcedure } from "../api/encounter/update-encounter.action"
 
 export const useEncounter = (patientId) => {
 
@@ -38,6 +38,17 @@ export const useMutateEncounterWithCondition = () => {
   
   return useMutation({
     mutationFn: updateEncounterWithNewCondition,
+    onSuccess: (encounter) => {
+      queryClient.invalidateQueries(['encounter', encounter.id])
+    }
+  })
+}
+
+export const useMutateEncounterWithProcedure = () => {
+  const queryClient = useQueryClient()
+  
+  return useMutation({
+    mutationFn: updateEncounterWithNewProcedure,
     onSuccess: (encounter) => {
       queryClient.invalidateQueries(['encounter', encounter.id])
     }
