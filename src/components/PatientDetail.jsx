@@ -34,7 +34,6 @@ export const PatientDetail = ({ patient }) => {
       <div>
         <p><span className='font-bold'>Edad:</span> {calcularEdad(patient.birthDate)} años</p>
         <p><span className='font-bold'>Documento de identidad:</span> {patient.identifier[0].value}</p>
-        <p><span className='font-bold'>Última consulta:</span> 23/05/2024 {patient.meta.lastUpdate}</p>
       </div>
 
       <div className='flex flex-col'>
