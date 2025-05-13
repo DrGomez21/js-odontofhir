@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import {
+  getAlergiasIntolerancias,
   getAnatomiaDental,
   getBarrios,
   getCiudades,
@@ -11,6 +12,14 @@ import {
   getPueblosIndigenas,
   getSeccionesFicha
 } from "../api/codesystem/codesystem.action.js"
+
+export const useAlergiasIntolerancias = () => {
+  return useQuery({
+    queryKey: ['alergiasIntolerancias'],
+    queryFn: getAlergiasIntolerancias,
+    staleTime: 1000 * 60 * 60 * 72,
+  })
+} 
 
 export const useAnatomiaDental = () => {
   return useQuery({

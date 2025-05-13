@@ -9,12 +9,13 @@ import { useNavigate } from 'react-router-dom'
 import Loader from './basics/Loader'
 import { Error } from './basics/Error'
 
+
 export const PatientForm = () => {
 
   const {
     register,
     handleSubmit,
-    watch
+    watch,
   } = useForm()
   const { mutate } = usePatient()
   const ciudadesDelParaguay = useCiudadesDelParaguay()
@@ -22,11 +23,14 @@ export const PatientForm = () => {
   const nacionalidades = useNacionalidades()
   const barriosDelParaguay = useBarriosDelParaguay()
   
+  
   const navigate = useNavigate()
 
   // Nos suscribimos a los cambios en el input de la ciudad
+  const departamentoSeleccionado = watch('departamento')
   const ciudadSeleccionada = watch('ciudad')
 
+  
   // Verificamos la carga de los datos.
   if (nacionalidades.isLoading || departamentosDelParaguay.isLoading || barriosDelParaguay.isLoading || ciudadesDelParaguay.isLoading) {
     return <Loader /> // Podemos cambiar a disabled o enabled dependiendo del estado de la consulta
@@ -44,6 +48,16 @@ export const PatientForm = () => {
     : barriosDelParaguay.data.filter(barrio =>
       ciudadSeleccionada ? barrio.code.startsWith(ciudadSeleccionada.toString()) : false
     )
+  // Filtramos las ciudades segun el departamento elegido
+  const ciudadesFiltradas = ciudadesDelParaguay.data.filter(ciudad => {
+    if (departamentoSeleccionado == null) return false; 
+    const dpto = departamentoSeleccionado.toString();
+    if (dpto === "0") {
+      return ciudad.code === "0"; // Capital => Asunción
+    }
+    return ciudad.code.startsWith(dpto); 
+  });
+
 
   const onSubmit = (data) => {
     const patient = parseFHIRResource(data)
@@ -207,6 +221,7 @@ export const PatientForm = () => {
                 enabled={departamentosDelParaguay.isSuccess.toString()}
                 {...register('departamento', { required: true })}
               >
+                <option value="">Seleccione un departamento</option>
                 {departamentosDelParaguay.data.map((departamento) => (
                   <option key={departamento.code} value={departamento.code}>
                     {departamento.display}
@@ -225,7 +240,7 @@ export const PatientForm = () => {
               {...register('ciudad', { required: true })}
             >
               <option value="">Seleccione una ciudad</option>
-              {ciudadesDelParaguay.data.map((ciudad) => (
+              {ciudadesFiltradas.map((ciudad) => (
                 <option key={ciudad.code} value={ciudad.code}>
                   {ciudad.display}
                 </option>
@@ -240,6 +255,7 @@ export const PatientForm = () => {
               id="barrio"
               {...register('barrio', { required: true })}
             >
+              <option value="">Seleccione un barrio</option>
               {barriosFiltrados.map((barrio) => (
                 <option key={barrio.code} value={barrio.code}>
                   {barrio.display}

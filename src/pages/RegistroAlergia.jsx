@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form"
 import { useParams, useSearchParams } from "react-router-dom"
 import { addAlergia } from "../api/alergias/add-alergia.action"
+import {useBarriosDelParaguay} from "../hooks/useCodeSystem"
 
 export const RegistroAlergia = () => {
 

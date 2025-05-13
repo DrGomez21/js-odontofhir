@@ -1,6 +1,13 @@
 import { odontoFhirApi } from "../fhir.api.js";
 
 
+export const getAlergiasIntolerancias = async () => {
+  const response = await odontoFhirApi.get(import.meta.env.VITE_CODESYSTEM_ID_ALERGIASINTOLERANCIAS)
+  const codigoAlergiasIntolerancias = response.data.concept
+  return codigoAlergiasIntolerancias
+}
+
+
 export const getAnatomiaDental = async () => {
   const response = await odontoFhirApi.get(import.meta.env.VITE_CODESYSTEM_ID_ANATOMIADENTAL)
   const codigoAnatomias = response.data.concept
