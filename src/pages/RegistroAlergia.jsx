@@ -26,13 +26,13 @@ export const RegistroAlergia = () => {
   }
 
   return (
-    <div className="flex flex-col mx-8 py-4 gap-4">
+    <div className="flex flex-col justify-center items-center w-full h-screen">
 
       <form onSubmit={handleSubmit(onSubmit)}>
 
         <button
           type="submit"
-          className="bg-blue-500 text-white font-bold py-2 px-4 rounded">
+          className="bg-blue-500 text-white font-bold py-2 px-4 rounded-md cursor-pointer">
           Registrar Alergia
         </button>
 
