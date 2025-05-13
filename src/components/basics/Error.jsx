@@ -1,11 +1,11 @@
 import React from 'react'
-import FailIndicator from '../../assets/serverdown.svg'
+import FailIndicator from '../../assets/error-state.svg'
 
-export const Error = ({ message }) => {
+export const Error = () => {
   return (
-    <div className='flex flex-col justify-center items-center gap-2'>
-      <img src={FailIndicator} alt="Ocurrió un error" className='w-[160px] h-[125px]' />
-      <span className='font-medium'>Error: {message}</span>
+    <div className='flex flex-col justify-center items-center gap-4'>
+      <img src={FailIndicator} alt="Ocurrió un error" />
+      <span className='text-sm font-light'>Ocurrió un error inesperado. Por favor, recarga la página.</span>
     </div>
   )
 }

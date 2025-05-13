@@ -3,18 +3,24 @@ import { usePatient } from '../hooks/usePatient'
 import DataTable from 'react-data-table-component'
 import { useNavigate } from 'react-router-dom'
 import Loader from './basics/Loader'
+import { SinDatos } from './basics/SinDatos'
+import IconPatient from '../assets/patient-icon.svg'
 import { Error } from './basics/Error'
 
 export const PatientTable = () => {
 
-  const { patients, entries, isLoading, isError, error, isSuccess } = usePatient()
+  const { allPatients } = usePatient()
   const navigate = useNavigate()
 
   const columns = [
     {
       name: 'Nombre',
-      selector: row => (row.name[0].given[0] + ' ' + row.name[0].family),
+      selector: row => <div className='flex flex-row items-center gap-2'><img src={IconPatient}/><span className='font-medium'>{row.name[0].given[0] + ' ' + row.name[0].family}</span></div>,
       sortable: true
+    },
+    {
+      name: 'Identificación',
+      selector: row => row.identifier[0].value,
     },
     {
       name: 'Género',
@@ -77,23 +83,27 @@ export const PatientTable = () => {
   }
 
   const goToProfile = (patientId) => {
-    navigate(`/patient-profile/${patientId}`)
+    navigate(`/patient/${patientId}`)
   }
 
-  if (isLoading) return <Loader />
-  if (isError) return <Error message={error.message | ''} />
+  if (allPatients.isLoading) return <Loader />
+  if (allPatients.isError) return <Error />
 
   return (
-    <div className='rounded-xl w-full'>
+    <div className='rounded-lg'>
       <DataTable
+        className='rounded-xl w-full'
         columns={columns}
-        data={patients}
+        data={allPatients.data}
         customStyles={customStyles}
         pagination
         fixedHeader
         onRowClicked={patient => goToProfile(patient.id)}
         highlightOnHover
         pointerOnHover
+        noDataComponent={<SinDatos />}
+        progressPending={allPatients.isLoading}
+        progressComponent={<Loader />}
       />
     </div>
   )

@@ -1,5 +1,6 @@
 import React from 'react'
 import DataTable from 'react-data-table-component'
+import { Indicator } from './Indicator'
 
 export const TablePatientProfile = () => {
 
@@ -19,11 +20,11 @@ export const TablePatientProfile = () => {
     },
     {
       name: 'Estado',
-      selector: row => row.estado
+      selector: row => <Indicator estado={row.estado} /> 
     },
     {
       name: 'Notas',
-      selector: row => row.notas
+      selector: row => <a href='/patient-notes' onClick={(e) => e.stopPropagation()}>{row.notas}</a>
     },
   ]
 
@@ -32,7 +33,7 @@ export const TablePatientProfile = () => {
       fecha: '24/10/2024',
       diente: 13,
       procedimiento: 'Carie',
-      estado: 'Finalizado',
+      estado: 'En proceso',
       notas: 'Ver notas'
     },
     {
@@ -109,6 +110,7 @@ export const TablePatientProfile = () => {
         data={data}
         customStyles={customStyles}
         pagination
+        paginationPerPage={4}
         fixedHeader
         highlightOnHover
         pointerOnHover

@@ -1,29 +1,43 @@
-import { useQuery } from "@tanstack/react-query"
-import { getAllPatients } from "../api/fhir.api"
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query"
+import { allPatientsAction } from "../api/patients/all-patients.action"
+import { addPatientAction } from "../api/patients/add-patient.action"
+import { getPatientByIdAction } from "../api/patients/get-patient.action"
 
 export const usePatient = () => {
-  
-  const { data, isLoading, error, isError, isSuccess } = useQuery({
-    queryKey: ['patients'],
-    queryFn: getAllPatients,
-    staleTime: 1000 * 60 * 5
+
+  const queryClient = useQueryClient()
+
+  // Querys
+  const allPatients = useQuery({
+    queryKey: ['patients', 'allPatients'],
+    queryFn: allPatientsAction,
+    staleTime: 1000 * 60 * 60 * 24,
   })
 
-  /**
-   * Los pacientes están en el arreglo entry,
-   * Entonces, una ve tenemos la data (respuesta de la API)
-   * accedemos a su campo entry, desde ahí obtenemos solo el resource.
-   * En caso de no haber datos se manda un arreglo vacío
-   */
-  const patients = data ? data.entry.map((entry) => entry.resource) : []
+  const { mutate } = useMutation({
+    mutationFn: addPatientAction,
+    onSuccess: (newPatient) => {
+
+      // Invalidamos la caché
+      queryClient.invalidateQueries({ queryKey: ['patients'] })
+
+      // Actualizar caché de react-query
+      queryClient.setQueryData(['patients'], (oldData) => {
+        if (oldData == null) return [newPatient]
+        return [...oldData, newPatient]
+      })
+    }
+  })
 
   return {
-    entries: data,
-    patients,
-    isLoading,
-    error,
-    isError,
-    isSuccess
+    allPatients,
+    mutate,
   }
+}
 
+export const useGetPatient = (id) => {
+  return useQuery({
+    queryKey: ['patient', id],
+    queryFn: () => getPatientByIdAction(id)
+  })
 }
