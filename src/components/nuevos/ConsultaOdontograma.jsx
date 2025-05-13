@@ -255,17 +255,9 @@ export const ConsultaOdontograma = ({pacienteId, consultaId, dientesHallazgos })
           consulta={consultaId}
           onClose={sidebarClose}
           onNewHallazgo={() => {}}
+          onNewProcedure={() => {}}
         />
       )}
     </div>
   )
 }
-
-
-// {
-//   dientesConEstado.map((diente) => (
-//     <div key={diente.id} className="border border-black p-2">
-//       <p>{diente.id}</p>
-//     </div>
-//   ))
-// }

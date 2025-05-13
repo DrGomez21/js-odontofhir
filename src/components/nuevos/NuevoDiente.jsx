@@ -10,10 +10,6 @@ export const NuevoDiente = ({ diente, onClick }) => {
 
   const colorBg = diente.estado ? 'bg-blue-400' : 'bg-white'
 
-  if (diente.estado !== null && diente.estado !== undefined) {
-    console.log(diente);
-  }
-
   return (
     <div className='relative w-14 h-20 mx-2'>
       <div className='absolute w-full text-center text-sm font-medium'>{diente.numberISO}</div>
