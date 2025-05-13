@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { useHallazgos } from '../hooks/useCodeSystem'
+import { useState } from 'react'
+import { useHallazgos, useProcedimientosOdontologicos } from '../hooks/useCodeSystem'
 import { Error } from './basics/Error'
 import { useForm } from 'react-hook-form'
-import { useEncounter, useMutateEncounterWithCondition } from '../hooks/useEncounter'
+import { useEncounter, useMutateEncounterWithCondition, useMutateEncounterWithProcedure } from '../hooks/useEncounter'
 import { Loader2Icon, LoaderCircle, PanelLeftClose, Save, SquareCheckIcon } from 'lucide-react'
 import { encounterMapper } from '../infraestructure/mappers/encounter.mapper'
 import { validateResource } from '../api/fhir.validate'
@@ -10,8 +10,10 @@ import { ConsultaCard } from './consultas/ConsultaCard'
 import { HallazgoCard } from './cards/HallazgoCard'
 import { useHallazgoByPatientAndTooth, useHallazgoMutation } from '../hooks/useHallazgo'
 import { hallazgoMapper } from '../infraestructure/mappers/hallazgo.mapper'
-import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import { useAddProcedure, useGetAllProcedures } from '../hooks/useProcedure'
+import { procedureMapper } from '../infraestructure/mappers/procedure.mapper'
 
 export const Encounter = ({ patientId }) => {
 
@@ -72,7 +74,6 @@ export const Encounter = ({ patientId }) => {
 
   if (patientEncounter.isLoading) return <p>Cargando...</p>
   if (!patientEncounter.isLoading && patientEncounter.isError) return <Error />
-  if (!patientEncounter.data.entry || patientEncounter.data.entry.length === 0) return <p>No hay consultas previas.</p>
 
   return (
     <div className='p-4'>
@@ -150,7 +151,10 @@ export const Encounter = ({ patientId }) => {
             </form>
           )
         }
-        {patientEncounter.data.entry
+
+        {!patientEncounter.data.entry && (<p>No hay consultas previas.</p>)}
+
+        {patientEncounter.data.entry && patientEncounter.data.entry
           .sort((a, b) => new Date(b.resource.period.start) - new Date(a.resource.period.start))
           .map(({ resource }) => (
             <ConsultaCard key={resource.id} encounter={resource} paciente={patientId} />
@@ -180,8 +184,6 @@ export const Condition = ({ patientId, diente, consultaId, onNewHallazgo }) => {
   const hallazgoByPatientAndTooth = useHallazgoByPatientAndTooth(patientId, diente.code)
   const hallazgoMutation = useHallazgoMutation(patientId)
   const patchEncounter = useMutateEncounterWithCondition()
-
-  console.log('CONSULTA NUMERO: ', consultaId)
 
   const onSubmit = (data) => {
     const hallazgoResource = hallazgoMapper(patientId, consultaId, 152, diente, data.hallazgo)
@@ -259,7 +261,109 @@ export const Condition = ({ patientId, diente, consultaId, onNewHallazgo }) => {
   )
 }
 
-export const Sidebar = ({ diente, patient, consulta, onClose, onNewHallazgo }) => {
+export const Procedure = ({ patientId, diente, consultaId, onNewProcedure }) => {
+  
+  // Estado para mostrar o no el form de creación de procedimiento odontológico.
+  const [mostrarCreacionProcedimiento, setMostrarCreacionProcedimiento] = useState(false)
+
+  // Instaciamos el hook useForm para manejar el formulario.
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting }
+  } = useForm()
+  
+  // Vamos a traernos todos los procedimientos disponibles.
+  const opcionesProcedimiento = useProcedimientosOdontologicos()
+  // Actualizar el estado de la consulta con el nuevo procedimiento.
+  const updateEncounter = useMutateEncounterWithProcedure()
+
+  // Traemos el hook para registrar un procedimiento odontológico.
+  const procedimientoMutation = useAddProcedure()
+  const procedimientosByPatient = useGetAllProcedures()
+
+  const onSubmit = (data) => {
+    const p = JSON.parse(data.procedimiento)
+    const procedimientoResource = procedureMapper({patientId:patientId, practitionerId:152, diente:diente, encounterId:consultaId, procedimiento:p})
+    
+    // TODO: VALIDAR EL RECURSO
+    if (!procedimientoResource) return toast.error('Ocurrió un error, vuelva a intentar guardar el procedimiento.')
+    
+    // insertamos el procedimiento en el servidor.
+    procedimientoMutation.mutate(procedimientoResource, {
+      onSuccess: (nuevoProcedimiento) => {
+        // Encadenamos la segunda mutación.
+        updateEncounter.mutate({
+          encounterId: consultaId,
+          procedureRef: `Procedure/${nuevoProcedimiento.id}`
+        }, {
+          onSuccess: () => {
+            toast.success('Actualizado el encuentro')
+          },
+          onError: () => {
+            toast.error('Falló la actulización del encuentro')
+          },
+        }
+      ),
+        toast.success('Procedimiento registrado', { position: 'bottom-left' })
+      },
+      onError: () => {
+        toast.error('Error al registrar el procedimiento', {position: 'bottom-left'})
+      }
+    })
+  }
+
+  return (
+    <div>
+      {/* Header */}
+      <div className='flex justify-between items-center mt-6'>
+        <h1 className='font-medium text-2xl'>Procedimientos</h1>
+        {consultaId && (
+          <button
+            className='flex items-center justify-center w-8 h-8 border-2 border-[#4a4a4a] rounded-md bg-cyan-200
+          hover:cursor-pointer hover:scale-95 transition-all duration-100'
+            onClick={() => setMostrarCreacionProcedimiento(!mostrarCreacionProcedimiento)}
+          >
+            {mostrarCreacionProcedimiento ? 'X' : '+'}
+          </button>
+        )}
+      </div>
+
+      {/* Abrimos el formulario */}
+      {mostrarCreacionProcedimiento && (
+        <form onSubmit={handleSubmit(onSubmit)} className='mt-2 mb-2'>
+          <select
+            className='w-full py-2 px-1 border-2 border-[#4a4a4a] rounded-md'
+            {...register('procedimiento', { required: true })}
+          >
+            {opcionesProcedimiento.data.map((p) => (
+              <option key={p.code} value={JSON.stringify(p)}>{p.display}</option>
+            ))}
+          </select>
+          <button
+            type='submit'
+            disabled={procedimientoMutation.isPending}
+            className='px-4 py-2 border-2 mt-2 w-full border-[#4a4a4a] bg-cyan-200 text-[#4a4a4a] text-sm font-medium rounded hover:cursor-pointer hover:scale-95 transition-all duration-100 disabled:opacity-50'
+          >
+            {procedimientoMutation.isPending ? (
+              <p className='flex items-center justify-center gap-2'><Loader2Icon className='animate-spin' />Guardando...</p>
+            ) : (
+              <p className='flex items-center justify-center gap-2'><Save />Guardar procedimiento</p>
+            )}
+          </button>
+        </form>
+      )}
+
+      {!procedimientosByPatient.data?.entry && <p>No hay procedimientos en este diente.</p>}
+      {
+        procedimientosByPatient.data?.entry && <p>Hay {procedimientosByPatient.data?.entry?.length} procedimientos.</p>
+      }
+
+    </div>
+  )
+}
+
+export const Sidebar = ({ diente, patient, consulta, onClose, onNewHallazgo, onNewProcedure }) => {
   return (
     <>
       {/* Overlay oscuro */}
@@ -290,11 +394,7 @@ export const Sidebar = ({ diente, patient, consulta, onClose, onNewHallazgo }) =
         <div>
           {/* <Encounter patientId={patient.id} /> */}
           <Condition patientId={patient} diente={diente} consultaId={consulta} onNewHallazgo={onNewHallazgo} />
-          {/* {
-            consulta && (
-              <Condition patientId={patient.id} diente={diente} consultaId={consulta} onNewHallazgo={onNewHallazgo} />
-            )
-          } */}
+          <Procedure patientId={patient} diente={diente} consultaId={consulta} onNewProcedure={onNewHallazgo} />
         </div>
       </aside>
     </>
