@@ -43,6 +43,6 @@ Cada hallazgo puede estar asociado a un diente específico utilizando bodySite.
 
 // Diente afectado
 * bodySite 1..*
-* bodySite from $VSAnatomiaDental (preferred)
+* bodySite from $VSAnatomiaDental (required)
 * bodySite ^short = "Diente afectado"
 * bodySite ^definition = "Código anatómico del diente afectado por el hallazgo clínico."

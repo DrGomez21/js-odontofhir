@@ -15,10 +15,6 @@ publisher:
   name: Universidad Nacional de Asuncion - FPUNA
   url: https://www.pol.una.py/
 
-dependencies:
-  hl7.fhir.us.dental-data-exchange: 1.0.0
-  hl7.fhir.cl.clcore: 1.9.2
-
 menu:
   Inicio: index.html
   Antecedentes: background.html

@@ -17,6 +17,7 @@ Description: "Perfil que representa una consulta odontológica, incluyendo el od
 
 // Odontólogo que consulta
 * participant 1..1
+* participant.individual 1..1
 * participant.individual only Reference($ProfesionalOdontologico)
 * participant ^short = "Odontólogo que atendió al paciente"
 
