@@ -26,5 +26,5 @@ Description: "Perfil para registrar alergias e intolerancias en pacientes odonto
 
 // Código de la alergia
 * code 1..1
-* code from $allergyintolerance-code (example)
+* code from $VSAlergiasIntolerancias  (required)
 * code ^short = "Código que identifica la alergia o intolerancia"

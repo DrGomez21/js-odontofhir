@@ -16,7 +16,7 @@ Alias: $VSHallazgosOdontologico = https://odontofhir.py/fhir/ValueSet/HallazgosO
 Alias: $VSAnatomiaDental = https://odontofhir.py/fhir/ValueSet/AnatomiaDental-OdontoFHIR-1
 Alias: $VSProcedimientoOdontologico = https://odontofhir.py/fhir/ValueSet/ProcedimientoOdontologico-OdontoFHIR-1
 Alias: $VSSeccionesFichaClinica = https://odontofhir.py/fhir/ValueSet/SeccionesFichaClinica-OdontoFHIR-1
-Alias: $allergyintolerance-code = http://hl7.org/fhir/ValueSet/allergyintolerance-code
+Alias: $VSAlergiasIntolerancias = https://odontofhir.py/fhir/ValueSet/AlergiasIntolerancias-OdontoFHIR-1
 Alias: $encounter-status = http://hl7.org/fhir/ValueSet/encounter-status
 
 
