@@ -11,6 +11,21 @@ import {
   getPueblosIndigenas,
   getSeccionesFicha
 } from "../api/codesystem/codesystem.action.js"
+import { getAlergias, getAllAlergias } from "../api/alergias/get-alergias-patient.js"
+
+export const useGetAlergiasByPatient = (patientId) => {
+  return useQuery({
+    queryKey: ['alergias', patientId],
+    queryFn: () => getAlergias(patientId),
+  })
+}
+
+export const useAlergias = () => {
+  return useQuery({
+    queryKey: ['alergiasCodes'],
+    queryFn: getAllAlergias,
+  })
+} 
 
 export const useAnatomiaDental = () => {
   return useQuery({

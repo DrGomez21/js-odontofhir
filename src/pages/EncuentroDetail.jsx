@@ -67,6 +67,7 @@ export const EncuentroDetail = () => {
           }
         </div>
 
+        {/* Lista de procedimientos  */}
         <div className="col-span-1 mt-4">
           <div className="flex items-center justify-between px-2 py-2 w-full bg-white rounded-md mb-2">
             <h2 className="font-bold text-[#4A4A4A] text-2xl">Procedimientos</h2>

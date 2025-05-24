@@ -356,7 +356,7 @@ export const Procedure = ({ patientId, diente, consultaId, onNewProcedure }) => 
 
       {!procedimientosByPatient.data?.entry && <p>No hay procedimientos en este diente.</p>}
       {
-        procedimientosByPatient.data?.entry && <p>Hay {procedimientosByPatient.data?.entry?.length} procedimientos.</p>
+        procedimientosByPatient.data?.entry && <p>Añadir procedimiento.</p>
       }
 
     </div>

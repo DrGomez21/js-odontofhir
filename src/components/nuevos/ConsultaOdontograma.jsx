@@ -210,13 +210,6 @@ export const ConsultaOdontograma = ({pacienteId, consultaId, dientesHallazgos })
 
   const [selectedDiente, setSelectedDiente] = useState(null) // Diente clickeado para abrir el sidebar
 
-  // const hallazgo = dientesHallazgos.find(h => h.bodySite[0].coding[0].code === diente.code)
-  // Asignar estado a los dientes que tienen hallazgos
-  // const dientesHallazgos = initialDientes.map(diente => {
-  //   console.log("diente", diente)
-  //   return diente
-  // })
-
   const dientesConEstado = initialDientes.map(diente => {
     const hallazgo = dientesHallazgos.find(h => h.bodySite[0].coding[0].code === diente.code)
     if (hallazgo) {
