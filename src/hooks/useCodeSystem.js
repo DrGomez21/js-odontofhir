@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import {
+  getAlergiasIntolerancias,
   getAnatomiaDental,
   getBarrios,
   getCiudades,
@@ -24,6 +25,14 @@ export const useAlergias = () => {
   return useQuery({
     queryKey: ['alergiasCodes'],
     queryFn: getAllAlergias,
+  })
+} 
+
+export const useAlergiasIntolerancias = () => {
+  return useQuery({
+    queryKey: ['alergiasIntolerancias'],
+    queryFn: getAlergiasIntolerancias,
+    staleTime: 1000 * 60 * 60 * 72,
   })
 } 
 

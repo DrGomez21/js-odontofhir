@@ -7,6 +7,8 @@ import { FichaClinica } from '../components/FichaClinica'
 import Loader from '../components/basics/Loader'
 import { Error } from '../components/basics/Error'
 import { Folder } from 'lucide-react'
+import { BotonConPlus, BotonConFolder } from '../components/boton/boton';
+
 
 const getPatientById = async (id) => {
   console.log(`Buscando información del paciente ${id}`)
@@ -33,18 +35,9 @@ export const PatientProfile = () => {
       <div className='flex w-full justify-between gap-8 items-center'>
         <PatientDetail patient={data} />
         <div className='flex flex-col gap-2'>
-          <button
-            className='flex items-center justify-center gap-2 px-4 py-2 rounded-md border-2 border-gray-600 bg-[#B3E5FC] text-[#4A4A4A] font-semibold hover:cursor-pointer hover:bg-[#86cff0] hover:scale-95 duration-100 transition-all'
-            onClick={() => navigate(`/patient/${id}/allergies`)}>
-            <Folder size={24} fill='#4a4a4a' color="#4a4a4a" />
+          <BotonConFolder onClick={() => navigate(`/patient/${id}/allergies`)}>
             <span className='nline-block max-w-full overflow-hidden whitespace-nowrap text-ellipsis'>Alergias e intolerancias</span>
-          </button>
-          <button
-            className='flex items-center justify-center gap-2 px-4 py-2 rounded-md border-2 border-gray-600 bg-[#B3E5FC] text-[#4A4A4A] font-semibold hover:cursor-pointer hover:bg-[#86cff0] hover:scale-95 duration-100 transition-all'
-            onClick={() => navigate(`/patient/${id}/allergies`)}>
-            <Folder size={24} fill='#4a4a4a' color="#4a4a4a" />
-            <span className='nline-block max-w-full overflow-hidden whitespace-nowrap text-ellipsis'>Alergias e intolerancias</span>
-          </button>
+          </BotonConFolder>
         </div>
       </div>
 

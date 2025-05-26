@@ -1,0 +1,25 @@
+id: odonto.fhir.ig
+canonical: https://odontofhir.py/fhir
+name: OdontoFHIR-PY
+title: OdontoFHIR-PY Implementation Guide
+description: Implementation Guide for OdontoFHIR-PY, a standardized approach to electronic dental records using FHIR.
+status: draft
+version: 0.1.0
+fhirVersion: 4.0.1
+copyrightYear: 2025+
+releaseLabel: ci-build
+date: 2025-03-18
+jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#005
+
+publisher:
+  name: Universidad Nacional de Asuncion - FPUNA
+  url: https://www.pol.una.py/
+
+menu:
+  Inicio: index.html
+  Antecedentes: background.html
+  Generalidades: generalidades.html
+  Artefactos: artifacts.html
+
+instanceOptions:
+  manualSliceOrdering: true
