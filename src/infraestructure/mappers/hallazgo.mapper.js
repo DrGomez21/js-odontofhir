@@ -43,6 +43,9 @@ function getHallazgoByCode(codigo) {
     : null
 }
 
+const { data: practitionerStore } = usePractitionerStore((state) => state.practitioner);
+
+
 export const hallazgoMapper = (
   patientId,
   encounterId,
@@ -74,7 +77,7 @@ export const hallazgoMapper = (
     },
     recordedDate: new Date().toISOString(),
     asserter: {
-      reference: `Practitioner/${practitionerId}`
+      reference: `Practitioner/${practitionerStore.resource.id}`
     }
   }
 
