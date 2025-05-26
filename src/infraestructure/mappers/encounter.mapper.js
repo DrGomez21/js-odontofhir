@@ -1,3 +1,6 @@
+const { data: practitionerStore } = usePractitionerStore((state) => state.practitioner);
+
+
 export const encounterMapper = (
   encounter,
   patient,
@@ -18,7 +21,7 @@ export const encounterMapper = (
       participant: [
         {
           individual: {
-            reference: `Practitioner/${practitioner}`
+            reference: `Practitioner/${practitionerStore.resource.id}`
           }
         }
       ],
