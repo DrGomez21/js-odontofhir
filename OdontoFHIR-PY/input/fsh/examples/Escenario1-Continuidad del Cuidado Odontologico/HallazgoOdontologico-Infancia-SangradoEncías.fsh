@@ -1,5 +1,5 @@
 Instance: HallazgoOdontologico-JuanOdontopediatria-EnciasSangrantes
-InstanceOf: OdontoFHIR-HallazgosOdontologicos-Condition-1
+InstanceOf: OdontoFHIR-HallazgosOdontologicos-Observation-1
 Title: "Hallazgo Odontologico: Sangrado de encías en paciente pediátrico"
 Description: "Encías sangrantes observadas durante el primer encuentro de Juan."
 

@@ -1,5 +1,5 @@
 Instance: HallazgoOdontologico-JuanOrtodoncia-DolorATM
-InstanceOf: OdontoFHIR-HallazgosOdontologicos-Condition-1
+InstanceOf: OdontoFHIR-HallazgosOdontologicos-Observation-1
 Title: "Hallazgo Odontológico: Dolor en articulación temporomandibular en Juan tratamiento de ortodoncia"
 
 Description: "Paciente refiere dolor leve en la ATM durante la consulta."

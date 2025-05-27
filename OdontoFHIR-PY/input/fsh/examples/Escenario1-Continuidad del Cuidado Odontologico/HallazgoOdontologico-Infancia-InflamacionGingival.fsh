@@ -1,5 +1,5 @@
 Instance: HallazgoOdontologico-JuanOdontopediatria-InflamacionGingival
-InstanceOf: OdontoFHIR-HallazgosOdontologicos-Condition-1
+InstanceOf: OdontoFHIR-HallazgosOdontologicos-Observation-1
 Title: "Hallazgo Odontologico: Inflamación Gingival en paciente pediátrico"
 Description: "Inflamación gingival detectada durante el primer encuentro de Juan."
 

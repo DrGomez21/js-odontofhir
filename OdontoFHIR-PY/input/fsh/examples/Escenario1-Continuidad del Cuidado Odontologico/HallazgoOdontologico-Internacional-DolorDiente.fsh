@@ -1,5 +1,5 @@
 Instance: HallazgoOdontologico-JuanInternacional-DolorDiente
-InstanceOf: OdontoFHIR-HallazgosOdontologicos-Condition-1
+InstanceOf: OdontoFHIR-HallazgosOdontologicos-Observation-1
 Title: "Hallazgo Odontológico: Dolor de diente superior en Juan durante consulta en el extranjero"
 
 Description: "Paciente refiere dolor agudo en premolar superior derecho."

@@ -1,5 +1,5 @@
 Instance: HallazgoOdontologico-JuanOdontopediatria-HigieneOralDeficiente
-InstanceOf: OdontoFHIR-HallazgosOdontologicos-Condition-1
+InstanceOf: OdontoFHIR-HallazgosOdontologicos-Observation-1
 Title: "Hallazgo Odontologico - Higiene oral deficiente en paciente pediátrico"
 Description: "Se identificó higiene oral deficiente en Juan durante su primera consulta."
 

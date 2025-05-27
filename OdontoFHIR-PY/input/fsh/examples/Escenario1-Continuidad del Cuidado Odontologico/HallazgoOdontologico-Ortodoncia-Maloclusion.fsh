@@ -1,5 +1,5 @@
 Instance: HallazgoOdontologico-JuanOrtodoncia-Maloclusion
-InstanceOf: OdontoFHIR-HallazgosOdontologicos-Condition-1
+InstanceOf: OdontoFHIR-HallazgosOdontologicos-Observation-1
 Title: "Hallazgo Odontológico: Maloclusión Clase II en Juan tratamiento de ortodoncia"
 
 Description: "Se diagnostica maloclusión Clase II como parte del examen ortodóntico."

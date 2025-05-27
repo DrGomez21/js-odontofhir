@@ -1,5 +1,5 @@
 Instance: HallazgoOdontologico-JuanInternacional-Absceso
-InstanceOf: OdontoFHIR-HallazgosOdontologicos-Condition-1
+InstanceOf: OdontoFHIR-HallazgosOdontologicos-Observation-1
 Title: "Hallazgo Odontológico: Absceso periapical en Juan durante consulta en el extranjero"
 Description: "Se diagnostica absceso periapical en premolar afectado."
 

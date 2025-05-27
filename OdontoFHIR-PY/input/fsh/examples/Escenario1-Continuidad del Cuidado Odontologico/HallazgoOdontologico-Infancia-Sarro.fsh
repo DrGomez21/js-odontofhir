@@ -1,5 +1,5 @@
 Instance: HallazgoOdontologico-JuanOdontopediatria-Sarro
-InstanceOf: OdontoFHIR-HallazgosOdontologicos-Condition-1
+InstanceOf: OdontoFHIR-HallazgosOdontologicos-Observation-1
 Title: "Hallazgo Odontologico: Sarro en paciente pediátrico"
 Description: "Acumulación de sarro detectada durante el primer encuentro de Juan."
 

@@ -15,7 +15,7 @@ Description: "Perfil que representa una consulta odontológica, incluyendo el od
 * subject only Reference($PacienteOdontologico)
 * subject ^short = "Paciente atendido en la consulta"
 
-// Odontólogo que consulta
+// Odontólogo que hace la consulta
 * participant 1..1
 * participant.individual 1..1
 * participant.individual only Reference($ProfesionalOdontologico)
@@ -38,9 +38,9 @@ Description: "Perfil que representa una consulta odontológica, incluyendo el od
 * period.end ^short = "Fecha y hora de finalización del encuentro"
 
 // Hallazgos Odontológicos
-* diagnosis 0..*
-* diagnosis.condition only Reference($HallazgosOdontologicos)
-* diagnosis ^short = "Hallazgos clínicos registrados durante la consulta"
+* reasonReference contains hallazgo 0..*
+* reasonReference[hallazgo] only Reference($HallazgosOdontologicos)
+* reasonReference[hallazgo] ^short = "Hallazgos clínicos observados durante la consulta"
 
 // Procedimientos Odontológicos
 * reasonReference 0..*
