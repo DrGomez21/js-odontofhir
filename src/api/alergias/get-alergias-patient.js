@@ -6,6 +6,6 @@ export const getAlergias = async (patientId) => {
 }
 
 export const getAllAlergias = async () => {
-  const { data } = await odontoFhirApi.get('/CodeSystem/602');
+  const { data } = await odontoFhirApi.get(import.meta.env.VITE_CODESYSTEM_ID_ALERGIASINTOLERANCIAS);
   return data
 }
