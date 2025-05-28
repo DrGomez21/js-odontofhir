@@ -41171,6 +41171,22 @@
               "mustSupport": true
             },
             {
+              "id": "Encounter.reasonReference:hallazgo",
+              "path": "Encounter.reasonReference",
+              "sliceName": "hallazgo",
+              "short": "Hallazgos clínicos observados durante la consulta",
+              "min": 0,
+              "max": "*",
+              "type": [
+                {
+                  "code": "Reference",
+                  "targetProfile": [
+                    "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologicos-Observation-1"
+                  ]
+                }
+              ]
+            },
+            {
               "id": "Encounter.reasonReference:procedimiento",
               "path": "Encounter.reasonReference",
               "sliceName": "procedimiento",
@@ -41187,21 +41203,8 @@
               ]
             },
             {
-              "id": "Encounter.diagnosis",
-              "path": "Encounter.diagnosis",
-              "short": "Hallazgos clínicos registrados durante la consulta"
-            },
-            {
               "id": "Encounter.diagnosis.condition",
               "path": "Encounter.diagnosis.condition",
-              "type": [
-                {
-                  "code": "Reference",
-                  "targetProfile": [
-                    "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologicos-Condition-1"
-                  ]
-                }
-              ],
               "mustSupport": true
             }
           ]
@@ -41394,9 +41397,9 @@
               "path": "Bundle.entry.resource",
               "type": [
                 {
-                  "code": "Condition",
+                  "code": "Observation",
                   "profile": [
-                    "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologicos-Condition-1"
+                    "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologicos-Observation-1"
                   ]
                 }
               ]
@@ -41605,7 +41608,7 @@
                 {
                   "code": "Reference",
                   "targetProfile": [
-                    "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologicos-Condition-1"
+                    "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologicos-Observation-1"
                   ]
                 }
               ]
@@ -41656,26 +41659,33 @@
     {
       "resource": {
         "resourceType": "StructureDefinition",
-        "id": "OdontoFHIR-HallazgosOdontologicos-Condition-1",
-        "url": "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologicos-Condition-1",
-        "name": "OdontoFHIRHallazgosOdontologicosCondition1",
+        "id": "OdontoFHIR-HallazgosOdontologicos-Observation-1",
+        "url": "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologicos-Observation-1",
+        "name": "OdontoFHIRHallazgosOdontologicosObservation1",
         "title": "Hallazgos Odontológicos",
         "status": "draft",
-        "description": "Perfil FHIR para representar hallazgos clínicos odontológicos como condiciones persistentes en pacientes.\nCada hallazgo puede estar asociado a un diente específico utilizando bodySite.",
+        "description": "Perfil FHIR para representar hallazgos clínicos odontológicos observados en un encuentro puntual.\nUtiliza el recurso Observation para reflejar datos clínicos transitorios registrados durante la consulta.",
         "fhirVersion": "4.0.1",
         "kind": "resource",
         "abstract": false,
-        "type": "Condition",
-        "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Condition",
+        "type": "Observation",
+        "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Observation",
         "derivation": "constraint",
         "differential": {
           "element": [
             {
-              "id": "Condition.code",
-              "path": "Condition.code",
+              "id": "Observation.status",
+              "path": "Observation.status",
+              "short": "Estado de la observación",
+              "definition": "Indica que la observación fue finalizada y registrada.",
+              "patternCode": "final",
+              "mustSupport": true
+            },
+            {
+              "id": "Observation.code",
+              "path": "Observation.code",
               "short": "Código del hallazgo odontológico",
               "definition": "Código estandarizado que representa el hallazgo clínico observado en el paciente.",
-              "min": 1,
               "mustSupport": true,
               "binding": {
                 "strength": "required",
@@ -41683,22 +41693,11 @@
               }
             },
             {
-              "id": "Condition.bodySite",
-              "path": "Condition.bodySite",
-              "short": "Diente afectado",
-              "definition": "Código anatómico del diente afectado por el hallazgo clínico.",
-              "min": 1,
-              "mustSupport": true,
-              "binding": {
-                "strength": "required",
-                "valueSet": "https://odontofhir.py/fhir/ValueSet/AnatomiaDental-OdontoFHIR-1"
-              }
-            },
-            {
-              "id": "Condition.subject",
-              "path": "Condition.subject",
+              "id": "Observation.subject",
+              "path": "Observation.subject",
               "short": "Paciente asociado",
               "definition": "Referencia al paciente al que pertenece el hallazgo odontológico.",
+              "min": 1,
               "type": [
                 {
                   "code": "Reference",
@@ -41710,10 +41709,10 @@
               "mustSupport": true
             },
             {
-              "id": "Condition.encounter",
-              "path": "Condition.encounter",
+              "id": "Observation.encounter",
+              "path": "Observation.encounter",
               "short": "Encuentro odontológico asociado",
-              "definition": "Encuentro en el cual se identificó esta condición.",
+              "definition": "Encuentro en el cual se observó este hallazgo.",
               "min": 1,
               "type": [
                 {
@@ -41726,19 +41725,42 @@
               "mustSupport": true
             },
             {
-              "id": "Condition.recordedDate",
-              "path": "Condition.recordedDate",
-              "short": "Fecha de registro",
-              "definition": "Fecha en que el hallazgo fue registrado por el profesional.",
+              "id": "Observation.effective[x]",
+              "path": "Observation.effective[x]",
+              "slicing": {
+                "discriminator": [
+                  {
+                    "type": "type",
+                    "path": "$this"
+                  }
+                ],
+                "ordered": false,
+                "rules": "open"
+              },
+              "min": 1
+            },
+            {
+              "id": "Observation.effective[x]:effectiveDateTime",
+              "path": "Observation.effective[x]",
+              "sliceName": "effectiveDateTime",
+              "short": "Fecha de observación",
+              "definition": "Fecha en que se realizó y documentó el hallazgo clínico.",
               "min": 1,
+              "max": "1",
+              "type": [
+                {
+                  "code": "dateTime"
+                }
+              ],
               "mustSupport": true
             },
             {
-              "id": "Condition.asserter",
-              "path": "Condition.asserter",
-              "short": "Odontólogo que registró el hallazgo",
-              "definition": "Profesional odontólogo que identificó y registró esta condición.",
+              "id": "Observation.performer",
+              "path": "Observation.performer",
+              "short": "Odontólogo que realizó la observación",
+              "definition": "Profesional odontólogo que observó y registró el hallazgo.",
               "min": 1,
+              "max": "1",
               "type": [
                 {
                   "code": "Reference",
@@ -41748,13 +41770,25 @@
                 }
               ],
               "mustSupport": true
+            },
+            {
+              "id": "Observation.bodySite",
+              "path": "Observation.bodySite",
+              "short": "Diente afectado",
+              "definition": "Código anatómico del diente afectado por el hallazgo clínico.",
+              "min": 1,
+              "mustSupport": true,
+              "binding": {
+                "strength": "required",
+                "valueSet": "https://odontofhir.py/fhir/ValueSet/AnatomiaDental-OdontoFHIR-1"
+              }
             }
           ]
         }
       },
       "request": {
         "method": "PUT",
-        "url": "StructureDefinition/OdontoFHIR-HallazgosOdontologicos-Condition-1"
+        "url": "StructureDefinition/OdontoFHIR-HallazgosOdontologicos-Observation-1"
       }
     },
     {
@@ -42131,7 +42165,7 @@
                 {
                   "code": "Reference",
                   "targetProfile": [
-                    "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologicos-Condition-1"
+                    "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologicos-Observation-1"
                   ]
                 }
               ],
@@ -42145,7 +42179,7 @@
               "min": 1,
               "mustSupport": true,
               "binding": {
-                "strength": "preferred",
+                "strength": "extensible",
                 "valueSet": "https://odontofhir.py/fhir/ValueSet/AnatomiaDental-OdontoFHIR-1"
               }
             }

@@ -37,16 +37,19 @@ Description: "Perfil que representa una consulta odontológica, incluyendo el od
 * period.end 0..1
 * period.end ^short = "Fecha y hora de finalización del encuentro"
 
-// Hallazgos Odontológicos
-* reasonReference contains hallazgo 0..*
-* reasonReference[hallazgo] only Reference($HallazgosOdontologicos)
-* reasonReference[hallazgo] ^short = "Hallazgos clínicos observados durante la consulta"
 
-// Procedimientos Odontológicos
+
+// Procedimientos Odontológicos y Hallazgos Odontologicos
 * reasonReference 0..*
 * reasonReference ^slicing.discriminator.type = #type
 * reasonReference ^slicing.discriminator.path = "$this"
 * reasonReference ^slicing.rules = #open
-* reasonReference contains procedimiento 0..*
+
+* reasonReference contains
+    hallazgo 0..* and
+    procedimiento 0..*
+
+* reasonReference[hallazgo] only Reference($HallazgosOdontologicos)
+* reasonReference[hallazgo] ^short = "Hallazgos clínicos observados durante la consulta"
 * reasonReference[procedimiento] only Reference($ProcedimientoOdontologico)
 * reasonReference[procedimiento] ^short = "Procedimientos que motivaron el encuentro"

@@ -48,7 +48,7 @@ Utiliza el recurso Observation para reflejar datos clínicos transitorios regist
 * performer ^definition = "Profesional odontólogo que observó y registró el hallazgo."
 
 // Diente afectado
-* bodySite 1..*
+* bodySite 1..1
 * bodySite from $VSAnatomiaDental (required)
 * bodySite ^short = "Diente afectado"
 * bodySite ^definition = "Código anatómico del diente afectado por el hallazgo clínico."

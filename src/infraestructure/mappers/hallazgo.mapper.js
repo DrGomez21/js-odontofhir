@@ -43,8 +43,6 @@ function getHallazgoByCode(codigo) {
     : null
 }
 
-const { data: practitionerStore } = usePractitionerStore((state) => state.practitioner);
-
 
 export const hallazgoMapper = (
   patientId,
@@ -53,14 +51,17 @@ export const hallazgoMapper = (
   diente,
   hallazgo,
 ) => {
-  const bodySite = quitarNumberISO(diente)
+  /*Puse la constante aca adentro*/
+  const bodySite = quitarNumberISO(diente);
   const hallazgoResource = {
-    resourceType: "Condition",
+    resourceType: "Observation",
     meta: {
       profile: [
-        "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologicos-Condition-1"
+        "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologicos-Observation-1"
       ]
     },
+    /*Indica que la observación fue finalizada y registrada*/
+    status: "final",
     bodySite: [
       {
         coding: [bodySite]
@@ -75,11 +76,14 @@ export const hallazgoMapper = (
     encounter: {
       reference: `Encounter/${encounterId}`
     },
-    recordedDate: new Date().toISOString(),
-    asserter: {
-      reference: `Practitioner/${practitionerStore.resource.id}`
-    }
-  }
+    /*Cambiado a performer por que es observation. Y cambiado a effectiveDatetime*/
+    effectiveDateTime: new Date().toISOString(),
+    performer: [ 
+      {
+        reference: `Practitioner/${practitionerId}`
+      }
+    ]
+  };
 
-  return hallazgoResource
-}
+  return hallazgoResource;
+};

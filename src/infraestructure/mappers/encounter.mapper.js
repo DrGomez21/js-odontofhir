@@ -1,4 +1,4 @@
-const { data: practitionerStore } = usePractitionerStore((state) => state.practitioner);
+
 
 
 export const encounterMapper = (
@@ -6,7 +6,8 @@ export const encounterMapper = (
   patient,
   practitioner,
 ) => {
-
+  /*Puse la constante aca adentro*/
+  const { data: practitionerStore } = usePractitionerStore((state) => state.practitioner);
   if (!encounter.end) {
     const encounterResource = {
       resourceType: 'Encounter',
@@ -37,7 +38,7 @@ export const encounterMapper = (
       diagnosis: [],
       reasonReference: [],
     }
-
+    
     return encounterResource
   }
 

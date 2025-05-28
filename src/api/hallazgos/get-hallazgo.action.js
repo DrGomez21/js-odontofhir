@@ -1,8 +1,10 @@
 import { odontoFhirApi } from "../fhir.api"
 
+/*Se cambia por Observation */
+
 export const getHallazgoByEncounterId = async (encounterId) => {
   try {
-    const response = await odontoFhirApi.get(`/Condition?encounter=Encounter/${encounterId}`)
+    const response = await odontoFhirApi.get(`/Observation?encounter=Encounter/${encounterId}`)
     return response.data
   } catch (error) {
     console.error(error)
@@ -12,7 +14,7 @@ export const getHallazgoByEncounterId = async (encounterId) => {
 
 export const getHallazgoByPatientId = async (patientId) => {
   try {
-    const response = await odontoFhirApi.get(`/Condition?subject=Patient/${patientId}`)
+    const response = await odontoFhirApi.get(`/Observation?subject=Patient/${patientId}`)
     return response.data
   } catch (error) {
     console.error(error)
@@ -22,7 +24,7 @@ export const getHallazgoByPatientId = async (patientId) => {
 
 export const getHallazgoByPatientIdAndToothCode = async (patientId, toothCode) => {
   try {
-    const response = await odontoFhirApi.get(`/Condition?subject=Patient/${patientId}&body-site=${toothCode}`)
+    const response = await odontoFhirApi.get(`/Observation?subject=Patient/${patientId}&body-site=${toothCode}`)
     console.log(response.data)
     return response.data
   } catch (error) {

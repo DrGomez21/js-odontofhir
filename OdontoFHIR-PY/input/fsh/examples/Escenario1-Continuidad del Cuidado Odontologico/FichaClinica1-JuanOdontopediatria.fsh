@@ -30,5 +30,5 @@ Description: "Ficha clínica que agrupa los encuentros, hallazgos, procedimiento
 * section[hallazgos].entry[0] = Reference(HallazgoOdontologico-JuanOdontopediatria-Sarro)
 * section[hallazgos].entry[1] = Reference(HallazgoOdontologico-JuanOdontopediatria-InflamacionGingival)
 * section[hallazgos].entry[2] = Reference(HallazgoOdontologico-JuanOdontopediatria-EnciasSangrantes)
-* section[hallazgos].entry[3] = Reference(HallazgoOdontologico-JuanOdontopediatria-HigieneOralDeficiente)
-
+* section[hallazgos].entry[3] = Reference(HallazgoOdontologico-JuanOdontopediatria-HigieneOralDeficienteDI)
+* section[hallazgos].entry[4] = Reference(HallazgoOdontologico-JuanOdontopediatria-HigieneOralDeficienteDD)

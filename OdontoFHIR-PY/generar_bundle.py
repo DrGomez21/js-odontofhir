@@ -46,4 +46,4 @@ agregar_recursos("StructureDefinition", filtro_id="Perfil")
 with open("bundle-upload.json", "w", encoding="utf-8") as f:
     json.dump(bundle, f, indent=2, ensure_ascii=False)
 
-print("✅ Bundle generado: bundle-upload.json")
+print("Bundle generado: bundle-upload.json")
