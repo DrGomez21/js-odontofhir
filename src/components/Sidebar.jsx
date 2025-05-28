@@ -14,11 +14,15 @@ import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { useAddProcedure, useGetAllProcedures } from '../hooks/useProcedure'
 import { procedureMapper } from '../infraestructure/mappers/procedure.mapper'
+import { usePractitionerStore } from "../storage/practitionerStore"; //Traje el storage de practititoner
 
 export const Encounter = ({ patientId }) => {
 
   // Necesitamos traer las consultas de este paciente.
   const { patientEncounter, mutate } = useEncounter(patientId)
+  //Agregue PractitionerID del store
+  const { data: practitionerStore } = usePractitionerStore((state) => state.practitioner);
+  const practitionerId = practitionerStore?.resource?.id;
 
   // Hora actual.
   const now = new Date().toISOString().slice(0, 10)
@@ -53,7 +57,7 @@ export const Encounter = ({ patientId }) => {
   }
 
   const onSubmit = (data) => {
-    const encounter = encounterMapper(data, patientId, 152)
+    const encounter = encounterMapper(data, patientId, practitionerId)
     if (!encounter) return toast.error('Ocurrió un error, vuelva a intentar guardar la consulta.')
     const valido = validateResource('/Encounter', encounter)
     if (!valido) {
@@ -169,6 +173,10 @@ export const Condition = ({ patientId, diente, consultaId, onNewHallazgo }) => {
   // Estado para mostrar o no el form de creación de encuentro.
   const [mostrarCreacionHallazgo, setMostrarCreacionHallazgo] = useState(false)
 
+  //Agregue PractitionerID del store
+  const { data: practitionerStore } = usePractitionerStore((state) => state.practitioner);
+  const practitionerId = practitionerStore?.resource?.id;
+
   const {
     register,
     handleSubmit,
@@ -184,9 +192,9 @@ export const Condition = ({ patientId, diente, consultaId, onNewHallazgo }) => {
   const hallazgoByPatientAndTooth = useHallazgoByPatientAndTooth(patientId, diente.code)
   const hallazgoMutation = useHallazgoMutation(patientId)
   const patchEncounter = useMutateEncounterWithCondition()
-
+  
   const onSubmit = (data) => {
-    const hallazgoResource = hallazgoMapper(patientId, consultaId, 152, diente, data.hallazgo)
+    const hallazgoResource = hallazgoMapper(patientId, consultaId, practitionerId, diente, data.hallazgo)
     hallazgoMutation.mutate(hallazgoResource, {
       onSuccess: (nuevoHallazgo) => {
         onNewHallazgo(diente.numberISO)
@@ -266,6 +274,10 @@ export const Procedure = ({ patientId, diente, consultaId, onNewProcedure }) => 
   // Estado para mostrar o no el form de creación de procedimiento odontológico.
   const [mostrarCreacionProcedimiento, setMostrarCreacionProcedimiento] = useState(false)
 
+  //Agregue PractitionerID del store
+  const { data: practitionerStore } = usePractitionerStore((state) => state.practitioner);
+  const practitionerId = practitionerStore?.resource?.id;
+
   // Instaciamos el hook useForm para manejar el formulario.
   const {
     register,
@@ -284,7 +296,7 @@ export const Procedure = ({ patientId, diente, consultaId, onNewProcedure }) => 
 
   const onSubmit = (data) => {
     const p = JSON.parse(data.procedimiento)
-    const procedimientoResource = procedureMapper({patientId:patientId, practitionerId:152, diente:diente, encounterId:consultaId, procedimiento:p})
+    const procedimientoResource = procedureMapper({patientId:patientId, practitionerId: practitionerId, diente:diente, encounterId:consultaId, procedimiento:p})
     
     // TODO: VALIDAR EL RECURSO
     if (!procedimientoResource) return toast.error('Ocurrió un error, vuelva a intentar guardar el procedimiento.')

@@ -1,15 +1,10 @@
-
-
-
 export const encounterMapper = (
   encounter,
-  patient,
-  practitioner,
+  patientId,
+  practitionerId
 ) => {
-  /*Puse la constante aca adentro*/
-  const { data: practitionerStore } = usePractitionerStore((state) => state.practitioner);
   if (!encounter.end) {
-    const encounterResource = {
+    return {
       resourceType: 'Encounter',
       meta: {
         profile: [
@@ -17,12 +12,12 @@ export const encounterMapper = (
         ]
       },
       subject: {
-        reference: `Patient/${patient}`
+        reference: `Patient/${patientId}`
       },
       participant: [
         {
           individual: {
-            reference: `Practitioner/${practitionerStore.resource.id}`
+            reference: `Practitioner/${practitionerId}`
           }
         }
       ],
@@ -37,12 +32,11 @@ export const encounterMapper = (
       },
       diagnosis: [],
       reasonReference: [],
-    }
-    
-    return encounterResource
+    };
   }
 
-  const encounterResource = {
+  // con `end`
+  return {
     resourceType: 'Encounter',
     meta: {
       profile: [
@@ -50,18 +44,18 @@ export const encounterMapper = (
       ]
     },
     subject: {
-      reference: `Patient/${patient}`
+      reference: `Patient/${patientId}`
     },
     participant: [
       {
         individual: {
-          reference: `Practitioner/${practitioner}`
+          reference: `Practitioner/${practitionerId}`
         }
       }
     ],
     period: {
       start: encounter.start,
-      end: encounter.end, 
+      end: encounter.end,
     },
     status: encounter.status,
     class: {
@@ -71,7 +65,5 @@ export const encounterMapper = (
     },
     diagnosis: [],
     reasonReference: [],
-  }
-
-  return encounterResource
-}
+  };
+};
