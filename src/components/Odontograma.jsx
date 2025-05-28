@@ -243,14 +243,14 @@ export const Odontograma = ({ patient, consulta }) => {
   // Renderizado de cada diente según su estado
   const renderDiente = d => {
     const props = {
-      key: d.numberISO,
       diente: d,
-      onClick: () => setSelectedDiente(d) // Tratar el click de un diente.
-    }
+      onClick: () => setSelectedDiente(d)
+    };
+
     return d.estado === 'hallazgo'
-      ? <DienteConHallazgo {...props} />
-      : <Diente {...props} />
-  }
+      ? <DienteConHallazgo key={d.numberISO} {...props} />
+      : <Diente key={d.numberISO} {...props} />;
+  };
 
   const sidebarClose = () => setSelectedDiente(null)
 
