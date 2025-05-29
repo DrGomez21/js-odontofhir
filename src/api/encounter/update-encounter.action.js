@@ -2,7 +2,7 @@ import { odontoFhirApi } from "../fhir.api"
 
 export const updateEncounterWithNewCondition = async ({ encounterId, conditionRef }) => {
 
-  console.log('Actualizando encounter con nuevo conditionRef:', conditionRef)
+  console.log('Actualizando encounter con nuevo observationRef:', conditionRef)
   console.log('EncounterId:', encounterId)
 
   // Primero obtenemos el encounter actual para verificar si tiene diagnosis

@@ -52,7 +52,7 @@ Incluye el diente tratado, la relación con hallazgos previos y el odontólogo r
 
 // Diente tratado
 * bodySite 1..*
-* bodySite from $VSAnatomiaDental (preferred)
+* bodySite from $VSAnatomiaDental (extensible)
 * bodySite ^short = "Diente tratado"
 * bodySite ^definition = "Indica el diente donde se realizó el procedimiento odontológico."
 
