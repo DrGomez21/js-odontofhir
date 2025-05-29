@@ -43,7 +43,6 @@ function getHallazgoByCode(codigo) {
     : null
 }
 
-const { data: practitionerStore } = usePractitionerStore((state) => state.practitioner);
 
 
 export const hallazgoMapper = (
@@ -53,6 +52,7 @@ export const hallazgoMapper = (
   diente,
   hallazgo,
 ) => {
+  const { data: practitionerStore } = usePractitionerStore((state) => state.practitioner);
   const bodySite = quitarNumberISO(diente)
   const hallazgoResource = {
     resourceType: "Condition",

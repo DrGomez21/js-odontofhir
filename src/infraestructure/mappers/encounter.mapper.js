@@ -1,12 +1,10 @@
-const { data: practitionerStore } = usePractitionerStore((state) => state.practitioner);
-
-
 export const encounterMapper = (
   encounter,
   patient,
   practitioner,
 ) => {
-
+  
+  // const { data: practitionerStore } = usePractitionerStore((state) => state.practitioner);
   if (!encounter.end) {
     const encounterResource = {
       resourceType: 'Encounter',
