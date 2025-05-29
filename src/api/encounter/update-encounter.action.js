@@ -8,17 +8,16 @@ export const updateEncounterWithNewCondition = async ({ encounterId, conditionRe
   // Primero obtenemos el encounter actual para verificar si tiene diagnosis
   const { data: encounter } = await odontoFhirApi.get(`/Encounter/${encounterId}`)
 
-  const newDiagnosis = {
-    condition: {
-      reference: conditionRef
-    }
+  const newReason = {
+    reference: conditionRef // que en realidad es una Observation
   }
 
-  if (!encounter.diagnosis) {
-    encounter.diagnosis = []
+  if (!encounter.reasonReference) {
+    encounter.reasonReference = []
   }
 
-  encounter.diagnosis.push(newDiagnosis)
+  encounter.reasonReference.push(newReason)
+
 
   // Actualizamos el encounter con el nuevo diagnosis.
   const { data } = await odontoFhirApi.put(`/Encounter/${encounterId}`, encounter)

@@ -35,9 +35,15 @@ export const PatientProfile = () => {
       <div className='flex w-full justify-between gap-8 items-center'>
         <PatientDetail patient={data} />
         <div className='flex flex-col gap-2'>
+
+          <BotonConPlus onClick={() => navigate(`/patient/${id}/ficha-nueva`)}>
+            <span className='nline-block max-w-full overflow-hidden whitespace-nowrap text-ellipsis'>Crear Ficha Clinica</span>
+          </BotonConPlus>          
+
           <BotonConFolder onClick={() => navigate(`/patient/${id}/allergies`)}>
             <span className='nline-block max-w-full overflow-hidden whitespace-nowrap text-ellipsis'>Alergias e intolerancias</span>
           </BotonConFolder>
+
         </div>
       </div>
 

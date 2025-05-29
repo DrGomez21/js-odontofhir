@@ -201,7 +201,7 @@ export const Condition = ({ patientId, diente, consultaId, onNewHallazgo }) => {
         // Encadenamos la segunda mutación.
         patchEncounter.mutate({
           encounterId: consultaId,
-          conditionRef: `Condition/${nuevoHallazgo.id}`
+          conditionRef: `Observation/${nuevoHallazgo.id}`
         }, {
           onSuccess: () => toast.success('Actualizado el encuentro'),
           onError: () => toast.error('Falló la UPDATE')

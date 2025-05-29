@@ -1,6 +1,19 @@
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query"
 import { getProcedureById, getAllProcedures, getProcedureByEncounterId, getProcedureByPatientId, getProcedureByReference } from "../api/procedure/get-procedure.action"
 import { addProcedure } from "../api/procedure/add-procedure.action"
+import { odontoFhirApi } from "../api/fhir.api"
+
+
+export const useGetResourceByReference = (reference) => {
+  return useQuery({
+    queryKey: ['resource', reference],
+    queryFn: async () => {
+      const { data } = await odontoFhirApi.get(`/${reference}`);
+      return data;
+    },
+    enabled: !!reference
+  });
+}
 
 export const useGetProcedureById = (id) => {
   return useQuery({

@@ -30,7 +30,6 @@ export const encounterMapper = (
         system: 'http://terminology.hl7.org/CodeSystem/v3-ActCode',
         display: encounter.classDisplay
       },
-      diagnosis: [],
       reasonReference: [],
     };
   }
@@ -63,7 +62,6 @@ export const encounterMapper = (
       system: 'http://terminology.hl7.org/CodeSystem/v3-ActCode',
       display: encounter.classDisplay
     },
-    diagnosis: [],
     reasonReference: [],
   };
 };

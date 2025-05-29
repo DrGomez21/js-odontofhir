@@ -9,6 +9,7 @@ import { RegistroAlergia } from "./pages/RegistroAlergia"
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { EncuentroDetail } from "./pages/EncuentroDetail"
 import { LoginPractitioner } from "./pages/LoginPractitioner"
+import FichaClinicaForm from './pages/FichaClinicaForm'
 import './App.css'
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/login" element={<LoginPractitioner />} />
           <Route path="/patient/:id/allergies" element={<RegistroAlergia />} />
           <Route path="/patient/:id/consulta/:idconsulta" element={<EncuentroDetail />} />
+          <Route path="/patient/:id/ficha-nueva" element={<FichaClinicaForm />} />          
           <Route path="*" element={<Navigate to='/404' />} />
         </Routes>
         <Toaster />
