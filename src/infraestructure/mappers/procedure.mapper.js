@@ -1,4 +1,3 @@
-
 // Función para obtener el procedimiento odontológico
 const getProcedure = (code) => {
 
@@ -60,7 +59,7 @@ export const procedureMapper = ({
   if (conditionId !== undefined) {
     procedure.reasonReference = [
       {
-        reference: `Condition/${conditionId}`
+        reference: `Observation/${conditionId}`
       }
     ];
   }

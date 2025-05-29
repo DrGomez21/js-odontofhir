@@ -26,7 +26,7 @@ export const LoginPractitioner = () => {
         isLoading: false,
         isError: false,
         isSuccess: true,
-        data: practitionerData.entry[0],
+        data: practitionerData.entry[0].resource,
       });
       toast.success("¡Bienvenido, profesional! Que sea un buen día. 🌤️");
       setLoading(false);

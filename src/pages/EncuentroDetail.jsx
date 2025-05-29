@@ -4,23 +4,26 @@ import { useGetEncounterById } from "../hooks/useEncounter"
 import { useState } from "react"
 import { Odontograma } from "../components/Odontograma"
 import { DiagnosisItem } from "../components/items/DiagnosisItem"
+import { useSeparadorHallazgosProcedimientos } from "../hooks/useSeparadorHallazgosProcedimientos";
 import { ConsultaOdontograma } from "../components/nuevos/ConsultaOdontograma"
 import { Header } from "../components/basics/Header"
-import { ProcedureList } from "../components/procedimientos/ProcedureList"
+import { ProcedureCard } from "../components/cards/ProcedureCard"
+import { HallazgoCard } from "../components/cards/HallazgoCard"
 
 export const EncuentroDetail = () => {
-
-  // Obtener los id de paciente y de consulta
   const { id, idconsulta } = useParams()
 
   const [showOdontograma, setShowOdontograma] = useState(false)
-  const [showOdontogramaProcedimiento, setShowOdontogramaProcedimiento] = useState(false)
   const [dientesConHallazgos, setDientesConHallazgos] = useState([])
 
   const paciente = useGetPatient(id)
   const consulta = useGetEncounterById(idconsulta)
 
-  if (paciente.isLoading || consulta.isLoading) return <p>Cargando...</p>
+  // Prevención para evitar error de hooks en render incompleto
+  const reasonRef = consulta.data?.reasonReference ?? []
+  const { observations: hallazgos, procedures: procedimientos, isLoading } = useSeparadorHallazgosProcedimientos(reasonRef);
+
+  if (paciente.isLoading || consulta.isLoading || isLoading) return <p>Cargando...</p>
   if (paciente.isError || consulta.isError) return <p>Error...</p>
 
   return (
@@ -30,6 +33,7 @@ export const EncuentroDetail = () => {
 
       <div className="grid grid-cols-2 gap-4 px-6 mt-4 mb-4">
 
+        {/* HALLAZGOS */}
         <div className="col-span-1 mt-4">
           <div className="flex items-center justify-between px-2 py-2 w-full bg-white rounded-md mb-2">
             <h2 className="font-bold text-[#4A4A4A] text-2xl">Hallazgos</h2>
@@ -39,35 +43,24 @@ export const EncuentroDetail = () => {
               {showOdontograma ? 'X' : '+'}
             </button>
           </div>
-          {
-            showOdontograma && (
-              <>
-                <ConsultaOdontograma pacienteId={id} consultaId={idconsulta} dientesHallazgos={dientesConHallazgos} />
-                {/* <Odontograma patient={paciente.data} consulta={idconsulta} /> */}
-              </>
-            )
-          }
-          {
-            !consulta.data.diagnosis ? (
-              <p className="mt-2">No hay hallazgos en la consulta</p>
-            ) : (
-              <div className="flex flex-col gap-2 rounded-md bg-white p-4 max-h-72 overflow-y-scroll mt-2">
-                <p>Hay {consulta.data.diagnosis.length} hallazgos en la consulta</p>
-                {
-                  consulta.data.diagnosis.map((diagnosis) => (
-                    <DiagnosisItem
-                      key={diagnosis.condition.reference}
-                      reference={diagnosis.condition.reference}
-                      onUpdater={setDientesConHallazgos}
-                    />
-                  ))
-                }
-              </div>
-            )
-          }
+
+          {showOdontograma && (
+            <ConsultaOdontograma pacienteId={id} consultaId={idconsulta} dientesHallazgos={dientesConHallazgos} />
+          )}
+
+          {hallazgos.length === 0 ? (
+            <p className="mt-2">No hay hallazgos en la consulta</p>
+          ) : (
+            <div className="flex flex-col gap-2 rounded-md bg-white p-4 overflow-y-scroll mt-2">
+              <p>Hay {hallazgos.length} hallazgos en la consulta</p>
+              {hallazgos.map((obs) => (
+                <HallazgoCard key={obs.id} condition={obs} />
+              ))}
+            </div>
+          )}
         </div>
 
-        {/* Lista de procedimientos  */}
+        {/* PROCEDIMIENTOS */}
         <div className="col-span-1 mt-4">
           <div className="flex items-center justify-between px-2 py-2 w-full bg-white rounded-md mb-2">
             <h2 className="font-bold text-[#4A4A4A] text-2xl">Procedimientos</h2>
@@ -77,28 +70,24 @@ export const EncuentroDetail = () => {
               {showOdontograma ? 'X' : '+'}
             </button>
           </div>
-          {
-            !consulta.data.reasonReference ? (
-              <p className="mt-2">No hay procedimientos en la consulta</p>
-            ) : (
-              <div className="flex flex-col gap-2 rounded-md bg-white p-4 overflow-y-scroll mt-2">
-                <p>Hay {consulta.data.reasonReference.length} procedimientos en la consulta</p>
-                {
-                  consulta.data.reasonReference.map((reference) => (
-                    <ProcedureList
-                      key={reference.reference}
-                      reference={reference.reference}
-                    />
-                  ))
-                }
-              </div>
-            )
-          }
+
+          {procedimientos.length === 0 ? (
+            <p className="mt-2">No hay procedimientos en la consulta</p>
+          ) : (
+            <div className="flex flex-col gap-2 rounded-md bg-white p-4 overflow-y-scroll mt-2">
+              <p>Hay {procedimientos.length} procedimientos en la consulta</p>
+              {procedimientos.map((proc) => (
+                <ProcedureCard key={proc.id} procedure={proc} />
+              ))}
+            </div>
+          )}
         </div>
+
       </div>
     </div>
   )
 }
+
 
 /**
  * 
