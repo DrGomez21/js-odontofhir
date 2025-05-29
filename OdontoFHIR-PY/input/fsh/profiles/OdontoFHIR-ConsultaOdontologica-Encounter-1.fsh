@@ -8,7 +8,7 @@ Description: "Perfil que representa una consulta odontológica, incluyendo el od
 
 // Must Support
 * subject and participant and status and class MS
-* period and diagnosis.condition and reasonReference MS
+* period and reasonReference MS
 
 // Paciente que consulta
 * subject 1..1
