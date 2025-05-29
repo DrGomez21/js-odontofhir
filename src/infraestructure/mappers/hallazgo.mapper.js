@@ -51,7 +51,8 @@ export const hallazgoMapper = (
   diente,
   hallazgo,
 ) => {
-  const { data: practitionerStore } = usePractitionerStore((state) => state.practitioner);
+  const { state: practitionerData } = JSON.parse(localStorage.getItem('practitioner-storage'));
+  console.log('Practitioner Store:', practitionerData);
   const bodySite = quitarNumberISO(diente)
   const hallazgoResource = {
     resourceType: "Observation",
@@ -78,9 +79,9 @@ export const hallazgoMapper = (
     },
     /*Cambiado a performer por que es observation. Y cambiado a effectiveDatetime*/
     effectiveDateTime: new Date().toISOString(),
-    performer: [ 
+    performer: [
       {
-        reference: `Practitioner/${practitionerId}`
+        reference: `Practitioner/${practitionerData.practitioner.id}`
       }
     ]
   };
