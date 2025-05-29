@@ -40,3 +40,20 @@ export const ConsultaCard = ({ encounter, paciente }) => {
     </div>
   )
 }
+
+export function EncuentroCardSimple({ encounter }) {
+  const options = { timeZone: 'UTC', year: 'numeric', month: 'numeric', day: 'numeric' };
+
+  return (
+    <div className="bg-white border border-[#4a4a4a] rounded-lg p-4 hover:shadow-md transition-shadow">
+      <div className="flex justify-between items-start">
+        <h3 className="font-bold text-[#4A4A4A]">
+          Consulta del: {new Date(encounter.period?.start).toLocaleDateString(undefined, options)}
+        </h3>
+        <span className="bg-cyan-200 text-xs px-2 py-1 rounded-full capitalize">
+          {encounter.status || "sin estado"}
+        </span>
+      </div>
+    </div>
+  );
+}

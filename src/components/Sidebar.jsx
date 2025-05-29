@@ -22,7 +22,7 @@ export const Encounter = ({ patientId }) => {
   const { patientEncounter, mutate } = useEncounter(patientId)
   //Agregue PractitionerID del store
   const { data: practitionerStore } = usePractitionerStore((state) => state.practitioner);
-  const practitionerId = practitionerStore?.resource?.id;
+  const practitionerId = practitionerStore?.id;
 
   // Hora actual.
   const now = new Date().toISOString().slice(0, 10)
@@ -175,7 +175,7 @@ export const Condition = ({ patientId, diente, consultaId, onNewHallazgo }) => {
 
   //Agregue PractitionerID del store
   const { data: practitionerStore } = usePractitionerStore((state) => state.practitioner);
-  const practitionerId = practitionerStore?.resource?.id;
+  const practitionerId = practitionerStore?.id;
 
   const {
     register,
@@ -276,7 +276,7 @@ export const Procedure = ({ patientId, diente, consultaId, onNewProcedure }) => 
 
   //Agregue PractitionerID del store
   const { data: practitionerStore } = usePractitionerStore((state) => state.practitioner);
-  const practitionerId = practitionerStore?.resource?.id;
+  const practitionerId = practitionerStore?.id;
 
   // Instaciamos el hook useForm para manejar el formulario.
   const {
