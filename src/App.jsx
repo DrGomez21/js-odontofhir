@@ -20,7 +20,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Router>
         <Routes>
-          <Route path="/" element={<PatientPage />} />
+          <Route path="/" element={<LoginPractitioner />} />
+          <Route path="/patients" element={<PatientPage />} />
           <Route path="/patient-form" element={<PatientFormCreate />} />
           <Route path="/patient/:id" element={<PatientProfile />} />
           <Route path="/404" element={<NotFound />} />
