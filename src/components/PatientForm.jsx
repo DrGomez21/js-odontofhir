@@ -79,7 +79,7 @@ export const PatientForm = () => {
           }
         })
         mutate(patient)
-        navigate('/')
+        navigate('/patients')
       }
       else toast.error(`El paciente no es válido ${valido}`, {
         style: {

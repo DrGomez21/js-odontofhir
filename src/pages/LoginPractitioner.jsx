@@ -30,7 +30,7 @@ export const LoginPractitioner = () => {
       });
       toast.success("¡Bienvenido, profesional! Que sea un buen día. 🌤️");
       setLoading(false);
-      navigate('/');
+      navigate('/patients');
     } else {
       setPractitioner({
         isLoading: false,
