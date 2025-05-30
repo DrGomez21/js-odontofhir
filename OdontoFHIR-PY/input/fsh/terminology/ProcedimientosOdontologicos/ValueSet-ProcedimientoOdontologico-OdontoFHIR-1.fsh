@@ -6,6 +6,7 @@ Description: "ValueSet de procedimientos clínicos comunes en la atención odont
 * ^url = "https://odontofhir.py/fhir/ValueSet/ProcedimientoOdontologico-OdontoFHIR-1"
 * ^version = "1.0.0"
 * ^status = #active
+* ^publisher = "OdontoFHIR Paraguay"
 
 
 * include codes from system https://odontofhir.py/fhir/CodeSystem/ProcedimientoOdontologico-OdontoFHIR-1

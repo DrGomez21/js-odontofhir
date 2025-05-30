@@ -7,7 +7,9 @@ Description: """
 Este perfil se utiliza para documentar los procedimientos odontológicos realizados en un paciente durante un encuentro odontológico. 
 Incluye el diente tratado, la relación con hallazgos previos y el odontólogo responsable.
 """
+
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ProcedimientoOdontologico-Procedure-1"
+* ^publisher = "OdontoFHIR Paraguay"
 
 // MustSupport
 * code and subject and encounter and performed[x] and reasonReference MS

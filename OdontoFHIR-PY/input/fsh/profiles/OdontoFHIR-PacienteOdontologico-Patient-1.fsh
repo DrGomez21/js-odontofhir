@@ -4,7 +4,10 @@ Parent: Patient
 Id : OdontoFHIR-PacienteOdontologico-Patient-1
 Title : "Perfil de Paciente Odontologico"
 Description : "Un perfil de paciente, adaptado a las necesidades odontológicas de Paraguay."
+
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-PacienteOdontologico-Patient-1"
+* ^publisher = "OdontoFHIR Paraguay"
+
 
 // MustSupport
 * identifier and identifier.type and identifier.system and identifier.value MS

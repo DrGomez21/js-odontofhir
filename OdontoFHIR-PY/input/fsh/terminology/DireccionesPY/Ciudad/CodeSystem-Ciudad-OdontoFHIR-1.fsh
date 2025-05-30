@@ -6,6 +6,7 @@ Title: "Código de Ciudades en Paraguay"
 Description: "Sistema de códigos para las ciudades en Paraguay."
 * ^status = #active
 * ^url = "https://odontofhir.py/fhir/CodeSystem/Ciudad-OdontoFHIR-1"
+* ^publisher = "OdontoFHIR Paraguay"
 
 //Codigos
 * #101 "CONCEPCION"

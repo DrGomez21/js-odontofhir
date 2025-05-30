@@ -10,6 +10,8 @@ Description: "Secciones estandarizadas para estructurar la ficha clínica del pa
 * ^content = #complete
 * ^caseSensitive = true
 * ^version = "1.0.0"
+* ^publisher = "OdontoFHIR Paraguay"
+
 
 * #15000OF "Ficha clínica odontológica"
   * ^definition = "Documento clínico que contiene información integral del paciente odontológico, incluyendo encuentros, procedimientos, hallazgos y alergias."

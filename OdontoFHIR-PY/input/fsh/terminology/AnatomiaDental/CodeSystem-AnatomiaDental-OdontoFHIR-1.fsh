@@ -12,6 +12,8 @@ Description: "Contiene dientes anatómicos permanentes y temporales utilizados e
 * ^caseSensitive = true
 * ^version = "1.0.0"
 * ^copyright = "OdontoFHIR Paraguay. Basado en SNOMED CT y SNODENT. Uso local no comercial autorizado."
+* ^publisher = "OdontoFHIR Paraguay"
+
 
 // Códigos
 * #13001OF "Tercer molar superior derecho permanente completo"

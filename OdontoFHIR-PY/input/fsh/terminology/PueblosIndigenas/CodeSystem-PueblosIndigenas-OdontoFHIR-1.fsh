@@ -9,6 +9,8 @@ Description: "Código de identificación oficial de OdontoFHIR en Paraguay para 
 * ^url = "https://odontofhir.py/fhir/CodeSystem/PueblosIndigenas-OdontoFHIR-1"
 * ^content = #complete  
 * ^caseSensitive = true  
+* ^publisher = "OdontoFHIR Paraguay"
+
 
 // Códigos  
 * #41 "ACHÉ"

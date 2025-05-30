@@ -5,8 +5,8 @@ Title: "Ficha Clínica Odontológica"
 Description: "Contenedor de información clínica del paciente odontológico, incluyendo encuentros, hallazgos, procedimientos y alergias."
 
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-FichaClinica-Composition-1"
-* ^status = #active
-* ^version = "1.0.0"
+* ^publisher = "OdontoFHIR Paraguay"
+
 
 // Must Support global
 * subject and author and date and section MS

@@ -5,6 +5,7 @@ Title: "Encuentro Odontológico"
 Description: "Perfil que representa una consulta odontológica, incluyendo el odontólogo, el paciente, los hallazgos y procedimientos clínicos registrados."
 
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ConsultaOdontologica-Encounter-1"
+* ^publisher = "OdontoFHIR Paraguay"
 
 // Must Support
 * subject and participant and status and class MS

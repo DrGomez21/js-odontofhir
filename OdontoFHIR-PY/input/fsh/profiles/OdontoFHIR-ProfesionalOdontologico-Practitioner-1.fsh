@@ -8,7 +8,9 @@ Parent: Practitioner
 Id: OdontoFHIR-ProfesionalOdontologico-Practitioner-1
 Title: "Perfil del Odontólogo"
 Description: "Perfil de un profesional odontológico en Paraguay, incluyendo registro profesional y documentos de identidad."
+
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ProfesionalOdontologico-Practitioner-1"
+* ^publisher = "OdontoFHIR Paraguay"
 
 // Must Support
 * identifier and identifier.use and identifier.system and identifier.value and identifier.type MS

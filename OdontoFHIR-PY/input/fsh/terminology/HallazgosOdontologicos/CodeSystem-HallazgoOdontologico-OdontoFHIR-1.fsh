@@ -11,6 +11,7 @@ Description: "Listado de hallazgos odontológicos observados en consultas clíni
 * ^caseSensitive = true
 * ^version = "1.0.0"
 * ^copyright = "OdontoFHIR Paraguay. Basado en SNOMED CT y SNODENT. Uso local no comercial autorizado."
+* ^publisher = "OdontoFHIR Paraguay"
 
 // Códigos
 * #12001OF "Absceso"

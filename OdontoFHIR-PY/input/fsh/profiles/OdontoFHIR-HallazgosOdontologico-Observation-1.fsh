@@ -8,6 +8,8 @@ Utiliza el recurso Observation para reflejar datos clínicos transitorios regist
 """
 
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-HallazgosOdontologicos-Observation-1"
+* ^publisher = "OdontoFHIR Paraguay"
+
 
 // MustSupport
 * status and code and subject and encounter and effectiveDateTime and performer and bodySite MS

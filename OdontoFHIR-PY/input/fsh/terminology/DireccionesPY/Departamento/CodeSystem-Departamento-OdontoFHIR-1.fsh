@@ -6,6 +6,7 @@ Title: "Código de Departamentos en Paraguay"
 Description: "Sistema de códigos para los departamentos en Paraguay."
 * ^status = #active
 * ^url = "https://odontofhir.py/fhir/CodeSystem/Departamento-OdontoFHIR-1"
+* ^publisher = "OdontoFHIR Paraguay"
 
 // Codigos
 * #0 "CAPITAL"

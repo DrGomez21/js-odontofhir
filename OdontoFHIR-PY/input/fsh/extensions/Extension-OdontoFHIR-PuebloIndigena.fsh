@@ -5,6 +5,8 @@ Title: "Pertenencia a pueblo indígena"
 Description: "Indica si el paciente pertenece a un pueblo indígena."
 
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-PueblosIndigenas"
+* ^publisher = "OdontoFHIR Paraguay"
+
 
 * value[x] only CodeableConcept
 * valueCodeableConcept from $VSPueblosIndigenas (extensible)
