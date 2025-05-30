@@ -9,6 +9,7 @@ Description: "Listado de procedimientos odontológicos comunes en Paraguay, con 
 * ^caseSensitive = true
 * ^version = "1.0.0"
 * ^copyright = "OdontoFHIR Paraguay. Basado en SNOMED CT. Uso local no comercial autorizado."
+* ^publisher = "OdontoFHIR Paraguay"
 
 * #14001OF "Tratamiento de ortodoncia"
   * ^definition = "Procedimiento para corregir la posición y alineación de los dientes y la mordida."

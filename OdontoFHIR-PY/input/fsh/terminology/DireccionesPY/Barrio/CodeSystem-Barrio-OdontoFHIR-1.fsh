@@ -7,6 +7,7 @@ Title: "Código de Barrios en Paraguay"
 Description: "Sistema de códigos para los barrios en Paraguay."
 * ^status = #active
 * ^url = "https://odontofhir.py/fhir/CodeSystem/Barrio-OdontoFHIR-1"
+* ^publisher = "OdontoFHIR Paraguay"
 
 //Codigos
 * #1 "SAJONIA"

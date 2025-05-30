@@ -9,6 +9,7 @@ Description: "Subconjunto de países basado en ISO 3166-1 adaptado para uso en s
 * ^status = #active
 * ^caseSensitive = true
 * ^copyright = "Subconjunto basado en ISO 3166-1. Uso limitado no comercial. ISO es titular del copyright de la clasificación completa."
+* ^publisher = "OdontoFHIR Paraguay"
 
 //Codigos ISO 3166
 * #004 "Afganistán"

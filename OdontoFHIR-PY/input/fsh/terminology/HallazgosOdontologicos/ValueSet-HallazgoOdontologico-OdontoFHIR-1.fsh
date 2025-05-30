@@ -7,5 +7,6 @@ Description: "Conjunto de hallazgos clínicos observados durante las consultas o
 * ^version = "1.0.0"
 * ^status = #active
 * ^copyright = "OdontoFHIR Paraguay. Basado en SNOMED CT y SNODENT. Uso local no comercial autorizado."
+* ^publisher = "OdontoFHIR Paraguay"
 
 * include codes from system https://odontofhir.py/fhir/CodeSystem/HallazgosOdontologicos-OdontoFHIR-1

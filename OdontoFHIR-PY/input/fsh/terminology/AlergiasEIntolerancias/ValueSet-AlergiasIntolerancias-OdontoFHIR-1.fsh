@@ -6,6 +6,7 @@ Description: "Incluye todos los conceptos definidos en el CodeSystem de alergias
 * ^url = "https://odontofhir.py/fhir/ValueSet/AlergiasIntolerancias-OdontoFHIR-1"
 * ^status = #active
 * ^version = "1.0.0"
+* ^publisher = "OdontoFHIR Paraguay"
 
 
 * include codes from system https://odontofhir.py/fhir/CodeSystem/AlergiasIntolerancias-OdontoFHIR-1

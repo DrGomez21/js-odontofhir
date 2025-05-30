@@ -9,6 +9,8 @@ Description: "Código de identificación oficial en Paraguay, incluyendo Cédula
 * ^url = "https://odontofhir.py/fhir/CodeSystem/DocumentoIdentidad-OdontoFHIR-1"
 * ^content = #complete  
 * ^caseSensitive = true  
+* ^publisher = "OdontoFHIR Paraguay"
+
 
 // Códigos  
 * #CI "Cédula de Identidad"  

@@ -5,6 +5,7 @@ Id: OdontoFHIR-ExpedienteOdontologico-Bundle-1
 Title: "Expediente Odontológico - Bundle"
 Description: "Este perfil define cómo debe estructurarse un Bundle de tipo document que representa el expediente clínico odontológico completo, incluyendo paciente, profesional, encuentros, procedimientos, hallazgos y alergias."
 
+* ^publisher = "OdontoFHIR Paraguay"
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/OdontoFHIR-ExpedienteOdontologico-Bundle-1"
 
 * identifier 1.. MS

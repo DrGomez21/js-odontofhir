@@ -11,6 +11,7 @@ Description: "Contiene códigos locales utilizados para representar alergias e i
 * ^caseSensitive = true
 * ^version = "1.0.0"
 * ^copyright = "OdontoFHIR Paraguay. Basado en SNOMED CT. Uso local no comercial autorizado."
+* ^publisher = "OdontoFHIR Paraguay"
 
 // Códigos
 * #15001OF "Alergia a Lidocaína"

@@ -7,6 +7,7 @@ Description: "Conjunto de valores que agrupa todos los códigos anatómicos dent
 * ^version = "1.0.0"
 * ^status = #active
 * ^copyright = "OdontoFHIR Paraguay. Basado en SNOMED CT y SNODENT. Uso local no comercial autorizado."
+* ^publisher = "OdontoFHIR Paraguay"
 
 
 * include codes from system https://odontofhir.py/fhir/CodeSystem/AnatomiaDental-OdontoFHIR-1

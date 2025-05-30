@@ -5,6 +5,8 @@ Title: "Dirección en Paraguay"
 Description: "Extensión para direcciones en Paraguay, incluyendo Departamento, Ciudad, Barrio y Número de Casa."
 
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-DireccionPYPaciente-1"
+* ^publisher = "OdontoFHIR Paraguay"
+
 
 // Subextensiones definidas
 * extension contains

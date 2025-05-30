@@ -6,5 +6,7 @@ Description: "Conjunto de códigos utilizados para identificar secciones dentro 
 * ^url = "https://odontofhir.py/fhir/ValueSet/SeccionesFichaClinica-OdontoFHIR-1"
 * ^status = #active
 * ^version = "1.0.0"
+* ^publisher = "OdontoFHIR Paraguay"
+
 
 * include codes from system https://odontofhir.py/fhir/CodeSystem/SeccionesFichaClinica-OdontoFHIR-1

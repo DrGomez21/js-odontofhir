@@ -4,6 +4,7 @@ Title: "Registro Profesional del Odontólogo"
 Description: "Número de Registro Profesional obligatorio para ejercer como odontólogo en Paraguay."
 
 * ^url = "https://odontofhir.py/fhir/StructureDefinition/Extension-OdontoFHIR-RegistroProfesional"
+* ^publisher = "OdontoFHIR Paraguay"
 * ^context.type = #element
 * ^context.expression = "Practitioner"
 
