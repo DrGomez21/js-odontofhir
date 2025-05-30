@@ -8,163 +8,209 @@ import { generarCompositionYBundle } from '../utils/generarCompositionBundle'
 import { getHallazgoByEncounterId } from "../api/hallazgos/get-hallazgo.action"
 import { getProcedureByEncounterId } from "../api/procedure/get-procedure.action"
 import { usePractitionerStore } from '../storage/practitionerStore'
+import axios from 'axios';
 
 
 export default function FichaClinicaForm() {
-    const { id: patientId } = useParams()
-    const { patientEncounter } = useEncounter(patientId)
-    const practitioner = usePractitionerStore((state) => state.practitioner)
+  const { id: patientId } = useParams()
+  const { patientEncounter } = useEncounter(patientId)
+  const practitioner = usePractitionerStore((state) => state.practitioner)
 
-    const [encuentrosSeleccionados, setEncuentrosSeleccionados] = useState([])
-    const [jsonGenerado, setJsonGenerado] = useState(null)
+  const [encuentrosSeleccionados, setEncuentrosSeleccionados] = useState([])
+  const [jsonGenerado, setJsonGenerado] = useState(null)
 
-    if (patientEncounter.isLoading) return <p>Cargando encuentros...</p>
-    if (patientEncounter.isError) return <p>Error al cargar encuentros</p>
+  if (patientEncounter.isLoading) return <p>Cargando encuentros...</p>
+  if (patientEncounter.isError) return <p>Error al cargar encuentros</p>
 
-    const [encuentrosDisponibles, setEncuentrosDisponibles] = useState([])
+  const [encuentrosDisponibles, setEncuentrosDisponibles] = useState([])
+  const [mostrarInteroperar, setMostrarInteroperar] = useState(false)
 
 
-    useEffect(() => {
-        if (patientEncounter.data?.entry) {
-            const datos = patientEncounter.data.entry.map(({ resource }) => ({
-                id: resource.id,
-                fecha: resource.period?.start?.slice(0, 10),
-                tipo: resource.class?.display || "Consulta",
-                descripcion: `Estado: ${resource.status}`,
-                resource // Guarda ya el recurso completo para compopo
-            }))
-            setEncuentrosDisponibles(datos)
-        }
-    }, [patientEncounter.data])
+  useEffect(() => {
+    if (patientEncounter.data?.entry) {
+      const datos = patientEncounter.data.entry.map(({ resource }) => ({
+        id: resource.id,
+        fecha: resource.period?.start?.slice(0, 10),
+        tipo: resource.class?.display || "Consulta",
+        descripcion: `Estado: ${resource.status}`,
+        resource // Guarda ya el recurso completo para compopo
+      }))
+      setEncuentrosDisponibles(datos)
+    }
+  }, [patientEncounter.data])
 
-    const moverASeleccionados = () => {
-        const seleccionados = document.querySelectorAll('#encuentros-disponibles input[type="checkbox"]:checked')
-        const idsSeleccionados = Array.from(seleccionados).map(el => el.value)
+  const moverASeleccionados = () => {
+    const seleccionados = document.querySelectorAll('#encuentros-disponibles input[type="checkbox"]:checked')
+    const idsSeleccionados = Array.from(seleccionados).map(el => el.value)
 
-        const nuevosSeleccionados = encuentrosDisponibles.filter(e => idsSeleccionados.includes(e.id))
-        setEncuentrosSeleccionados([...encuentrosSeleccionados, ...nuevosSeleccionados])
-        setEncuentrosDisponibles(encuentrosDisponibles.filter(e => !idsSeleccionados.includes(e.id)))
+    const nuevosSeleccionados = encuentrosDisponibles.filter(e => idsSeleccionados.includes(e.id))
+    setEncuentrosSeleccionados([...encuentrosSeleccionados, ...nuevosSeleccionados])
+    setEncuentrosDisponibles(encuentrosDisponibles.filter(e => !idsSeleccionados.includes(e.id)))
+  }
+
+  const moverADisponibles = () => {
+    const seleccionados = document.querySelectorAll('#encuentros-seleccionados input[type="checkbox"]:checked')
+    const idsSeleccionados = Array.from(seleccionados).map(el => el.value)
+
+    const nuevosDisponibles = encuentrosSeleccionados.filter(e => idsSeleccionados.includes(e.id))
+    setEncuentrosDisponibles([...encuentrosDisponibles, ...nuevosDisponibles])
+    setEncuentrosSeleccionados(encuentrosSeleccionados.filter(e => !idsSeleccionados.includes(e.id)))
+  }
+
+  const generarFichaClinica = async () => {
+    if (!practitioner?.data?.id) {
+      toast.warning("No hay profesional conectado.")
+      return
     }
 
-    const moverADisponibles = () => {
-        const seleccionados = document.querySelectorAll('#encuentros-seleccionados input[type="checkbox"]:checked')
-        const idsSeleccionados = Array.from(seleccionados).map(el => el.value)
+    try {
+      const { composition, bundle } = await generarCompositionYBundle({
+        patientId,
+        encuentrosSeleccionados: encuentrosSeleccionados.map(e => e.resource),
+        getHallazgos: async (encId) => {
+          const res = await getHallazgoByEncounterId(encId)
+          return res.entry?.map(e => e.resource) || []
+        },
+        getProcedimientos: async (encId) => {
+          const res = await getProcedureByEncounterId(encId)
+          return res.entry?.map(e => e.resource) || []
+        },
+        practitionerId: practitioner.data.id
+      })
 
-        const nuevosDisponibles = encuentrosSeleccionados.filter(e => idsSeleccionados.includes(e.id))
-        setEncuentrosDisponibles([...encuentrosDisponibles, ...nuevosDisponibles])
-        setEncuentrosSeleccionados(encuentrosSeleccionados.filter(e => !idsSeleccionados.includes(e.id)))
+      setJsonGenerado(JSON.stringify(bundle, null, 2))
+      toast.success("Ficha clínica generada con éxito")
+    } catch (error) {
+      console.error(error)
+      toast.error("Error al generar la ficha clínica")
     }
+  }
 
-    const generarFichaClinica = async () => {
-        if (!practitioner?.data?.id) {
-            toast.warning("No hay profesional conectado.")
-            return
-        }
-
-        try {
-            const { composition, bundle } = await generarCompositionYBundle({
-                patientId,
-                encuentrosSeleccionados: encuentrosSeleccionados.map(e => e.resource),
-                getHallazgos: async (encId) => {
-                    const res = await getHallazgoByEncounterId(encId)
-                    return res.entry?.map(e => e.resource) || []
-                },
-                getProcedimientos: async (encId) => {
-                    const res = await getProcedureByEncounterId(encId)
-                    return res.entry?.map(e => e.resource) || []
-                },
-                practitionerId: practitioner.data.id
-            })
-
-            setJsonGenerado(JSON.stringify(bundle, null, 2))
-            toast.success("Ficha clínica generada con éxito")
-        } catch (error) {
-            console.error(error)
-            toast.error("Error al generar la ficha clínica")
-        }
+  const [servidorDestino, setServidorDestino] = useState("")
+  const sendToServer = async () => {
+    if (!servidorDestino) {
+      toast.error("Por favor, ingresa una URL de servidor FHIR válida.")
+      return
     }
+    const response = await axios.post(`${servidorDestino}/fhir/Bundle`, jsonGenerado, {
+      headers: {
+        'Content-Type': 'application/fhir+json',
+        'Accept': 'application/fhir+json'
+      }
+    }
+    ).then(response => {
+      toast.success("Datos enviados correctamente al servidor FHIR")
+      console.log("Respuesta del servidor:", response.data)
+    }).catch(error => {
+      console.error("Error al enviar datos al servidor FHIR:", error)
+      toast.error("Datos enviados correctamente al servidor FHIR")
+    }
+    )
+    return response
+  }
 
 
-    return (
+  return (
     <div className="container mx-auto p-6 bg-white min-h-screen">
-        <h1 className="font-bold text-[#4A4A4A] text-3xl mb-6">Crear Ficha Clínica Odontológica</h1>
+      <h1 className="font-bold text-[#4A4A4A] text-3xl mb-6">Crear Ficha Clínica Odontológica</h1>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative">
         {/* Panel izquierdo: disponibles */}
         <div className="bg-white border border-[#4a4a4a] rounded-lg p-4 shadow-sm col-span-1">
-            <h2 className="font-bold text-[#4A4A4A] text-xl mb-4">Encuentros Disponibles</h2>
-            <div id="encuentros-disponibles" className="space-y-3 max-h-[500px] overflow-y-auto pr-2">
+          <h2 className="font-bold text-[#4A4A4A] text-xl mb-4">Encuentros Disponibles</h2>
+          <div id="encuentros-disponibles" className="space-y-3 max-h-[500px] overflow-y-auto pr-2">
             {encuentrosDisponibles.map((encuentro) => (
-                <div key={encuentro.id} className="flex items-start gap-3">
+              <div key={encuentro.id} className="flex items-start gap-3">
                 <input type="checkbox" value={encuentro.id} className="mt-1" />
                 <div className="flex-1">
-                    <EncuentroCardSimple encounter={encuentro.resource} />
+                  <EncuentroCardSimple encounter={encuentro.resource} />
                 </div>
-                </div>
+              </div>
             ))}
             {encuentrosDisponibles.length === 0 && (
-                <p className="text-gray-500 italic text-center py-4">No hay encuentros disponibles</p>
+              <p className="text-gray-500 italic text-center py-4">No hay encuentros disponibles</p>
             )}
-            </div>
+          </div>
         </div>
 
         {/* Botones al centro */}
         <div className="flex flex-col justify-center items-center gap-4 col-span-1 lg:col-span-1">
-            <button
+          <button
             onClick={moverASeleccionados}
             className="bg-cyan-200 hover:bg-cyan-300 p-2 rounded-full hover:scale-95 transition-all duration-100"
             aria-label="Mover a seleccionados"
-            >
+          >
             <ChevronRight className="h-6 w-6 text-[#4A4A4A]" />
-            </button>
-            <button
+          </button>
+          <button
             onClick={moverADisponibles}
             className="bg-cyan-200 hover:bg-cyan-300 p-2 rounded-full hover:scale-95 transition-all duration-100"
             aria-label="Mover a disponibles"
-            >
+          >
             <ChevronLeft className="h-6 w-6 text-[#4A4A4A]" />
-            </button>
+          </button>
         </div>
 
         {/* Panel derecho: seleccionados */}
         <div className="bg-white border border-[#4a4a4a] rounded-lg p-4 shadow-sm col-span-1">
-            <h2 className="font-bold text-[#4A4A4A] text-xl mb-4">Encuentros Seleccionados</h2>
-            <div id="encuentros-seleccionados" className="space-y-3 max-h-[500px] overflow-y-auto pr-2">
+          <h2 className="font-bold text-[#4A4A4A] text-xl mb-4">Encuentros Seleccionados</h2>
+          <div id="encuentros-seleccionados" className="space-y-3 max-h-[500px] overflow-y-auto pr-2">
             {encuentrosSeleccionados.map((encuentro) => (
-                <div key={encuentro.id} className="flex items-start gap-3">
+              <div key={encuentro.id} className="flex items-start gap-3">
                 <input type="checkbox" value={encuentro.id} className="mt-1" />
                 <div className="flex-1">
-                    <EncuentroCardSimple encounter={encuentro.resource} />
+                  <EncuentroCardSimple encounter={encuentro.resource} />
                 </div>
-                </div>
+              </div>
             ))}
             {encuentrosSeleccionados.length === 0 && (
-                <p className="text-gray-500 italic text-center py-4">No hay encuentros seleccionados</p>
+              <p className="text-gray-500 italic text-center py-4">No hay encuentros seleccionados</p>
             )}
-            </div>
+          </div>
         </div>
-        </div>
+      </div>
 
-        {/* Botones de acción */}
-        <div className="mt-8 flex flex-wrap gap-4 justify-center">
+      {/* Botones de acción */}
+      <div className="mt-8 flex flex-wrap gap-4 justify-center">
         <button
-            onClick={generarFichaClinica}
-            className="flex items-center gap-2 bg-cyan-200 hover:bg-cyan-300 text-[#4A4A4A] font-bold py-3 px-6 rounded-lg hover:scale-95 transition-all duration-100"
+          onClick={generarFichaClinica}
+          className="flex items-center gap-2 bg-cyan-200 hover:bg-cyan-300 text-[#4A4A4A] font-bold py-3 px-6 rounded-lg hover:scale-95 transition-all duration-100"
         >
-            <FileText className="h-5 w-5" />
-            Generar Ficha Clínica
+          <FileText className="h-5 w-5" />
+          Generar Ficha Clínica
         </button>
 
-        </div>
+      </div>
 
-        {/* Área de JSON generado */}
-        {jsonGenerado && (
+      {/* Área de JSON generado */}
+      {jsonGenerado && (
         <div className="mt-8">
-            <h2 className="font-bold text-[#4A4A4A] text-xl mb-4">Bundle JSON Generado</h2>
-            <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm">{jsonGenerado}</pre>
+          <h2 className="font-bold text-[#4A4A4A] text-xl mb-4">Bundle JSON Generado</h2>
+          <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm">{jsonGenerado}</pre>
         </div>
-        )}
+      )}
+
+      {jsonGenerado && (
+        <div>
+          <h2 className="font-bold text-[#4A4A4A] text-xl mb-4">Interoperar con FHIR</h2>
+          <p className="text-gray-600 mb-4">Aquí puedes integrar con otros sistemas FHIR.</p>
+          <input
+            type="text"
+            placeholder="URL del servidor FHIR destino"
+            value={servidorDestino}
+            onChange={e => setServidorDestino(e.target.value)}
+            className="border border-gray-300 rounded px-3 py-2 mb-4 w-full"
+          />
+          <button
+            onClick={sendToServer}
+            className="bg-cyan-200 hover:bg-cyan-300 text-[#4A4A4A] font-bold py-2 px-4 rounded-lg hover:scale-95 transition-all duration-100"
+          >
+            Interoperar
+          </button>
+        </div>
+      )
+      }
     </div>
-    )
+  )
 
 }
