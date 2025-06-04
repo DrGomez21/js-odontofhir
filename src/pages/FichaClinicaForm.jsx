@@ -99,11 +99,11 @@ export default function FichaClinicaForm() {
       }
     }
     ).then(response => {
-      toast.success("Datos enviados correctamente al servidor FHIR")
+      toast.success(`Datos enviados correctamente al servidor FHIR: ${response.data.id}`)
       console.log("Respuesta del servidor:", response.data)
     }).catch(error => {
       console.error("Error al enviar datos al servidor FHIR:", error)
-      toast.error("Datos enviados correctamente al servidor FHIR")
+      toast.error("Error al enviar datos al servidor FHIR")
     }
     )
     return response
