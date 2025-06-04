@@ -2,7 +2,7 @@ import { NuevoDiente } from "./NuevoDiente";
 import { Sidebar } from "../Sidebar";
 import { useState } from "react";
 
-export const ConsultaOdontograma = ({pacienteId, consultaId, dientesHallazgos }) => {
+export const ConsultaOdontograma = ({pacienteId, consultaId, dientesHallazgos, dientesProcedimientos }) => {
 
   const dientesSuperiores = [
     {
@@ -204,16 +204,20 @@ export const ConsultaOdontograma = ({pacienteId, consultaId, dientesHallazgos })
 
   // Combina y marca posición para poder renderizar superiores/inferiores
   const initialDientes = [
-    ...dientesSuperiores.map(d => ({ ...d, position: 'arriba', estado: null })),
-    ...dientesInferiores.map(d => ({ ...d, position: 'abajo', estado: null })),
+    ...dientesSuperiores.map(d => ({ ...d, position: 'arriba', estado: null, procedimientos: null })),
+    ...dientesInferiores.map(d => ({ ...d, position: 'abajo', estado: null, procedimientos: null })),
   ]
 
   const [selectedDiente, setSelectedDiente] = useState(null) // Diente clickeado para abrir el sidebar
 
   const dientesConEstado = initialDientes.map(diente => {
-    const hallazgo = dientesHallazgos.find(h => h.bodySite[0].coding[0].code === diente.code)
+    const hallazgo = dientesHallazgos.find(h => h.bodySite.coding[0].code === diente.code)
+    const procedimiento = dientesProcedimientos.find(p => p.bodySite[0].coding[0].code === diente.code)
     if (hallazgo) {
       return { ...diente, estado: hallazgo.code.coding[0].display }
+    }
+    if (procedimiento) {
+      return { ...diente, procedimientos: procedimiento.code.coding[0].display}
     }
     return diente
   })
