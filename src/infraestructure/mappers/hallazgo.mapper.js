@@ -1,5 +1,5 @@
 function quitarNumberISO(diente) {
-  const { numberISO, ...rest } = diente;
+  const { numberISO, estado, position, ...rest } = diente;
   return rest;
 }
 
@@ -39,7 +39,7 @@ const HALLAZGO_MAP = {
 function getHallazgoByCode(codigo) {
   const display = HALLAZGO_MAP[codigo]
   return display
-    ? { code: codigo, display, system: 'https://odontofhir.py/fhir/CodeSystem/Hallazgos-OdontoFHIR-1' }
+    ? { code: codigo, display, system: 'https://odontofhir.py/fhir/CodeSystem/HallazgosOdontologicos-OdontoFHIR-1' }
     : null
 }
 
@@ -47,13 +47,13 @@ function getHallazgoByCode(codigo) {
 export const hallazgoMapper = (
   patientId,
   encounterId,
-  practitionerId,
   diente,
   hallazgo,
 ) => {
+
   const { state: practitionerData } = JSON.parse(localStorage.getItem('practitioner-storage'));
-  console.log('Practitioner Store:', practitionerData);
   const bodySite = quitarNumberISO(diente)
+
   const hallazgoResource = {
     resourceType: "Observation",
     meta: {
@@ -63,11 +63,9 @@ export const hallazgoMapper = (
     },
     /*Indica que la observación fue finalizada y registrada*/
     status: "final",
-    bodySite: [
-      {
-        coding: [bodySite]
-      }
-    ],
+    bodySite: {
+      coding: [bodySite]
+    },
     code: {
       coding: [getHallazgoByCode(hallazgo)]
     },
@@ -81,7 +79,7 @@ export const hallazgoMapper = (
     effectiveDateTime: new Date().toISOString(),
     performer: [
       {
-        reference: `Practitioner/${practitionerData.practitioner.id}`
+        reference: `Practitioner/${practitionerData.practitioner.data.id}`
       }
     ]
   };
