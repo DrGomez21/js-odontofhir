@@ -2,8 +2,6 @@ import { useParams } from "react-router-dom"
 import { useGetPatient } from "../hooks/usePatient"
 import { useGetEncounterById } from "../hooks/useEncounter"
 import { useState } from "react"
-import { Odontograma } from "../components/Odontograma"
-import { DiagnosisItem } from "../components/items/DiagnosisItem"
 import { useSeparadorHallazgosProcedimientos } from "../hooks/useSeparadorHallazgosProcedimientos";
 import { ConsultaOdontograma } from "../components/nuevos/ConsultaOdontograma"
 import { Header } from "../components/basics/Header"
@@ -31,6 +29,10 @@ export const EncuentroDetail = () => {
       <Header />
       <h1 className="px-6 mt-4 font-bold text-[#4A4A4A] col-span-2 text-3xl">Detalles de la consulta</h1>
 
+      <div className="w-full flex items-center justify-center px-6 mt-4 mb-4">
+        <ConsultaOdontograma pacienteId={id} consultaId={idconsulta} dientesHallazgos={hallazgos} dientesProcedimientos={procedimientos} />
+      </div>
+
       <div className="grid grid-cols-2 gap-4 px-6 mt-4 mb-4">
 
         {/* HALLAZGOS */}
@@ -45,7 +47,7 @@ export const EncuentroDetail = () => {
           </div>
 
           {showOdontograma && (
-            <ConsultaOdontograma pacienteId={id} consultaId={idconsulta} dientesHallazgos={dientesConHallazgos} />
+            <ConsultaOdontograma pacienteId={id} consultaId={idconsulta} dientesHallazgos={hallazgos} dientesProcedimientos={procedimientos} />
           )}
 
           {hallazgos.length === 0 ? (
