@@ -194,7 +194,7 @@ export const Condition = ({ patientId, diente, consultaId, onNewHallazgo }) => {
   const patchEncounter = useMutateEncounterWithCondition()
   
   const onSubmit = (data) => {
-    const hallazgoResource = hallazgoMapper(patientId, consultaId, practitionerId, diente, data.hallazgo)
+    const hallazgoResource = hallazgoMapper(patientId, consultaId, diente, data.hallazgo)
     hallazgoMutation.mutate(hallazgoResource, {
       onSuccess: (nuevoHallazgo) => {
         onNewHallazgo(diente.numberISO)
