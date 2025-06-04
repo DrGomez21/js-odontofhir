@@ -9,6 +9,7 @@ export const NuevoDiente = ({ diente, onClick }) => {
   //       : 'bg-white'
 
   const colorBg = diente.estado ? 'bg-blue-400' : 'bg-white'
+  const colorBorder = diente.procedimientos ? 'border-red-400' : 'border-black'
 
   return (
     <div className='relative w-14 h-20 mx-2'>
@@ -18,7 +19,7 @@ export const NuevoDiente = ({ diente, onClick }) => {
         <div
           className={`
             w-10 h-10 border-2 rounded-lg 
-            ${colorBg}
+            ${colorBg} ${colorBorder}
             cursor-pointer hover:scale-95 hover:border-4 hover:rounded-xl transition-all duration-100
           `}
           onClick={onClick}
